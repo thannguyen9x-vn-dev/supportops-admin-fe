@@ -1,0 +1,80 @@
+{
+  "common": {
+    "chooseLocale": "Chọn ngôn ngữ",
+    "continueWithLanguage": "Chọn ngôn ngữ bạn muốn tiếp tục."
+  },
+  "auth": {
+    "layout": {
+      "dashboard": "Bảng điều khiển",
+      "team": "Đội ngũ",
+      "projects": "Dự án",
+      "calendar": "Lịch",
+      "loginRegister": "Đăng nhập/Đăng ký"
+    },
+    "common": {
+      "emailLabel": "Email của bạn",
+      "emailPlaceholder": "name@example.com",
+      "emailRequired": "Email là bắt buộc",
+      "invalidEmail": "Địa chỉ email không hợp lệ",
+      "passwordLabel": "Mật khẩu",
+      "passwordPlaceholder": "••••••••",
+      "passwordRequired": "Mật khẩu là bắt buộc",
+      "acceptTerms": "Tôi đồng ý với",
+      "termsAndConditions": "Điều khoản và Điều kiện"
+    },
+    "login": {
+      "title": "Đăng nhập",
+      "subtitle": "Chào mừng bạn quay lại. Tiếp tục công việc đang dở.",
+      "badge": "Truy cập an toàn",
+      "illustrationTitle": "Sẵn sàng triển khai?",
+      "illustrationText": "Giữ dự án luôn vận hành với đăng nhập nhanh và ổn định.",
+      "footerPrompt": "Bạn mới ở đây?",
+      "footerAction": "Tạo tài khoản",
+      "rememberMe": "Ghi nhớ tôi",
+      "forgotPassword": "Quên mật khẩu?",
+      "submit": "Đăng nhập"
+    },
+    "register": {
+      "title": "Tạo tài khoản miễn phí",
+      "subtitle": "Khởi tạo workspace của bạn chỉ trong vài phút.",
+      "badge": "Khởi tạo",
+      "illustrationTitle": "Thiết lập nhanh gọn",
+      "illustrationText": "Đồng bộ đội ngũ với một workspace rõ ràng và tự tin.",
+      "footerPrompt": "Đã có tài khoản?",
+      "footerAction": "Đăng nhập",
+      "fullNameLabel": "Họ và tên",
+      "fullNamePlaceholder": "Nguyễn Văn A",
+      "fullNameRequired": "Tên là bắt buộc",
+      "passwordPlaceholder": "Tạo mật khẩu",
+      "confirmPasswordLabel": "Xác nhận mật khẩu",
+      "confirmPasswordPlaceholder": "Nhập lại mật khẩu",
+      "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu",
+      "submit": "Tạo tài khoản"
+    },
+    "forgotPassword": {
+      "title": "Quên mật khẩu?",
+      "subtitle": "Chúng tôi sẽ gửi liên kết đặt lại qua email của bạn.",
+      "badge": "Khôi phục",
+      "illustrationTitle": "Đặt lại trong vài phút",
+      "illustrationText": "Nhập email, chúng tôi sẽ giúp bạn đăng nhập lại.",
+      "footerPrompt": "Bạn đã nhớ mật khẩu?",
+      "footerAction": "Quay lại đăng nhập",
+      "submit": "Khôi phục mật khẩu"
+    },
+    "resetPassword": {
+      "title": "Đặt lại mật khẩu",
+      "subtitle": "Chọn mật khẩu mới để bảo vệ tài khoản của bạn.",
+      "badge": "Bảo mật",
+      "illustrationTitle": "Luôn được bảo vệ",
+      "illustrationText": "Cập nhật thông tin đăng nhập để giữ an toàn cho công việc.",
+      "footerPrompt": "Muốn bắt đầu lại?",
+      "footerAction": "Yêu cầu liên kết mới",
+      "newPasswordLabel": "Mật khẩu mới",
+      "newPasswordPlaceholder": "Tạo mật khẩu mạnh",
+      "confirmNewPasswordLabel": "Xác nhận mật khẩu mới",
+      "confirmNewPasswordPlaceholder": "Nhập lại mật khẩu",
+      "confirmNewPasswordRequired": "Vui lòng xác nhận mật khẩu",
+      "submit": "Đặt lại mật khẩu"
+    }
+  }
+}

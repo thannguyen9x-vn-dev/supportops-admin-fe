@@ -53,6 +53,26 @@ const StyledTextField = styled(TextField, {
       },
     },
 
+    '& .MuiOutlinedInput-input': {
+      backgroundColor: theme.palette.background.paper,
+      color: theme.palette.text.primary,
+      '&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-internal-autofill-selected':
+        {
+          WebkitTextFillColor: `${theme.palette.text.primary} !important`,
+          WebkitBoxShadow: `0 0 0 1000px ${theme.palette.background.paper} inset !important`,
+          boxShadow: `0 0 0 1000px ${theme.palette.background.paper} inset !important`,
+          backgroundColor: `${theme.palette.background.paper} !important`,
+          caretColor: theme.palette.text.primary,
+          borderRadius: baseRadius * 2,
+          transition: 'background-color 99999s ease-in-out 0s',
+        },
+      '&:-moz-autofill': {
+        boxShadow: `0 0 0 1000px ${theme.palette.background.paper} inset !important`,
+        backgroundColor: `${theme.palette.background.paper} !important`,
+        caretColor: theme.palette.text.primary,
+      },
+    },
+
     // Success state
     ...(fieldStatus === 'success' && {
       '& fieldset': {

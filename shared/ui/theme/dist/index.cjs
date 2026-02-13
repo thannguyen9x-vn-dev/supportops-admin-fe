@@ -1,7 +1,13 @@
-import { createTheme, ThemeProvider as ThemeProvider$1 } from '@mui/material/styles';
-import t, { useMemo } from 'react';
-import { jsx, jsxs } from 'react/jsx-runtime';
-import { StyledEngineProvider, CssBaseline, Button, alpha, Stack, Box } from '@mui/material';
+'use strict';
+
+var styles = require('@mui/material/styles');
+var t = require('react');
+var jsxRuntime = require('react/jsx-runtime');
+var material = require('@mui/material');
+
+function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+var t__default = /*#__PURE__*/_interopDefault(t);
 
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
@@ -1100,17 +1106,17 @@ function getTypographyVariantOptions() {
     }
   };
 }
-var f1 = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t.createElement("path", { d: "M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z" }));
-var J1 = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t.createElement("path", { d: "M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z" }));
-var r2 = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t.createElement("path", { d: "M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z" }));
-var P7 = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t.createElement("path", { d: "M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z" }));
-var hF = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t.createElement("path", { d: "M4.83582 12L11.0429 18.2071L12.4571 16.7929L7.66424 12L12.4571 7.20712L11.0429 5.79291L4.83582 12ZM10.4857 12L16.6928 18.2071L18.107 16.7929L13.3141 12L18.107 7.20712L16.6928 5.79291L10.4857 12Z" }));
-var VF = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t.createElement("path", { d: "M19.1642 12L12.9571 5.79291L11.5429 7.20712L16.3358 12L11.5429 16.7929L12.9571 18.2071L19.1642 12ZM13.5143 12L7.30722 5.79291L5.89301 7.20712L10.6859 12L5.89301 16.7929L7.30722 18.2071L13.5143 12Z" }));
-var fS = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t.createElement("path", { d: "M18.2072 9.0428 12.0001 2.83569 5.793 9.0428 7.20721 10.457 12.0001 5.66412 16.793 10.457 18.2072 9.0428ZM5.79285 14.9572 12 21.1643 18.2071 14.9572 16.7928 13.543 12 18.3359 7.20706 13.543 5.79285 14.9572Z" }));
+var f1 = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t__default.default.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t__default.default.createElement("path", { d: "M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z" }));
+var J1 = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t__default.default.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t__default.default.createElement("path", { d: "M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z" }));
+var r2 = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t__default.default.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t__default.default.createElement("path", { d: "M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z" }));
+var P7 = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t__default.default.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t__default.default.createElement("path", { d: "M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z" }));
+var hF = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t__default.default.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t__default.default.createElement("path", { d: "M4.83582 12L11.0429 18.2071L12.4571 16.7929L7.66424 12L12.4571 7.20712L11.0429 5.79291L4.83582 12ZM10.4857 12L16.6928 18.2071L18.107 16.7929L13.3141 12L18.107 7.20712L16.6928 5.79291L10.4857 12Z" }));
+var VF = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t__default.default.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t__default.default.createElement("path", { d: "M19.1642 12L12.9571 5.79291L11.5429 7.20712L16.3358 12L11.5429 16.7929L12.9571 18.2071L19.1642 12ZM13.5143 12L7.30722 5.79291L5.89301 7.20712L10.6859 12L5.89301 16.7929L7.30722 18.2071L13.5143 12Z" }));
+var fS = ({ color: C = "currentColor", size: e = 24, className: l, ...i }) => t__default.default.createElement("svg", { viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", width: e, height: e, fill: C, ...i, className: "remixicon " + (l || "") }, t__default.default.createElement("path", { d: "M18.2072 9.0428 12.0001 2.83569 5.793 9.0428 7.20721 10.457 12.0001 5.66412 16.793 10.457 18.2072 9.0428ZM5.79285 14.9572 12 21.1643 18.2071 14.9572 16.7928 13.543 12 18.3359 7.20706 13.543 5.79285 14.9572Z" }));
 function OverrideAutocomplete() {
   return {
     defaultProps: {
-      popupIcon: /* @__PURE__ */ jsx(fS, {})
+      popupIcon: /* @__PURE__ */ jsxRuntime.jsx(fS, {})
     },
     styleOverrides: {
       popper: {
@@ -1239,7 +1245,7 @@ var iconStyle = {
 };
 var focusRing = (color) => ({
   "&::after": {
-    boxShadow: `0 0 0 4px ${alpha(color, 0.25)}`
+    boxShadow: `0 0 0 4px ${material.alpha(color, 0.25)}`
   },
   "&:active::after": {
     boxShadow: "none"
@@ -2100,8 +2106,8 @@ function OverrideCardContent() {
   };
 }
 var CheckboxIndeterminateIcon = () => {
-  return /* @__PURE__ */ jsxs(Stack, { children: [
-    /* @__PURE__ */ jsx(Stack, { className: "checkbox-indeterminate", children: /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsxRuntime.jsxs(material.Stack, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(material.Stack, { className: "checkbox-indeterminate", children: /* @__PURE__ */ jsxRuntime.jsxs(
       "svg",
       {
         xmlns: "http://www.w3.org/2000/svg",
@@ -2110,15 +2116,15 @@ var CheckboxIndeterminateIcon = () => {
         viewBox: "0 0 20 20",
         fill: "none",
         children: [
-          /* @__PURE__ */ jsxs("g", { clipPath: "url(#clip0_3824_2241)", children: [
-            /* @__PURE__ */ jsx("rect", { width: "20", height: "20", rx: "4", fill: "#594DE8" }),
-            /* @__PURE__ */ jsx("rect", { x: "5", y: "9", width: "10", height: "2", rx: "0.2", fill: "white" })
+          /* @__PURE__ */ jsxRuntime.jsxs("g", { clipPath: "url(#clip0_3824_2241)", children: [
+            /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "20", height: "20", rx: "4", fill: "#594DE8" }),
+            /* @__PURE__ */ jsxRuntime.jsx("rect", { x: "5", y: "9", width: "10", height: "2", rx: "0.2", fill: "white" })
           ] }),
-          /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", { id: "checkbox-indeterminate_clip0_3824_2241", children: /* @__PURE__ */ jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
+          /* @__PURE__ */ jsxRuntime.jsx("defs", { children: /* @__PURE__ */ jsxRuntime.jsx("clipPath", { id: "checkbox-indeterminate_clip0_3824_2241", children: /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
         ]
       }
     ) }),
-    /* @__PURE__ */ jsx(Box, { className: "checkbox-indeterminate-disable", sx: { display: "none" }, children: /* @__PURE__ */ jsxs(
+    /* @__PURE__ */ jsxRuntime.jsx(material.Box, { className: "checkbox-indeterminate-disable", sx: { display: "none" }, children: /* @__PURE__ */ jsxRuntime.jsxs(
       "svg",
       {
         xmlns: "http://www.w3.org/2000/svg",
@@ -2127,19 +2133,19 @@ var CheckboxIndeterminateIcon = () => {
         viewBox: "0 0 20 20",
         fill: "none",
         children: [
-          /* @__PURE__ */ jsxs("g", { clipPath: "url(#clip0_3824_2241)", children: [
-            /* @__PURE__ */ jsx("rect", { x: "0.5", y: "0.5", width: "19", height: "19", rx: "3.5", fill: "#F0F4F8", stroke: "#CDD7E1" }),
-            /* @__PURE__ */ jsx("rect", { x: "5", y: "9", width: "10", height: "2", rx: "0.2", fill: "#CDD7E1" })
+          /* @__PURE__ */ jsxRuntime.jsxs("g", { clipPath: "url(#clip0_3824_2241)", children: [
+            /* @__PURE__ */ jsxRuntime.jsx("rect", { x: "0.5", y: "0.5", width: "19", height: "19", rx: "3.5", fill: "#F0F4F8", stroke: "#CDD7E1" }),
+            /* @__PURE__ */ jsxRuntime.jsx("rect", { x: "5", y: "9", width: "10", height: "2", rx: "0.2", fill: "#CDD7E1" })
           ] }),
-          /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", { id: "checkbox_indeterminate_disable_clip0_3824_2241", children: /* @__PURE__ */ jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
+          /* @__PURE__ */ jsxRuntime.jsx("defs", { children: /* @__PURE__ */ jsxRuntime.jsx("clipPath", { id: "checkbox_indeterminate_disable_clip0_3824_2241", children: /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
         ]
       }
     ) })
   ] });
 };
 var CheckboxCheckedIcon = () => {
-  return /* @__PURE__ */ jsxs(Stack, { children: [
-    /* @__PURE__ */ jsx(Stack, { className: "checkbox-checked", children: /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsxRuntime.jsxs(material.Stack, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(material.Stack, { className: "checkbox-checked", children: /* @__PURE__ */ jsxRuntime.jsxs(
       "svg",
       {
         width: "20",
@@ -2148,9 +2154,9 @@ var CheckboxCheckedIcon = () => {
         fill: "none",
         xmlns: "http://www.w3.org/2000/svg",
         children: [
-          /* @__PURE__ */ jsxs("g", { clipPath: "url(#clip0_3824_2208)", children: [
-            /* @__PURE__ */ jsx("rect", { width: "20", height: "20", rx: "4", fill: "#594DE8" }),
-            /* @__PURE__ */ jsx(
+          /* @__PURE__ */ jsxRuntime.jsxs("g", { clipPath: "url(#clip0_3824_2208)", children: [
+            /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "20", height: "20", rx: "4", fill: "#594DE8" }),
+            /* @__PURE__ */ jsxRuntime.jsx(
               "path",
               {
                 d: "M14.2839 6.39844L15.1091 7.22363L15.197 7.3125L8.92163 13.5879L8.83276 13.6758L8.74487 13.5879L5.03198 9.87598L4.94409 9.78711L5.94604 8.78516L6.03394 8.87402L8.83276 11.6719L14.1072 6.39844L14.1951 6.31055L14.2839 6.39844Z",
@@ -2160,11 +2166,11 @@ var CheckboxCheckedIcon = () => {
               }
             )
           ] }),
-          /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", { id: "checkbox_checked_clip0_3824_2208", children: /* @__PURE__ */ jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
+          /* @__PURE__ */ jsxRuntime.jsx("defs", { children: /* @__PURE__ */ jsxRuntime.jsx("clipPath", { id: "checkbox_checked_clip0_3824_2208", children: /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
         ]
       }
     ) }),
-    /* @__PURE__ */ jsx(Box, { className: "checkbox-checked-disable", sx: { display: "none" }, children: /* @__PURE__ */ jsxs(
+    /* @__PURE__ */ jsxRuntime.jsx(material.Box, { className: "checkbox-checked-disable", sx: { display: "none" }, children: /* @__PURE__ */ jsxRuntime.jsxs(
       "svg",
       {
         xmlns: "http://www.w3.org/2000/svg",
@@ -2173,9 +2179,9 @@ var CheckboxCheckedIcon = () => {
         viewBox: "0 0 20 20",
         fill: "none",
         children: [
-          /* @__PURE__ */ jsxs("g", { clipPath: "url(#clip0_3824_2241)", children: [
-            /* @__PURE__ */ jsx("rect", { x: "0.5", y: "0.5", width: "19", height: "19", rx: "3.5", fill: "#F0F4F8", stroke: "#CDD7E1" }),
-            /* @__PURE__ */ jsx(
+          /* @__PURE__ */ jsxRuntime.jsxs("g", { clipPath: "url(#clip0_3824_2241)", children: [
+            /* @__PURE__ */ jsxRuntime.jsx("rect", { x: "0.5", y: "0.5", width: "19", height: "19", rx: "3.5", fill: "#F0F4F8", stroke: "#CDD7E1" }),
+            /* @__PURE__ */ jsxRuntime.jsx(
               "path",
               {
                 d: "M14.2839 6.39844L15.1091 7.22363L15.197 7.3125L8.92163 13.5879L8.83276 13.6758L8.74487 13.5879L5.03198 9.87598L4.94409 9.78711L5.94604 8.78516L6.03394 8.87402L8.83276 11.6719L14.1072 6.39844L14.1951 6.31055L14.2839 6.39844Z",
@@ -2185,15 +2191,15 @@ var CheckboxCheckedIcon = () => {
               }
             )
           ] }),
-          /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", { id: "checkbox_checked_disable_clip0_3824_2241", children: /* @__PURE__ */ jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
+          /* @__PURE__ */ jsxRuntime.jsx("defs", { children: /* @__PURE__ */ jsxRuntime.jsx("clipPath", { id: "checkbox_checked_disable_clip0_3824_2241", children: /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
         ]
       }
     ) })
   ] });
 };
 var CheckboxDefaultIcon = () => {
-  return /* @__PURE__ */ jsxs(Stack, { children: [
-    /* @__PURE__ */ jsx(Stack, { className: "checkbox-default", children: /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsxRuntime.jsxs(material.Stack, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(material.Stack, { className: "checkbox-default", children: /* @__PURE__ */ jsxRuntime.jsxs(
       "svg",
       {
         xmlns: "http://www.w3.org/2000/svg",
@@ -2202,7 +2208,7 @@ var CheckboxDefaultIcon = () => {
         viewBox: "0 0 20 20",
         fill: "none",
         children: [
-          /* @__PURE__ */ jsx("g", { clipPath: "url(#clip0_3794_15414)", children: /* @__PURE__ */ jsx(
+          /* @__PURE__ */ jsxRuntime.jsx("g", { clipPath: "url(#clip0_3794_15414)", children: /* @__PURE__ */ jsxRuntime.jsx(
             "rect",
             {
               className: "checkbox-default",
@@ -2215,11 +2221,11 @@ var CheckboxDefaultIcon = () => {
               stroke: "#CDD7E1"
             }
           ) }),
-          /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", { id: "checkbox_default_clip0_3794_15414", children: /* @__PURE__ */ jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
+          /* @__PURE__ */ jsxRuntime.jsx("defs", { children: /* @__PURE__ */ jsxRuntime.jsx("clipPath", { id: "checkbox_default_clip0_3794_15414", children: /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
         ]
       }
     ) }),
-    /* @__PURE__ */ jsx(Box, { className: "checkbox-default-disable", sx: { display: "none" }, children: /* @__PURE__ */ jsxs(
+    /* @__PURE__ */ jsxRuntime.jsx(material.Box, { className: "checkbox-default-disable", sx: { display: "none" }, children: /* @__PURE__ */ jsxRuntime.jsxs(
       "svg",
       {
         xmlns: "http://www.w3.org/2000/svg",
@@ -2228,8 +2234,8 @@ var CheckboxDefaultIcon = () => {
         viewBox: "0 0 20 20",
         fill: "none",
         children: [
-          /* @__PURE__ */ jsx("g", { clipPath: "url(#clip0_3824_2241)", children: /* @__PURE__ */ jsx("rect", { x: "0.5", y: "0.5", width: "19", height: "19", rx: "3.5", fill: "#F0F4F8", stroke: "#CDD7E1" }) }),
-          /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", { id: "checkbox_default_disable_clip0_3824_2241", children: /* @__PURE__ */ jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
+          /* @__PURE__ */ jsxRuntime.jsx("g", { clipPath: "url(#clip0_3824_2241)", children: /* @__PURE__ */ jsxRuntime.jsx("rect", { x: "0.5", y: "0.5", width: "19", height: "19", rx: "3.5", fill: "#F0F4F8", stroke: "#CDD7E1" }) }),
+          /* @__PURE__ */ jsxRuntime.jsx("defs", { children: /* @__PURE__ */ jsxRuntime.jsx("clipPath", { id: "checkbox_default_disable_clip0_3824_2241", children: /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
         ]
       }
     ) })
@@ -2243,9 +2249,9 @@ function OverrideCheckbox(theme) {
       disableTouchRipple: true,
       disableFocusRipple: true,
       size: "medium",
-      icon: /* @__PURE__ */ jsx(CheckboxDefaultIcon, {}),
-      checkedIcon: /* @__PURE__ */ jsx(CheckboxCheckedIcon, {}),
-      indeterminateIcon: /* @__PURE__ */ jsx(CheckboxIndeterminateIcon, {})
+      icon: /* @__PURE__ */ jsxRuntime.jsx(CheckboxDefaultIcon, {}),
+      checkedIcon: /* @__PURE__ */ jsxRuntime.jsx(CheckboxCheckedIcon, {}),
+      indeterminateIcon: /* @__PURE__ */ jsxRuntime.jsx(CheckboxIndeterminateIcon, {})
     },
     styleOverrides: {
       root: {
@@ -2304,7 +2310,7 @@ function OverrideChip(theme) {
   const white = common.white;
   return {
     defaultProps: {
-      deleteIcon: /* @__PURE__ */ jsx(P7, { size: 16 }),
+      deleteIcon: /* @__PURE__ */ jsxRuntime.jsx(P7, { size: 16 }),
       variant: "filled",
       size: "medium",
       color: "primary"
@@ -3083,7 +3089,7 @@ var focusRing2 = (color) => ({
     position: "absolute",
     inset: 0,
     borderRadius: "inherit",
-    boxShadow: `0 0 0 4px ${alpha(color, 0.25)}`,
+    boxShadow: `0 0 0 4px ${material.alpha(color, 0.25)}`,
     pointerEvents: "none",
     opacity: 0,
     transition: "opacity 0.2s"
@@ -3847,9 +3853,10 @@ function OverrideMuiSelect() {
 function OverrideOutlinedInput(theme) {
   function baseInputStyle() {
     const { textSm: fontStyleBodySm } = theme.typography;
-    const { grey: grey2, error: error2, primary: primary2 } = theme.palette;
+    const { grey: grey2, error: error2, primary: primary2, background } = theme.palette;
     const { sm: radiusSm } = theme.radius;
     const { focusPrimary100, focusError100 } = theme.shadowCustom;
+    const inputBackgroundColor = background.paper;
     return {
       ...fontStyleBodySm,
       fontWeight: 500,
@@ -3870,43 +3877,17 @@ function OverrideOutlinedInput(theme) {
         }
       },
       input: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: inputBackgroundColor,
         borderRadius: radiusSm,
         padding: "10px 16px",
         "&::placeholder": {
           ...fontStyleBodySm,
           color: grey2[500],
           opacity: 1
-        },
-        "&:-webkit-autofill": {
-          WebkitTextFillColor: "inherit",
-          WebkitBoxShadow: "0 0 0px 1000px transparent inset !important",
-          boxShadow: "0 0 0px 1000px transparent inset !important",
-          transition: "background-color 99999s ease-in-out 0s",
-          backgroundColor: "transparent !important",
-          backgroundClip: "padding-box",
-          caretColor: "inherit"
-        },
-        "&:-internal-autofill-selected": {
-          WebkitTextFillColor: "inherit",
-          WebkitBoxShadow: "0 0 0px 1000px transparent inset !important",
-          boxShadow: "0 0 0px 1000px transparent inset !important",
-          backgroundColor: "transparent !important",
-          backgroundClip: "padding-box",
-          caretColor: "inherit"
-        },
-        "&:-moz-autofill": {
-          boxShadow: "0 0 0px 1000px transparent inset !important",
-          backgroundColor: "transparent !important",
-          WebkitTextFillColor: "inherit",
-          caretColor: "inherit"
-        },
-        "&:autofill": {
-          backgroundColor: "transparent!important"
         }
       },
       textarea: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: inputBackgroundColor,
         borderRadius: radiusSm,
         padding: "10px 16px",
         "&::placeholder": {
@@ -4066,21 +4047,21 @@ function OverridePaper() {
   };
 }
 var RadioDefaultIcon = () => {
-  return /* @__PURE__ */ jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", fill: "none", children: [
-    /* @__PURE__ */ jsx("g", { clipPath: "url(#clip0_3824_2261)", children: /* @__PURE__ */ jsx("rect", { x: "0.5", y: "0.5", width: "19", height: "19", rx: "9.5", fill: "white", stroke: "#CDD7E1" }) }),
-    /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", { id: "clip0_3824_2261", children: /* @__PURE__ */ jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
+  return /* @__PURE__ */ jsxRuntime.jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", fill: "none", children: [
+    /* @__PURE__ */ jsxRuntime.jsx("g", { clipPath: "url(#clip0_3824_2261)", children: /* @__PURE__ */ jsxRuntime.jsx("rect", { x: "0.5", y: "0.5", width: "19", height: "19", rx: "9.5", fill: "white", stroke: "#CDD7E1" }) }),
+    /* @__PURE__ */ jsxRuntime.jsx("defs", { children: /* @__PURE__ */ jsxRuntime.jsx("clipPath", { id: "clip0_3824_2261", children: /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
   ] });
 };
 var RadioCheckedIcon = () => {
-  return /* @__PURE__ */ jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", fill: "none", children: [
-    /* @__PURE__ */ jsx("g", { clipPath: "url(#clip0_3824_2263)", children: /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", fill: "none", children: [
+    /* @__PURE__ */ jsxRuntime.jsx("g", { clipPath: "url(#clip0_3824_2263)", children: /* @__PURE__ */ jsxRuntime.jsx(
       "path",
       {
         d: "M10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10C20 15.5228 15.5228 20 10 20ZM10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM10 15C7.23858 15 5 12.7614 5 10C5 7.23858 7.23858 5 10 5C12.7614 5 15 7.23858 15 10C15 12.7614 12.7614 15 10 15Z",
         fill: "#594DE8"
       }
     ) }),
-    /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", { id: "clip0_3824_2263", children: /* @__PURE__ */ jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
+    /* @__PURE__ */ jsxRuntime.jsx("defs", { children: /* @__PURE__ */ jsxRuntime.jsx("clipPath", { id: "clip0_3824_2263", children: /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "20", height: "20", fill: "white" }) }) })
   ] });
 };
 function OverrideRadio(theme) {
@@ -4091,8 +4072,8 @@ function OverrideRadio(theme) {
       disableTouchRipple: true,
       disableFocusRipple: true,
       size: "medium",
-      icon: /* @__PURE__ */ jsx(RadioDefaultIcon, {}),
-      checkedIcon: /* @__PURE__ */ jsx(RadioCheckedIcon, {})
+      icon: /* @__PURE__ */ jsxRuntime.jsx(RadioDefaultIcon, {}),
+      checkedIcon: /* @__PURE__ */ jsxRuntime.jsx(RadioCheckedIcon, {})
     },
     styleOverrides: {
       root: {
@@ -4329,10 +4310,10 @@ function OverrideTablePagination(theme) {
     defaultProps: {
       slots: {
         actions: {
-          firstButton: Button,
-          lastButton: Button,
-          nextButton: Button,
-          previousButton: Button
+          firstButton: material.Button,
+          lastButton: material.Button,
+          nextButton: material.Button,
+          previousButton: material.Button
         }
       },
       slotProps: {
@@ -4542,7 +4523,7 @@ function createAppTheme() {
     neg400: -16,
     neg600: -24
   };
-  const base = createTheme({
+  const base = styles.createTheme({
     cssVariables: true,
     shape: { borderRadius: radius.sm },
     spacer: spacerInput,
@@ -4595,7 +4576,7 @@ function createAppTheme() {
       "0px 2px 8px -2px rgba(21, 21, 21, 0.08), 0px 20px 24px 0px rgba(144, 139, 164, 0.08)"
     ]
   });
-  return createTheme(base, {
+  return styles.createTheme(base, {
     components: {
       ...createComponents(base),
       MuiUseMediaQuery: {
@@ -4607,13 +4588,15 @@ function createAppTheme() {
   });
 }
 function ThemeProvider({ children }) {
-  const theme = useMemo(() => createAppTheme(), []);
-  return /* @__PURE__ */ jsx(StyledEngineProvider, { injectFirst: true, children: /* @__PURE__ */ jsxs(ThemeProvider$1, { theme, children: [
-    /* @__PURE__ */ jsx(CssBaseline, {}),
+  const theme = t.useMemo(() => createAppTheme(), []);
+  return /* @__PURE__ */ jsxRuntime.jsx(material.StyledEngineProvider, { injectFirst: true, children: /* @__PURE__ */ jsxRuntime.jsxs(styles.ThemeProvider, { theme, children: [
+    /* @__PURE__ */ jsxRuntime.jsx(material.CssBaseline, {}),
     children
   ] }) });
 }
 
-export { ThemeProvider, colors_exports as colors, createAppTheme };
-//# sourceMappingURL=index.js.map
-//# sourceMappingURL=index.js.map
+exports.ThemeProvider = ThemeProvider;
+exports.colors = colors_exports;
+exports.createAppTheme = createAppTheme;
+//# sourceMappingURL=index.cjs.map
+//# sourceMappingURL=index.cjs.map

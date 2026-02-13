@@ -4,6 +4,7 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
 import { Button } from "@mui/material";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -18,6 +19,8 @@ type ForgotFormValues = {
 
 export default function ForgotPasswordPage() {
   const { locale } = useParams<{ locale: string }>();
+  const t = useTranslations("auth.forgotPassword");
+  const commonT = useTranslations("auth.common");
   const { control, handleSubmit } = useForm<ForgotFormValues>({
     defaultValues: {
       email: "",
@@ -30,14 +33,14 @@ export default function ForgotPasswordPage() {
 
   return (
     <AuthCard
-      title="Forgot your password?"
-      subtitle="We will send a reset link to your email."
+      title={t("title")}
+      subtitle={t("subtitle")}
       illustration={
         <>
-          <span className={styles.illustrationBadge}>Recovery</span>
-          <div className={styles.illustrationTitle}>Reset in minutes</div>
+          <span className={styles.illustrationBadge}>{t("badge")}</span>
+          <div className={styles.illustrationTitle}>{t("illustrationTitle")}</div>
           <div className={styles.illustrationText}>
-            Enter your email and we will help you get back in.
+            {t("illustrationText")}
           </div>
           <LockResetOutlinedIcon
             sx={{ fontSize: 120, color: "#2563eb", mt: 2 }}
@@ -46,8 +49,8 @@ export default function ForgotPasswordPage() {
       }
       footer={
         <>
-          <span>Remembered your password?</span>
-          <Link href={`/${locale}/login`}>Back to sign in</Link>
+          <span>{t("footerPrompt")}</span>
+          <Link href={`/${locale}/login`}>{t("footerAction")}</Link>
         </>
       }
     >
@@ -56,14 +59,14 @@ export default function ForgotPasswordPage() {
           <TextInputField
             name="email"
             control={control}
-            label="Your email"
-            placeholder="name@example.com"
+            label={commonT("emailLabel")}
+            placeholder={commonT("emailPlaceholder")}
             startIcon={<EmailOutlinedIcon fontSize="small" />}
             rules={{
-              required: "Email is required",
+              required: commonT("emailRequired"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
+                message: commonT("invalidEmail"),
               },
             }}
           />
@@ -80,7 +83,7 @@ export default function ForgotPasswordPage() {
               "&:hover": { bgcolor: "#1d4ed8" },
             }}
           >
-            Recover password
+            {t("submit")}
           </Button>
         </div>
       </form>

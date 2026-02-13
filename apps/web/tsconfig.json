@@ -6,8 +6,7 @@
   },
   "include": ["next-env.d.ts", "src"],
   "references": [
-    { "path": "../../packages/ui/theme" },
-    { "path": "../../packages/ui/common-components" },
-    { "path": "../../packages/ui/form" }
+    { "path": "../../shared/ui/theme" },
+    { "path": "../../shared/ui/form" }
   ]
 }

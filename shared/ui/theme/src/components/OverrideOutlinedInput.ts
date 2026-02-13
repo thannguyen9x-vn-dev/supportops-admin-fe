@@ -4,9 +4,11 @@ import type {Components} from '@mui/material/styles'
 export function OverrideOutlinedInput(theme: Theme): Components['MuiOutlinedInput'] {
   function baseInputStyle(): CSSObject {
     const {textSm: fontStyleBodySm} = theme.typography
-    const {grey, error, primary} = theme.palette
+    const {grey, error, primary, background} = theme.palette
     const {sm: radiusSm} = theme.radius
     const {focusPrimary100, focusError100} = theme.shadowCustom
+    const inputBackgroundColor = background.paper
+
     return {
       ...fontStyleBodySm,
       fontWeight: 500,
@@ -27,7 +29,7 @@ export function OverrideOutlinedInput(theme: Theme): Components['MuiOutlinedInpu
         },
       },
       input: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: inputBackgroundColor,
         borderRadius: radiusSm,
         padding: '10px 16px',
         '&::placeholder': {
@@ -35,35 +37,9 @@ export function OverrideOutlinedInput(theme: Theme): Components['MuiOutlinedInpu
           color: grey[500],
           opacity: 1,
         },
-        '&:-webkit-autofill': {
-          WebkitTextFillColor: 'inherit',
-          WebkitBoxShadow: '0 0 0px 1000px transparent inset !important',
-          boxShadow: '0 0 0px 1000px transparent inset !important',
-          transition: 'background-color 99999s ease-in-out 0s',
-          backgroundColor: 'transparent !important',
-          backgroundClip: 'padding-box',
-          caretColor: 'inherit',
-        },
-        '&:-internal-autofill-selected': {
-          WebkitTextFillColor: 'inherit',
-          WebkitBoxShadow: '0 0 0px 1000px transparent inset !important',
-          boxShadow: '0 0 0px 1000px transparent inset !important',
-          backgroundColor: 'transparent !important',
-          backgroundClip: 'padding-box',
-          caretColor: 'inherit',
-        },
-        '&:-moz-autofill': {
-          boxShadow: '0 0 0px 1000px transparent inset !important',
-          backgroundColor: 'transparent !important',
-          WebkitTextFillColor: 'inherit',
-          caretColor: 'inherit',
-        },
-        '&:autofill': {
-          backgroundColor: 'transparent!important',
-        },
       },
       textarea: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: inputBackgroundColor,
         borderRadius: radiusSm,
         padding: '10px 16px',
         '&::placeholder': {

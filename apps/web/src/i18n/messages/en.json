@@ -1,0 +1,80 @@
+{
+  "common": {
+    "chooseLocale": "Choose a locale",
+    "continueWithLanguage": "Select the language you want to continue with."
+  },
+  "auth": {
+    "layout": {
+      "dashboard": "Dashboard",
+      "team": "Team",
+      "projects": "Projects",
+      "calendar": "Calendar",
+      "loginRegister": "Login/Register"
+    },
+    "common": {
+      "emailLabel": "Your email",
+      "emailPlaceholder": "name@example.com",
+      "emailRequired": "Email is required",
+      "invalidEmail": "Invalid email address",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "passwordRequired": "Password is required",
+      "acceptTerms": "I accept the",
+      "termsAndConditions": "Terms and Conditions"
+    },
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Welcome back. Pick up where you left off.",
+      "badge": "Secure access",
+      "illustrationTitle": "Ready to ship?",
+      "illustrationText": "Keep projects moving with quick, reliable sign in.",
+      "footerPrompt": "New here?",
+      "footerAction": "Create an account",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign In"
+    },
+    "register": {
+      "title": "Create your free account",
+      "subtitle": "Launch your workspace in minutes.",
+      "badge": "Onboarding",
+      "illustrationTitle": "Plug & play setup",
+      "illustrationText": "Get your team synced with a clean, confident workspace.",
+      "footerPrompt": "Already have an account?",
+      "footerAction": "Sign in",
+      "fullNameLabel": "Full name",
+      "fullNamePlaceholder": "Alex Johnson",
+      "fullNameRequired": "Name is required",
+      "passwordPlaceholder": "Create a password",
+      "confirmPasswordLabel": "Confirm password",
+      "confirmPasswordPlaceholder": "Repeat your password",
+      "confirmPasswordRequired": "Confirm your password",
+      "submit": "Create account"
+    },
+    "forgotPassword": {
+      "title": "Forgot your password?",
+      "subtitle": "We will send a reset link to your email.",
+      "badge": "Recovery",
+      "illustrationTitle": "Reset in minutes",
+      "illustrationText": "Enter your email and we will help you get back in.",
+      "footerPrompt": "Remembered your password?",
+      "footerAction": "Back to sign in",
+      "submit": "Recover password"
+    },
+    "resetPassword": {
+      "title": "Reset password",
+      "subtitle": "Choose a new password to secure your account.",
+      "badge": "Security",
+      "illustrationTitle": "Stay protected",
+      "illustrationText": "Update your credentials and keep your work safe.",
+      "footerPrompt": "Need to start over?",
+      "footerAction": "Request a new link",
+      "newPasswordLabel": "New password",
+      "newPasswordPlaceholder": "Create a strong password",
+      "confirmNewPasswordLabel": "Confirm new password",
+      "confirmNewPasswordPlaceholder": "Repeat your password",
+      "confirmNewPasswordRequired": "Confirm your password",
+      "submit": "Reset password"
+    }
+  }
+}

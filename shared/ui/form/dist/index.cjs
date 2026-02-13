@@ -1,16 +1,27 @@
-import { forwardRef, useMemo } from 'react';
-import { useController } from 'react-hook-form';
-import Box from '@mui/material/Box';
-import FormHelperText from '@mui/material/FormHelperText';
-import InputAdornment from '@mui/material/InputAdornment';
-import { styled, alpha } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { jsx, jsxs } from 'react/jsx-runtime';
+'use strict';
+
+var react = require('react');
+var reactHookForm = require('react-hook-form');
+var Box = require('@mui/material/Box');
+var FormHelperText = require('@mui/material/FormHelperText');
+var InputAdornment = require('@mui/material/InputAdornment');
+var styles = require('@mui/material/styles');
+var TextField = require('@mui/material/TextField');
+var CheckCircleOutlineIcon = require('@mui/icons-material/CheckCircleOutline');
+var ErrorOutlineIcon = require('@mui/icons-material/ErrorOutline');
+var jsxRuntime = require('react/jsx-runtime');
+
+function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+var Box__default = /*#__PURE__*/_interopDefault(Box);
+var FormHelperText__default = /*#__PURE__*/_interopDefault(FormHelperText);
+var InputAdornment__default = /*#__PURE__*/_interopDefault(InputAdornment);
+var TextField__default = /*#__PURE__*/_interopDefault(TextField);
+var CheckCircleOutlineIcon__default = /*#__PURE__*/_interopDefault(CheckCircleOutlineIcon);
+var ErrorOutlineIcon__default = /*#__PURE__*/_interopDefault(ErrorOutlineIcon);
 
 // src/field/input/TextInputField.tsx
-var StyledTextField = styled(TextField, {
+var StyledTextField = styles.styled(TextField__default.default, {
   shouldForwardProp: (prop) => prop !== "fieldStatus"
 })(({ theme, fieldStatus }) => {
   const baseRadius = typeof theme.shape.borderRadius === "number" ? theme.shape.borderRadius : Number.parseFloat(theme.shape.borderRadius) || 0;
@@ -31,9 +42,27 @@ var StyledTextField = styled(TextField, {
         borderWidth: 2
       },
       "&.Mui-disabled": {
-        backgroundColor: alpha(theme.palette.action.disabled, 0.05),
+        backgroundColor: styles.alpha(theme.palette.action.disabled, 0.05),
         "& fieldset": {
           borderColor: theme.palette.divider
+        }
+      },
+      "& .MuiOutlinedInput-input": {
+        backgroundColor: theme.palette.background.paper,
+        color: theme.palette.text.primary,
+        "&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-internal-autofill-selected": {
+          WebkitTextFillColor: `${theme.palette.text.primary} !important`,
+          WebkitBoxShadow: `0 0 0 1000px ${theme.palette.background.paper} inset !important`,
+          boxShadow: `0 0 0 1000px ${theme.palette.background.paper} inset !important`,
+          backgroundColor: `${theme.palette.background.paper} !important`,
+          caretColor: theme.palette.text.primary,
+          borderRadius: baseRadius * 2,
+          transition: "background-color 99999s ease-in-out 0s"
+        },
+        "&:-moz-autofill": {
+          boxShadow: `0 0 0 1000px ${theme.palette.background.paper} inset !important`,
+          backgroundColor: `${theme.palette.background.paper} !important`,
+          caretColor: theme.palette.text.primary
         }
       },
       // Success state
@@ -88,7 +117,7 @@ var StyledTextField = styled(TextField, {
     }
   };
 });
-var StyledHelperText = styled(FormHelperText, {
+var StyledHelperText = styles.styled(FormHelperText__default.default, {
   shouldForwardProp: (prop) => prop !== "fieldStatus"
 })(({ theme, fieldStatus }) => ({
   marginLeft: 0,
@@ -121,8 +150,8 @@ function TextInputFieldInner(props, ref) {
     endIcon,
     status: externalStatus,
     showSuccessState = false,
-    successIcon = /* @__PURE__ */ jsx(CheckCircleOutlineIcon, { fontSize: "small" }),
-    errorIcon = /* @__PURE__ */ jsx(ErrorOutlineIcon, { fontSize: "small" }),
+    successIcon = /* @__PURE__ */ jsxRuntime.jsx(CheckCircleOutlineIcon__default.default, { fontSize: "small" }),
+    errorIcon = /* @__PURE__ */ jsxRuntime.jsx(ErrorOutlineIcon__default.default, { fontSize: "small" }),
     hideEmptyHelperText = false,
     disabled,
     ...textFieldProps
@@ -130,49 +159,49 @@ function TextInputFieldInner(props, ref) {
   const {
     field,
     fieldState: { error, isDirty, isTouched }
-  } = useController({
+  } = reactHookForm.useController({
     name,
     control,
     rules
   });
-  const fieldStatus = useMemo(() => {
+  const fieldStatus = react.useMemo(() => {
     if (externalStatus) return externalStatus;
     if (error) return "error";
     if (showSuccessState && isTouched && isDirty && !error) return "success";
     return "default";
   }, [externalStatus, error, showSuccessState, isTouched, isDirty]);
-  const helperTextContent = useMemo(() => {
+  const helperTextContent = react.useMemo(() => {
     if (fieldStatus === "error" && error?.message) {
-      return /* @__PURE__ */ jsxs(Box, { component: "span", sx: { display: "flex", alignItems: "center", gap: 0.5 }, children: [
-        /* @__PURE__ */ jsx("span", { className: "helper-text-title", children: "Oh snap!" }),
-        /* @__PURE__ */ jsx("span", { children: error.message })
+      return /* @__PURE__ */ jsxRuntime.jsxs(Box__default.default, { component: "span", sx: { display: "flex", alignItems: "center", gap: 0.5 }, children: [
+        /* @__PURE__ */ jsxRuntime.jsx("span", { className: "helper-text-title", children: "Oh snap!" }),
+        /* @__PURE__ */ jsxRuntime.jsx("span", { children: error.message })
       ] });
     }
     if (fieldStatus === "success" && successMessage) {
-      return /* @__PURE__ */ jsxs(Box, { component: "span", sx: { display: "flex", alignItems: "center", gap: 0.5 }, children: [
-        /* @__PURE__ */ jsx("span", { className: "helper-text-title", children: "Well done!" }),
-        /* @__PURE__ */ jsx("span", { children: successMessage })
+      return /* @__PURE__ */ jsxRuntime.jsxs(Box__default.default, { component: "span", sx: { display: "flex", alignItems: "center", gap: 0.5 }, children: [
+        /* @__PURE__ */ jsxRuntime.jsx("span", { className: "helper-text-title", children: "Well done!" }),
+        /* @__PURE__ */ jsxRuntime.jsx("span", { children: successMessage })
       ] });
     }
     return helperText;
   }, [fieldStatus, error, successMessage, helperText]);
-  const startAdornment = useMemo(() => {
+  const startAdornment = react.useMemo(() => {
     if (!startIcon && fieldStatus === "default") return void 0;
     const icon = fieldStatus === "success" ? successIcon : fieldStatus === "error" ? errorIcon : startIcon;
     if (!icon) return void 0;
-    return /* @__PURE__ */ jsx(InputAdornment, { position: "start", children: icon });
+    return /* @__PURE__ */ jsxRuntime.jsx(InputAdornment__default.default, { position: "start", children: icon });
   }, [startIcon, fieldStatus, successIcon, errorIcon]);
-  const endAdornment = useMemo(() => {
+  const endAdornment = react.useMemo(() => {
     if (!startIcon && fieldStatus !== "default") {
       const statusIcon = fieldStatus === "success" ? successIcon : errorIcon;
-      return /* @__PURE__ */ jsx(InputAdornment, { position: "end", children: statusIcon });
+      return /* @__PURE__ */ jsxRuntime.jsx(InputAdornment__default.default, { position: "end", children: statusIcon });
     }
     if (!endIcon) return void 0;
-    return /* @__PURE__ */ jsx(InputAdornment, { position: "end", children: endIcon });
+    return /* @__PURE__ */ jsxRuntime.jsx(InputAdornment__default.default, { position: "end", children: endIcon });
   }, [endIcon, startIcon, fieldStatus, successIcon, errorIcon]);
   const showHelperText = !hideEmptyHelperText || helperTextContent;
-  return /* @__PURE__ */ jsxs(Box, { sx: { width: "100%" }, children: [
-    /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsxs(Box__default.default, { sx: { width: "100%" }, children: [
+    /* @__PURE__ */ jsxRuntime.jsx(
       StyledTextField,
       {
         ...textFieldProps,
@@ -198,11 +227,11 @@ function TextInputFieldInner(props, ref) {
         }
       }
     ),
-    showHelperText && /* @__PURE__ */ jsx(StyledHelperText, { fieldStatus, children: helperTextContent })
+    showHelperText && /* @__PURE__ */ jsxRuntime.jsx(StyledHelperText, { fieldStatus, children: helperTextContent })
   ] });
 }
-var TextInputField = forwardRef(TextInputFieldInner);
+var TextInputField = react.forwardRef(TextInputFieldInner);
 
-export { TextInputField };
-//# sourceMappingURL=index.js.map
-//# sourceMappingURL=index.js.map
+exports.TextInputField = TextInputField;
+//# sourceMappingURL=index.cjs.map
+//# sourceMappingURL=index.cjs.map

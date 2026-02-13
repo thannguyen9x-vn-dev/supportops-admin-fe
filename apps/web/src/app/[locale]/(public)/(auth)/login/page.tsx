@@ -5,6 +5,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import WifiOutlinedIcon from "@mui/icons-material/WifiOutlined";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -21,6 +22,8 @@ type LoginFormValues = {
 
 export default function LoginPage() {
   const { locale } = useParams<{ locale: string }>();
+  const t = useTranslations("auth.login");
+  const commonT = useTranslations("auth.common");
   const { control, handleSubmit, register } = useForm<LoginFormValues>({
     defaultValues: {
       email: "",
@@ -35,22 +38,22 @@ export default function LoginPage() {
 
   return (
     <AuthCard
-      title="Sign in"
-      subtitle="Welcome back. Pick up where you left off."
+      title={t("title")}
+      subtitle={t("subtitle")}
       illustration={
         <>
-          <span className={styles.illustrationBadge}>Secure access</span>
-          <div className={styles.illustrationTitle}>Ready to ship?</div>
+          <span className={styles.illustrationBadge}>{t("badge")}</span>
+          <div className={styles.illustrationTitle}>{t("illustrationTitle")}</div>
           <div className={styles.illustrationText}>
-            Keep projects moving with quick, reliable sign in.
+            {t("illustrationText")}
           </div>
           <WifiOutlinedIcon sx={{ fontSize: 120, color: "#2563eb", mt: 2 }} />
         </>
       }
       footer={
         <>
-          <span>New here?</span>
-          <Link href={`/${locale}/register`}>Create an account</Link>
+          <span>{t("footerPrompt")}</span>
+          <Link href={`/${locale}/register`}>{t("footerAction")}</Link>
         </>
       }
     >
@@ -59,34 +62,34 @@ export default function LoginPage() {
           <TextInputField
             name="email"
             control={control}
-            label="Your email"
-            placeholder="name@example.com"
+            label={commonT("emailLabel")}
+            placeholder={commonT("emailPlaceholder")}
             startIcon={<EmailIcon fontSize="small" />}
             rules={{
-              required: "Email is required",
+              required: commonT("emailRequired"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
+                message: commonT("invalidEmail"),
               },
             }}
           />
           <TextInputField
             name="password"
             control={control}
-            label="Password"
-            placeholder="••••••••"
+            label={commonT("passwordLabel")}
+            placeholder={commonT("passwordPlaceholder")}
             type="password"
             startIcon={<LockOutlinedIcon fontSize="small" />}
             rules={{
-              required: "Password is required",
+              required: commonT("passwordRequired"),
             }}
           />
           <div className={styles.helperRow}>
             <FormControlLabel
               control={<Checkbox size="small" {...register("remember")} />}
-              label="Remember me"
+              label={t("rememberMe")}
             />
-            <Link href={`/${locale}/forgot-password`}>Forgot password?</Link>
+            <Link href={`/${locale}/forgot-password`}>{t("forgotPassword")}</Link>
           </div>
           <Button
             type="submit"
@@ -101,7 +104,7 @@ export default function LoginPage() {
               "&:hover": { bgcolor: "#1d4ed8" },
             }}
           >
-            Sign In
+            {t("submit")}
           </Button>
         </div>
       </form>

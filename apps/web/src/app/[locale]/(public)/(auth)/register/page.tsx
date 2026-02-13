@@ -5,6 +5,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -23,6 +24,8 @@ type RegisterFormValues = {
 
 export default function RegisterPage() {
   const { locale } = useParams<{ locale: string }>();
+  const t = useTranslations("auth.register");
+  const commonT = useTranslations("auth.common");
   const { control, handleSubmit, register } = useForm<RegisterFormValues>({
     defaultValues: {
       fullName: "",
@@ -39,22 +42,22 @@ export default function RegisterPage() {
 
   return (
     <AuthCard
-      title="Create your free account"
-      subtitle="Launch your workspace in minutes."
+      title={t("title")}
+      subtitle={t("subtitle")}
       illustration={
         <>
-          <span className={styles.illustrationBadge}>Onboarding</span>
-          <div className={styles.illustrationTitle}>Plug &amp; play setup</div>
+          <span className={styles.illustrationBadge}>{t("badge")}</span>
+          <div className={styles.illustrationTitle}>{t("illustrationTitle")}</div>
           <div className={styles.illustrationText}>
-            Get your team synced with a clean, confident workspace.
+            {t("illustrationText")}
           </div>
           <PersonOutlineIcon sx={{ fontSize: 120, color: "#1d4ed8", mt: 2 }} />
         </>
       }
       footer={
         <>
-          <span>Already have an account?</span>
-          <Link href={`/${locale}/login`}>Sign in</Link>
+          <span>{t("footerPrompt")}</span>
+          <Link href={`/${locale}/login`}>{t("footerAction")}</Link>
         </>
       }
     >
@@ -63,55 +66,55 @@ export default function RegisterPage() {
           <TextInputField
             name="fullName"
             control={control}
-            label="Full name"
-            placeholder="Alex Johnson"
+            label={t("fullNameLabel")}
+            placeholder={t("fullNamePlaceholder")}
             startIcon={<PersonOutlineIcon fontSize="small" />}
             rules={{
-              required: "Name is required",
+              required: t("fullNameRequired"),
             }}
           />
           <TextInputField
             name="email"
             control={control}
-            label="Your email"
-            placeholder="name@example.com"
+            label={commonT("emailLabel")}
+            placeholder={commonT("emailPlaceholder")}
             startIcon={<EmailIcon fontSize="small" />}
             rules={{
-              required: "Email is required",
+              required: commonT("emailRequired"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
+                message: commonT("invalidEmail"),
               },
             }}
           />
           <TextInputField
             name="password"
             control={control}
-            label="Password"
-            placeholder="Create a password"
+            label={commonT("passwordLabel")}
+            placeholder={t("passwordPlaceholder")}
             type="password"
             startIcon={<LockOutlinedIcon fontSize="small" />}
             rules={{
-              required: "Password is required",
+              required: commonT("passwordRequired"),
             }}
           />
           <TextInputField
             name="confirmPassword"
             control={control}
-            label="Confirm password"
-            placeholder="Repeat your password"
+            label={t("confirmPasswordLabel")}
+            placeholder={t("confirmPasswordPlaceholder")}
             type="password"
             startIcon={<LockOutlinedIcon fontSize="small" />}
             rules={{
-              required: "Confirm your password",
+              required: t("confirmPasswordRequired"),
             }}
           />
           <FormControlLabel
             control={<Checkbox size="small" {...register("acceptTerms")} />}
             label={
               <span>
-                I accept the{" "}
-                <Link href={`/${locale}/terms`}>Terms and Conditions</Link>
+                {commonT("acceptTerms")}{" "}
+                <Link href={`/${locale}/terms`}>{commonT("termsAndConditions")}</Link>
               </span>
             }
           />
@@ -128,7 +131,7 @@ export default function RegisterPage() {
               "&:hover": { bgcolor: "#1d4ed8" },
             }}
           >
-            Create account
+            {t("submit")}
           </Button>
         </div>
       </form>
