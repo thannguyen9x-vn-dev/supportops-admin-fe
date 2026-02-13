@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { getTranslations } from "next-intl/server";
 
 import styles from "./auth.module.css";
 
@@ -11,6 +12,7 @@ export default async function AuthLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "auth.layout" });
 
   return (
     <div className={styles.page}>
@@ -21,14 +23,14 @@ export default async function AuthLayout({
         </div>
         <nav className={styles.nav}>
           <Link className="active" href={`/${locale}`}>
-            Dashboard
+            {t("dashboard")}
           </Link>
-          <Link href={`/${locale}/team`}>Team</Link>
-          <Link href={`/${locale}/projects`}>Projects</Link>
-          <Link href={`/${locale}/calendar`}>Calendar</Link>
+          <Link href={`/${locale}/team`}>{t("team")}</Link>
+          <Link href={`/${locale}/projects`}>{t("projects")}</Link>
+          <Link href={`/${locale}/calendar`}>{t("calendar")}</Link>
         </nav>
         <Link className={styles.ctaLink} href={`/${locale}/login`}>
-          Login/Register
+          {t("loginRegister")}
         </Link>
       </header>
       <main className={styles.main}>{children}</main>

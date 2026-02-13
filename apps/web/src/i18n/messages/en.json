@@ -1,0 +1,217 @@
+{
+  "common": {
+    "chooseLocale": "Choose a locale",
+    "continueWithLanguage": "Select the language you want to continue with."
+  },
+  "auth": {
+    "layout": {
+      "dashboard": "Dashboard",
+      "team": "Team",
+      "projects": "Projects",
+      "calendar": "Calendar",
+      "loginRegister": "Login/Register"
+    },
+    "common": {
+      "emailLabel": "Your email",
+      "emailPlaceholder": "name@example.com",
+      "emailRequired": "Email is required",
+      "invalidEmail": "Invalid email address",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "passwordRequired": "Password is required",
+      "acceptTerms": "I accept the",
+      "termsAndConditions": "Terms and Conditions"
+    },
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Welcome back. Pick up where you left off.",
+      "badge": "Secure access",
+      "illustrationTitle": "Ready to ship?",
+      "illustrationText": "Keep projects moving with quick, reliable sign in.",
+      "footerPrompt": "New here?",
+      "footerAction": "Create an account",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign In"
+    },
+    "register": {
+      "title": "Create your free account",
+      "subtitle": "Launch your workspace in minutes.",
+      "badge": "Onboarding",
+      "illustrationTitle": "Plug & play setup",
+      "illustrationText": "Get your team synced with a clean, confident workspace.",
+      "footerPrompt": "Already have an account?",
+      "footerAction": "Sign in",
+      "fullNameLabel": "Full name",
+      "fullNamePlaceholder": "Alex Johnson",
+      "fullNameRequired": "Name is required",
+      "passwordPlaceholder": "Create a password",
+      "confirmPasswordLabel": "Confirm password",
+      "confirmPasswordPlaceholder": "Repeat your password",
+      "confirmPasswordRequired": "Confirm your password",
+      "submit": "Create account"
+    },
+    "forgotPassword": {
+      "title": "Forgot your password?",
+      "subtitle": "We will send a reset link to your email.",
+      "badge": "Recovery",
+      "illustrationTitle": "Reset in minutes",
+      "illustrationText": "Enter your email and we will help you get back in.",
+      "footerPrompt": "Remembered your password?",
+      "footerAction": "Back to sign in",
+      "submit": "Recover password"
+    },
+    "resetPassword": {
+      "title": "Reset password",
+      "subtitle": "Choose a new password to secure your account.",
+      "badge": "Security",
+      "illustrationTitle": "Stay protected",
+      "illustrationText": "Update your credentials and keep your work safe.",
+      "footerPrompt": "Need to start over?",
+      "footerAction": "Request a new link",
+      "newPasswordLabel": "New password",
+      "newPasswordPlaceholder": "Create a strong password",
+      "confirmNewPasswordLabel": "Confirm new password",
+      "confirmNewPasswordPlaceholder": "Repeat your password",
+      "confirmNewPasswordRequired": "Confirm your password",
+      "submit": "Reset password"
+    }
+  },
+  "nav": {
+    "main": "MAIN",
+    "analytics": "ANALYTICS",
+    "system": "SYSTEM",
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "team": "Team",
+    "calendar": "Calendar",
+    "reports": "Reports",
+    "reportsOverview": "Overview",
+    "reportsPerformance": "Performance",
+    "settings": "Settings"
+  },
+  "header": {
+    "searchPlaceholder": "Search...",
+    "toggleNavigationAriaLabel": "Toggle navigation",
+    "closeNavigationAriaLabel": "Close navigation",
+    "notificationsAriaLabel": "Notifications",
+    "userMenuAriaLabel": "Open user menu",
+    "profile": "Profile",
+    "signOut": "Sign out"
+  },
+  "pages": {
+    "dashboardComingSoon": "Dashboard - coming soon",
+    "projectsComingSoon": "Projects - coming soon",
+    "teamComingSoon": "Team - coming soon",
+    "calendarComingSoon": "Calendar - coming soon",
+    "settingsComingSoon": "Settings - coming soon",
+    "reportsComingSoon": "Reports - coming soon",
+    "reportsOverviewComingSoon": "Reports overview - coming soon",
+    "reportsPerformanceComingSoon": "Reports performance - coming soon",
+    "settings": {
+      "state": {
+        "loading": "Loading settings...",
+        "error": "Unable to load settings. Please try again.",
+        "empty": "No settings data is available yet.",
+        "saved": "Saved successfully",
+        "saveError": "Save failed. Please try again."
+      },
+      "action": {
+        "retry": "Retry",
+        "reload": "Reload",
+        "update": "Update",
+        "saving": "Saving...",
+        "savePreferences": "Save preferences"
+      },
+      "profile": {
+        "userRole": "Senior Software Engineer",
+        "generalInfoTitle": "General information",
+        "fields": {
+          "firstName": "First name",
+          "lastName": "Last name",
+          "birthday": "Birthday",
+          "phoneNumber": "Phone number",
+          "address": "Address",
+          "country": "Country",
+          "email": "Email",
+          "organization": "Organization",
+          "zipCode": "Zip/Postal code",
+          "city": "City",
+          "department": "Department"
+        }
+      },
+      "password": {
+        "title": "Password information",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
+        "placeholders": {
+          "currentPassword": "Enter your current password",
+          "newPassword": "Enter your new password",
+          "confirmNewPassword": "Confirm your new password"
+        },
+        "requirements": {
+          "title": "Password requirements:",
+          "description": "Ensure that these requirements are met:",
+          "minLength": "At least 10 characters (and up to 100 characters)",
+          "lowercase": "At least one lowercase character",
+          "specialCharacter": "Inclusion of at least one special character, e.g., ! @ # ?"
+        }
+      },
+      "notifications": {
+        "alertsTitle": "Alerts & Notifications",
+        "alertsDescription": "You can set up Themesberg to get notifications",
+        "emailTitle": "Email Settings",
+        "emailDescription": "You can set up Themesberg to get email notifications",
+        "items": {
+          "companyNews": {
+            "title": "Company News",
+            "description": "Get Themesberg news, announcements, and product updates"
+          },
+          "accountActivity": {
+            "title": "Account Activity",
+            "description": "Get important notifications about you or activity you've missed"
+          },
+          "meetupsNearYou": {
+            "title": "Meetups Near You",
+            "description": "Get an email when a Dribbble Meetup is posted close to my location"
+          },
+          "newMessages": {
+            "title": "New Messages",
+            "description": "Get Themesberg news, announcements, and product updates"
+          },
+          "ratingReminders": {
+            "title": "Rating reminders",
+            "description": "Send an email reminding me to rate an item a week after purchase"
+          },
+          "itemUpdateNotifications": {
+            "title": "Item update notifications",
+            "description": "Send an email when an item I've purchased is updated"
+          },
+          "itemCommentNotifications": {
+            "title": "Item comment notifications",
+            "description": "Send me an email when someone comments on one of my items"
+          },
+          "buyerReviewNotifications": {
+            "title": "Buyer review notifications",
+            "description": "Send me an email when someone leaves a review with their rating"
+          }
+        }
+      },
+      "validation": {
+        "required": "This field is required",
+        "invalidEmail": "Invalid email address",
+        "passwordMin": "Password must be at least 10 characters",
+        "passwordFormat": "Password must include one lowercase letter and one special character",
+        "passwordMismatch": "New passwords do not match"
+      },
+      "countries": {
+        "unitedStates": "United States",
+        "canada": "Canada",
+        "vietnam": "Vietnam",
+        "searchPlaceholder": "Search country...",
+        "noOptions": "No country found"
+      }
+    }
+  }
+}

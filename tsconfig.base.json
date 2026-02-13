@@ -28,9 +28,8 @@
     // Path mapping (optional)
     "baseUrl": ".",
     "paths": {
-      "@supportops/ui-theme": ["./packages/ui/theme/src"],
-      "@supportops/ui-common": ["./packages/ui/common-components/src"],
-      "@supportops/ui-form": ["./packages/ui/form/src"]
+      "@supportops/ui-theme": ["./shared/ui/theme/src"],
+      "@supportops/ui-form": ["./shared/ui/form/src"]
     }
   }
 }

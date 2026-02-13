@@ -5,6 +5,7 @@ import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -22,6 +23,8 @@ type ResetFormValues = {
 
 export default function ResetPasswordPage() {
   const { locale } = useParams<{ locale: string }>();
+  const t = useTranslations("auth.resetPassword");
+  const commonT = useTranslations("auth.common");
   const { control, handleSubmit, register } = useForm<ResetFormValues>({
     defaultValues: {
       email: "",
@@ -37,22 +40,22 @@ export default function ResetPasswordPage() {
 
   return (
     <AuthCard
-      title="Reset password"
-      subtitle="Choose a new password to secure your account."
+      title={t("title")}
+      subtitle={t("subtitle")}
       illustration={
         <>
-          <span className={styles.illustrationBadge}>Security</span>
-          <div className={styles.illustrationTitle}>Stay protected</div>
+          <span className={styles.illustrationBadge}>{t("badge")}</span>
+          <div className={styles.illustrationTitle}>{t("illustrationTitle")}</div>
           <div className={styles.illustrationText}>
-            Update your credentials and keep your work safe.
+            {t("illustrationText")}
           </div>
           <ShieldOutlinedIcon sx={{ fontSize: 120, color: "#2563eb", mt: 2 }} />
         </>
       }
       footer={
         <>
-          <span>Need to start over?</span>
-          <Link href={`/${locale}/forgot-password`}>Request a new link</Link>
+          <span>{t("footerPrompt")}</span>
+          <Link href={`/${locale}/forgot-password`}>{t("footerAction")}</Link>
         </>
       }
     >
@@ -61,45 +64,45 @@ export default function ResetPasswordPage() {
           <TextInputField
             name="email"
             control={control}
-            label="Your email"
-            placeholder="name@example.com"
+            label={commonT("emailLabel")}
+            placeholder={commonT("emailPlaceholder")}
             startIcon={<EmailOutlinedIcon fontSize="small" />}
             rules={{
-              required: "Email is required",
+              required: commonT("emailRequired"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
+                message: commonT("invalidEmail"),
               },
             }}
           />
           <TextInputField
             name="password"
             control={control}
-            label="New password"
-            placeholder="Create a strong password"
+            label={t("newPasswordLabel")}
+            placeholder={t("newPasswordPlaceholder")}
             type="password"
             startIcon={<VpnKeyOutlinedIcon fontSize="small" />}
             rules={{
-              required: "Password is required",
+              required: commonT("passwordRequired"),
             }}
           />
           <TextInputField
             name="confirmPassword"
             control={control}
-            label="Confirm new password"
-            placeholder="Repeat your password"
+            label={t("confirmNewPasswordLabel")}
+            placeholder={t("confirmNewPasswordPlaceholder")}
             type="password"
             startIcon={<VpnKeyOutlinedIcon fontSize="small" />}
             rules={{
-              required: "Confirm your password",
+              required: t("confirmNewPasswordRequired"),
             }}
           />
           <FormControlLabel
             control={<Checkbox size="small" {...register("acceptTerms")} />}
             label={
               <span>
-                I accept the{" "}
-                <Link href={`/${locale}/terms`}>Terms and Conditions</Link>
+                {commonT("acceptTerms")}{" "}
+                <Link href={`/${locale}/terms`}>{commonT("termsAndConditions")}</Link>
               </span>
             }
           />
@@ -116,7 +119,7 @@ export default function ResetPasswordPage() {
               "&:hover": { bgcolor: "#1d4ed8" },
             }}
           >
-            Reset password
+            {t("submit")}
           </Button>
         </div>
       </form>
