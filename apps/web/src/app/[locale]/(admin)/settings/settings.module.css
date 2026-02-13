@@ -1,0 +1,174 @@
+.page {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 400px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.leftColumn,
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid var(--mui-palette-divider);
+  border-radius: var(--mui-radius-sm);
+  background: var(--mui-palette-background-paper);
+  padding: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--mui-palette-grey-800);
+  line-height: 1.2;
+}
+
+.sectionDescription {
+  margin: 0 0 8px;
+  color: var(--mui-palette-grey-500);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.userHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.userName {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--mui-palette-grey-800);
+}
+
+.userRole {
+  margin-top: 4px;
+  color: var(--mui-palette-grey-500);
+  font-size: 14px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+}
+
+.passwordGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+}
+
+.passwordRequirements {
+  grid-column: 2 / 3;
+  align-self: start;
+}
+
+.passwordRequirementsTitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--mui-palette-grey-800);
+}
+
+.passwordRequirementsDescription {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--mui-palette-grey-500);
+}
+
+.passwordRequirementsList {
+  margin: 8px 0 0;
+  padding-left: 28px;
+  display: grid;
+  gap: 6px;
+  color: var(--mui-palette-grey-500);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.fullRow {
+  grid-column: 1 / -1;
+}
+
+.preferenceList {
+  display: flex;
+  flex-direction: column;
+}
+
+.preferenceItem {
+  padding-block: 14px;
+  border-top: 1px solid var(--mui-palette-divider);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.preferenceContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.preferenceTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--mui-palette-grey-800);
+}
+
+.preferenceDescription {
+  margin: 2px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--mui-palette-grey-500);
+}
+
+.formActions {
+  margin-top: 8px;
+  grid-column: 1 / -1;
+}
+
+.centeredState {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.formActions :global(.MuiButton-root) {
+  text-transform: none;
+}
+
+@media (max-width: 1200px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+
+  .formGrid,
+  .passwordGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .passwordRequirements {
+    grid-column: 1 / -1;
+  }
+}

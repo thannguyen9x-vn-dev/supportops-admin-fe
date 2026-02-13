@@ -76,5 +76,142 @@
       "confirmNewPasswordRequired": "Vui lòng xác nhận mật khẩu",
       "submit": "Đặt lại mật khẩu"
     }
+  },
+  "nav": {
+    "main": "CHÍNH",
+    "analytics": "PHÂN TÍCH",
+    "system": "HỆ THỐNG",
+    "dashboard": "Bảng điều khiển",
+    "projects": "Dự án",
+    "team": "Đội ngũ",
+    "calendar": "Lịch",
+    "reports": "Báo cáo",
+    "reportsOverview": "Tổng quan",
+    "reportsPerformance": "Hiệu suất",
+    "settings": "Cài đặt"
+  },
+  "header": {
+    "searchPlaceholder": "Tìm kiếm...",
+    "toggleNavigationAriaLabel": "Mở hoặc thu gọn menu điều hướng",
+    "closeNavigationAriaLabel": "Đóng menu điều hướng",
+    "notificationsAriaLabel": "Thông báo",
+    "userMenuAriaLabel": "Mở menu người dùng",
+    "profile": "Hồ sơ",
+    "signOut": "Đăng xuất"
+  },
+  "pages": {
+    "dashboardComingSoon": "Bảng điều khiển - sắp ra mắt",
+    "projectsComingSoon": "Dự án - sắp ra mắt",
+    "teamComingSoon": "Đội ngũ - sắp ra mắt",
+    "calendarComingSoon": "Lịch - sắp ra mắt",
+    "settingsComingSoon": "Cài đặt - sắp ra mắt",
+    "reportsComingSoon": "Báo cáo - sắp ra mắt",
+    "reportsOverviewComingSoon": "Tổng quan báo cáo - sắp ra mắt",
+    "reportsPerformanceComingSoon": "Hiệu suất báo cáo - sắp ra mắt",
+    "settings": {
+      "state": {
+        "loading": "Đang tải cài đặt...",
+        "error": "Không thể tải cài đặt. Vui lòng thử lại.",
+        "empty": "Chưa có dữ liệu cài đặt.",
+        "saved": "Lưu thành công",
+        "saveError": "Lưu thất bại. Vui lòng thử lại."
+      },
+      "action": {
+        "retry": "Thử lại",
+        "reload": "Tải lại",
+        "update": "Cập nhật",
+        "saving": "Đang lưu...",
+        "savePreferences": "Lưu tùy chọn"
+      },
+      "profile": {
+        "userRole": "Kỹ sư phần mềm cao cấp",
+        "generalInfoTitle": "Thông tin chung",
+        "fields": {
+          "firstName": "Tên",
+          "lastName": "Họ",
+          "birthday": "Ngày sinh",
+          "phoneNumber": "Số điện thoại",
+          "address": "Địa chỉ",
+          "country": "Quốc gia",
+          "email": "Email",
+          "organization": "Tổ chức",
+          "zipCode": "Mã bưu chính",
+          "city": "Thành phố",
+          "department": "Phòng ban"
+        }
+      },
+      "password": {
+        "title": "Thông tin mật khẩu",
+        "currentPassword": "Mật khẩu hiện tại",
+        "newPassword": "Mật khẩu mới",
+        "confirmNewPassword": "Xác nhận mật khẩu mới",
+        "placeholders": {
+          "currentPassword": "Nhập mật khẩu hiện tại",
+          "newPassword": "Nhập mật khẩu mới",
+          "confirmNewPassword": "Xác nhận mật khẩu mới"
+        },
+        "requirements": {
+          "title": "Yêu cầu mật khẩu:",
+          "description": "Đảm bảo các yêu cầu sau được đáp ứng:",
+          "minLength": "Ít nhất 10 ký tự (và tối đa 100 ký tự)",
+          "lowercase": "Có ít nhất một ký tự chữ thường",
+          "specialCharacter": "Có ít nhất một ký tự đặc biệt, ví dụ: ! @ # ?"
+        }
+      },
+      "notifications": {
+        "alertsTitle": "Cảnh báo & Thông báo",
+        "alertsDescription": "Bạn có thể thiết lập Themesberg để nhận thông báo",
+        "emailTitle": "Cài đặt email",
+        "emailDescription": "Bạn có thể thiết lập Themesberg để nhận thông báo qua email",
+        "items": {
+          "companyNews": {
+            "title": "Tin tức công ty",
+            "description": "Nhận tin tức Themesberg, thông báo và cập nhật sản phẩm"
+          },
+          "accountActivity": {
+            "title": "Hoạt động tài khoản",
+            "description": "Nhận các thông báo quan trọng về bạn hoặc hoạt động bạn đã bỏ lỡ"
+          },
+          "meetupsNearYou": {
+            "title": "Sự kiện gần bạn",
+            "description": "Nhận email khi có Dribbble Meetup được đăng gần vị trí của tôi"
+          },
+          "newMessages": {
+            "title": "Tin nhắn mới",
+            "description": "Nhận tin tức Themesberg, thông báo và cập nhật sản phẩm"
+          },
+          "ratingReminders": {
+            "title": "Nhắc đánh giá",
+            "description": "Gửi email nhắc tôi đánh giá một mục sau một tuần kể từ khi mua"
+          },
+          "itemUpdateNotifications": {
+            "title": "Thông báo cập nhật mục",
+            "description": "Gửi email khi mục tôi đã mua được cập nhật"
+          },
+          "itemCommentNotifications": {
+            "title": "Thông báo bình luận mục",
+            "description": "Gửi email cho tôi khi có người bình luận vào một trong các mục của tôi"
+          },
+          "buyerReviewNotifications": {
+            "title": "Thông báo đánh giá người mua",
+            "description": "Gửi email cho tôi khi có người để lại đánh giá kèm xếp hạng"
+          }
+        }
+      },
+      "validation": {
+        "required": "Trường này là bắt buộc",
+        "invalidEmail": "Địa chỉ email không hợp lệ",
+        "passwordMin": "Mật khẩu phải có ít nhất 10 ký tự",
+        "passwordFormat": "Mật khẩu phải có ít nhất 1 chữ thường và 1 ký tự đặc biệt",
+        "passwordMismatch": "Mật khẩu mới không khớp"
+      },
+      "countries": {
+        "unitedStates": "Hoa Kỳ",
+        "canada": "Canada",
+        "vietnam": "Việt Nam",
+        "searchPlaceholder": "Tìm quốc gia...",
+        "noOptions": "Không tìm thấy quốc gia"
+      }
+    }
   }
 }

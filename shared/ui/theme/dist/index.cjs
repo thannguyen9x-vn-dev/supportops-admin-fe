@@ -4589,10 +4589,10 @@ function createAppTheme() {
 }
 function ThemeProvider({ children }) {
   const theme = t.useMemo(() => createAppTheme(), []);
-  return /* @__PURE__ */ jsxRuntime.jsx(material.StyledEngineProvider, { injectFirst: true, children: /* @__PURE__ */ jsxRuntime.jsxs(styles.ThemeProvider, { theme, children: [
+  return /* @__PURE__ */ jsxRuntime.jsxs(styles.ThemeProvider, { theme, children: [
     /* @__PURE__ */ jsxRuntime.jsx(material.CssBaseline, {}),
     children
-  ] }) });
+  ] });
 }
 
 exports.ThemeProvider = ThemeProvider;

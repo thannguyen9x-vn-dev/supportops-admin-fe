@@ -2,7 +2,13 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "composite": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@supportops/ui-theme": ["../../shared/ui/theme/src"],
+      "@supportops/ui-form": ["../../shared/ui/form/src"]
+    }
   },
   "include": ["next-env.d.ts", "src"],
   "references": [
