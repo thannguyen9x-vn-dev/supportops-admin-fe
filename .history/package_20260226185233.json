@@ -23,7 +23,7 @@
     "prepare": "husky install",
     "commit": "pnpm exec cz",
     "ac": "git add -A && pnpm run commit && git push",
-    "commit:auto": "git add -A && git commit -m \"chore(auto): $(date +%Y%m%d%H%M%S%N | cut -c1-16)\" && git push",
+    "commit:auto": "git add -A && git commit -m \"auto: $(date +%Y%m%d%H%M%S%N | cut -c1-16)\" && git push",
     "ac:auto": "pnpm run commit:auto"
   },
   "config": {
