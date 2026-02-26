@@ -108,6 +108,79 @@
     "reportsComingSoon": "Báo cáo - sắp ra mắt",
     "reportsOverviewComingSoon": "Tổng quan báo cáo - sắp ra mắt",
     "reportsPerformanceComingSoon": "Hiệu suất báo cáo - sắp ra mắt",
+    "projects": {
+      "state": {
+        "loading": "Đang tải sản phẩm...",
+        "error": "Không thể tải sản phẩm. Vui lòng thử lại.",
+        "empty": "Không có sản phẩm phù hợp với bộ lọc hiện tại.",
+        "created": "Tạo sản phẩm thành công",
+        "updated": "Cập nhật sản phẩm thành công",
+        "deleted": "{count, plural, one {Đã xóa # sản phẩm} other {Đã xóa # sản phẩm}}",
+        "saveError": "Không thể lưu sản phẩm. Vui lòng thử lại.",
+        "deleteError": "Không thể xóa sản phẩm. Vui lòng thử lại."
+      },
+      "action": {
+        "retry": "Thử lại"
+      },
+      "toolbar": {
+        "searchPlaceholder": "Tìm theo tên, công nghệ hoặc mã id",
+        "filterByStatusAria": "Lọc sản phẩm theo trạng thái",
+        "addProduct": "Thêm sản phẩm",
+        "deleteSelected": "{count, plural, =0 {Xóa mục đã chọn} one {Xóa 1 mục đã chọn} other {Xóa # mục đã chọn}}"
+      },
+      "statusFilter": {
+        "all": "Tất cả trạng thái",
+        "active": "Đang hoạt động",
+        "draft": "Bản nháp",
+        "archived": "Lưu trữ"
+      },
+      "status": {
+        "active": "Đang hoạt động",
+        "draft": "Bản nháp",
+        "archived": "Lưu trữ"
+      },
+      "table": {
+        "ariaLabel": "Bảng sản phẩm",
+        "selectAll": "Chọn tất cả sản phẩm trong trang này",
+        "selectRow": "Chọn sản phẩm {name}",
+        "editAria": "Chỉnh sửa sản phẩm {name}",
+        "columns": {
+          "name": "Tên",
+          "technology": "Công nghệ",
+          "id": "ID",
+          "price": "Giá",
+          "status": "Trạng thái",
+          "updatedAt": "Cập nhật",
+          "action": "Hành động"
+        }
+      },
+      "dialog": {
+        "createTitle": "Thêm sản phẩm",
+        "editTitle": "Chỉnh sửa sản phẩm",
+        "save": "Lưu",
+        "saving": "Đang lưu...",
+        "cancel": "Hủy",
+        "fields": {
+          "name": "Tên sản phẩm",
+          "technology": "Công nghệ",
+          "price": "Giá (USD)",
+          "status": "Trạng thái"
+        }
+      },
+      "deleteDialog": {
+        "title": "Xóa các sản phẩm đã chọn",
+        "description": "{count, plural, one {Thao tác này sẽ xóa 1 sản phẩm.} other {Thao tác này sẽ xóa # sản phẩm.}}",
+        "cancel": "Hủy",
+        "confirm": "Xóa",
+        "deleting": "Đang xóa..."
+      },
+      "validation": {
+        "nameRequired": "Tên sản phẩm là bắt buộc",
+        "technologyRequired": "Công nghệ là bắt buộc",
+        "priceRequired": "Giá là bắt buộc",
+        "pricePositive": "Giá phải lớn hơn 0"
+      }
+    },
     "settings": {
       "state": {
         "loading": "Đang tải cài đặt...",
@@ -125,6 +198,11 @@
       },
       "profile": {
         "userRole": "Kỹ sư phần mềm cao cấp",
+        "changePicture": "Đổi ảnh",
+        "avatarUploadSuccess": "Tải ảnh đại diện thành công",
+        "avatarUploadError": "Không thể tải ảnh đại diện. Vui lòng thử lại.",
+        "avatarUploadTypeError": "Định dạng ảnh không hỗ trợ. Vui lòng dùng JPG, PNG hoặc WEBP.",
+        "avatarUploadSizeError": "Ảnh quá lớn. Kích thước tối đa là 2 MB.",
         "generalInfoTitle": "Thông tin chung",
         "fields": {
           "firstName": "Tên",

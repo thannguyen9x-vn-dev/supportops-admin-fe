@@ -108,6 +108,79 @@
     "reportsComingSoon": "Reports - coming soon",
     "reportsOverviewComingSoon": "Reports overview - coming soon",
     "reportsPerformanceComingSoon": "Reports performance - coming soon",
+    "projects": {
+      "state": {
+        "loading": "Loading products...",
+        "error": "Unable to load products. Please try again.",
+        "empty": "No products match your current filters.",
+        "created": "Product created successfully",
+        "updated": "Product updated successfully",
+        "deleted": "{count, plural, one {# product deleted} other {# products deleted}}",
+        "saveError": "Unable to save product. Please try again.",
+        "deleteError": "Unable to delete products. Please try again."
+      },
+      "action": {
+        "retry": "Retry"
+      },
+      "toolbar": {
+        "searchPlaceholder": "Search by name, technology, or id",
+        "filterByStatusAria": "Filter products by status",
+        "addProduct": "Add product",
+        "deleteSelected": "{count, plural, =0 {Delete selected} one {Delete 1 selected} other {Delete # selected}}"
+      },
+      "statusFilter": {
+        "all": "All statuses",
+        "active": "Active",
+        "draft": "Draft",
+        "archived": "Archived"
+      },
+      "status": {
+        "active": "Active",
+        "draft": "Draft",
+        "archived": "Archived"
+      },
+      "table": {
+        "ariaLabel": "Products table",
+        "selectAll": "Select all products in this page",
+        "selectRow": "Select product {name}",
+        "editAria": "Edit product {name}",
+        "columns": {
+          "name": "Name",
+          "technology": "Technology",
+          "id": "ID",
+          "price": "Price",
+          "status": "Status",
+          "updatedAt": "Updated",
+          "action": "Action"
+        }
+      },
+      "dialog": {
+        "createTitle": "Add product",
+        "editTitle": "Edit product",
+        "save": "Save",
+        "saving": "Saving...",
+        "cancel": "Cancel",
+        "fields": {
+          "name": "Product name",
+          "technology": "Technology",
+          "price": "Price (USD)",
+          "status": "Status"
+        }
+      },
+      "deleteDialog": {
+        "title": "Delete selected products",
+        "description": "{count, plural, one {This action will delete 1 product.} other {This action will delete # products.}}",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "deleting": "Deleting..."
+      },
+      "validation": {
+        "nameRequired": "Product name is required",
+        "technologyRequired": "Technology is required",
+        "priceRequired": "Price is required",
+        "pricePositive": "Price must be greater than 0"
+      }
+    },
     "settings": {
       "state": {
         "loading": "Loading settings...",
@@ -125,6 +198,11 @@
       },
       "profile": {
         "userRole": "Senior Software Engineer",
+        "changePicture": "Change picture",
+        "avatarUploadSuccess": "Avatar uploaded successfully",
+        "avatarUploadError": "Unable to upload avatar. Please try again.",
+        "avatarUploadTypeError": "Unsupported image format. Use JPG, PNG, or WEBP.",
+        "avatarUploadSizeError": "Image is too large. Maximum file size is 2 MB.",
         "generalInfoTitle": "General information",
         "fields": {
           "firstName": "First name",
