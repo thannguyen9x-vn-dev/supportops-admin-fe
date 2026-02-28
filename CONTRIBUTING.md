@@ -1,41 +1,47 @@
-# Contributing
+# Contributing to SupportOps
 
-## Commit message policy
-
-We follow [conventional commits](https://www.conventionalcommits.org/) with the
-following types:
-
-- feat, fix, chore, docs, style, refactor, test, build, ci, perf, revert
-
-Scopes should be a folder or feature (e.g. `settings`, `theme`, `table`).
-Example: `feat(settings): add email notification toggle`.
-
-Breaking changes are indicated with `!` after the type/scope or by adding a
-`BREAKING CHANGE:` footer in the body.
-
-## Getting started
-
-Run `pnpm install` to install dependencies and set up Husky hooks.
-After that you can create a commit with:
+## Quick Start
 
 ```bash
-pnpm run ac   # stages all changes, prompts for a message, and pushes
-# or
-git ac        # equivalent git alias
+# install deps
+pnpm install
+
+# start infra
+cd apps/api && docker compose up -d
+
+# run backend
+cd apps/api && ./gradlew bootRun
+
+# run frontend
+cd apps/web && pnpm dev
 ```
 
-The commit message is validated by commitlint via a `commit-msg` Husky hook.
+## Workflow
+- Branch from `main`
+- Follow Conventional Commits
+- Keep PRs focused and atomic
+- Ensure tests pass before PR
 
-If you ever need to reinitialise the hooks run `pnpm run prepare`.
-
-For situations where you don’t want to type or think about a message at
-all, we provide a quick auto‑commit helper which generates a unique code.
-The message is still a valid conventional commit, using `chore(auto)` as the
-header.
-
-```bash
-pnpm run ac:auto      # stages everything, creates a timestamp-based message, pushes
+## Commit Format
+```text
+feat(module): short summary
+fix(module): short summary
+refactor(module): short summary
+docs: short summary
+test(module): short summary
+chore: short summary
 ```
 
-Each run creates messages such as `chore(auto): 20260226123456789012` so you
-can still identify a change if you look at the history.
+## Feature Delivery Order
+1. Contracts first (`shared/contracts`)
+2. Migration (`apps/api/src/main/resources/db/migration`)
+3. Backend module
+4. Frontend service/hook/component/page
+5. Tests + i18n update
+
+## Checklist
+- Tenant filter present on all tenant data queries
+- Validation annotations on request DTOs
+- No hardcoded API URL in frontend
+- No user-facing hardcoded strings
+- Loading/error/empty states handled
