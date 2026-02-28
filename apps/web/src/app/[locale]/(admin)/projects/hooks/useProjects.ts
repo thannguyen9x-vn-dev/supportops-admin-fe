@@ -2,8 +2,15 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import { mockDeleteProducts, mockFetchProducts, mockSaveProduct } from "../projects.mock";
+import { productService } from "@/features/products/services/product.service";
+
 import type { LoadState, Product, ProductDraft } from "../projects.types";
+import {
+  mapContractProductToProject,
+  mapDraftToCreateRequest,
+  mapDraftToUpdateRequest,
+  mapListItemToProject
+} from "../projects.mapper";
 
 type UseProjectsReturn = {
   data: Product[];
@@ -21,9 +28,14 @@ export function useProjects(): UseProjectsReturn {
     setLoadState("loading");
 
     try {
-      const response = await mockFetchProducts();
-      setData(response);
-      setLoadState(response.length > 0 ? "ready" : "empty");
+      const { data: response } = await productService.list({
+        page: 1,
+        size: 100
+      });
+
+      const mapped = response.map((item) => mapListItemToProject(item));
+      setData(mapped);
+      setLoadState(mapped.length > 0 ? "ready" : "empty");
     } catch {
       setLoadState("error");
     }
@@ -41,16 +53,19 @@ export function useProjects(): UseProjectsReturn {
 
   const saveProduct = useCallback(
     async (draft: ProductDraft, productId?: string) => {
-      const savedProduct = await mockSaveProduct(draft, productId);
+      if (productId) {
+        const { data: updated } = await productService.update(productId, mapDraftToUpdateRequest(draft));
+        const savedProduct = mapContractProductToProject(updated);
 
-      setData((prev) => {
-        if (productId) {
-          return prev.map((item) => (item.id === productId ? savedProduct : item));
-        }
+        setData((prev) => prev.map((item) => (item.id === productId ? savedProduct : item)));
+        setLoadState("ready");
+        return savedProduct;
+      }
 
-        return [savedProduct, ...prev];
-      });
+      const { data: created } = await productService.create(mapDraftToCreateRequest(draft));
+      const savedProduct = mapContractProductToProject(created);
 
+      setData((prev) => [savedProduct, ...prev]);
       setLoadState("ready");
       return savedProduct;
     },
@@ -58,7 +73,15 @@ export function useProjects(): UseProjectsReturn {
   );
 
   const removeProducts = useCallback(async (productIds: string[]) => {
-    await mockDeleteProducts(productIds);
+    if (productIds.length === 1) {
+      const [singleId] = productIds;
+      if (singleId) {
+        await productService.delete(singleId);
+      }
+    } else {
+      await productService.bulkDelete(productIds);
+    }
+
     const deleteSet = new Set(productIds);
 
     setData((prev) => {

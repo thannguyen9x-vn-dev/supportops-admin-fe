@@ -40,7 +40,8 @@ export function ProjectsPageClient() {
         normalizedQuery.length === 0 ||
         product.name.toLowerCase().includes(normalizedQuery) ||
         product.technology.toLowerCase().includes(normalizedQuery) ||
-        product.id.includes(normalizedQuery);
+        product.id.includes(normalizedQuery) ||
+        product.displayId.toLowerCase().includes(normalizedQuery);
       const matchStatus = statusFilter === "all" || product.status === statusFilter;
 
       return matchQuery && matchStatus;

@@ -19,8 +19,12 @@
       "passwordLabel": "Mật khẩu",
       "passwordPlaceholder": "••••••••",
       "passwordRequired": "Mật khẩu là bắt buộc",
+      "passwordMismatch": "Mật khẩu xác nhận không khớp",
       "acceptTerms": "Tôi đồng ý với",
-      "termsAndConditions": "Điều khoản và Điều kiện"
+      "termsAndConditions": "Điều khoản và Điều kiện",
+      "acceptTermsRequired": "Bạn phải đồng ý với điều khoản và điều kiện",
+      "unableToSignIn": "Không thể đăng nhập",
+      "unableToRegister": "Không thể đăng ký"
     },
     "login": {
       "title": "Đăng nhập",
@@ -289,6 +293,60 @@
         "vietnam": "Việt Nam",
         "searchPlaceholder": "Tìm quốc gia...",
         "noOptions": "Không tìm thấy quốc gia"
+      }
+    },
+    "dashboard": {
+      "title": "Bảng điều khiển",
+      "state": {
+        "loading": "Đang tải dữ liệu bảng điều khiển...",
+        "error": "Không thể tải dữ liệu bảng điều khiển."
+      },
+      "action": {
+        "retry": "Thử lại",
+        "refresh": "Làm mới"
+      },
+      "kpi": {
+        "todaySales": "Doanh số hôm nay",
+        "todayVisitors": "Khách truy cập hôm nay",
+        "weekVisitors": "Khách truy cập tuần",
+        "change": "Biến động: {value}%"
+      },
+      "latestCustomers": {
+        "title": "Khách hàng mới nhất"
+      },
+      "transactions": {
+        "title": "Giao dịch gần đây",
+        "status": {
+          "COMPLETED": "Hoàn tất",
+          "IN_PROGRESS": "Đang xử lý",
+          "CANCELLED": "Đã hủy"
+        }
+      }
+    },
+    "reportsPage": {
+      "title": "Báo cáo",
+      "overviewTitle": "Tổng quan báo cáo",
+      "performanceTitle": "Hiệu suất báo cáo",
+      "state": {
+        "loading": "Đang tải dữ liệu báo cáo...",
+        "error": "Không thể tải dữ liệu báo cáo."
+      },
+      "action": {
+        "retry": "Thử lại",
+        "refresh": "Làm mới"
+      },
+      "summary": {
+        "points": "Điểm dữ liệu",
+        "templates": "Tổng templates",
+        "invoicing": "Tổng invoicing"
+      },
+      "transactions": {
+        "title": "Giao dịch gần đây",
+        "status": {
+          "COMPLETED": "Hoàn tất",
+          "IN_PROGRESS": "Đang xử lý",
+          "CANCELLED": "Đã hủy"
+        }
       }
     }
   }

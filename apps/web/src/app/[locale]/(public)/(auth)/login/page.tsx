@@ -4,25 +4,33 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import WifiOutlinedIcon from "@mui/icons-material/WifiOutlined";
 import { Alert, Button, Checkbox, FormControlLabel } from "@mui/material";
+import { TextInputField } from "@supportops/ui-form";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-import { TextInputField } from "@supportops/ui-form";
-
-
 import { authService } from "@/features/auth/services/auth.service";
 import { ApiError } from "@/lib/api";
 import { tokenManager } from "@/lib/auth/tokenManager";
+
+import { AuthCard } from "@/components/auth/AuthCard";
+
 import styles from "../auth.module.css";
-import {AuthCard} from "@/components/auth/AuthCard";
 
 type LoginFormValues = {
   email: string;
   password: string;
   remember: boolean;
 };
+
+function resolveNextPath(nextPath: string, locale: string): string {
+  if (/^\/(en|vi)(\/|$)/.test(nextPath)) {
+    return nextPath;
+  }
+
+  return `/${locale}${nextPath}`;
+}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -35,36 +43,34 @@ export default function LoginPage() {
     formState: { errors, isSubmitting },
     handleSubmit,
     register,
-    setError,
+    setError
   } = useForm<LoginFormValues>({
     defaultValues: {
       email: "",
       password: "",
-      remember: true,
-    },
+      remember: true
+    }
   });
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
       const { data: payload } = await authService.login({
         email: data.email,
-        password: data.password,
+        password: data.password
       });
 
       tokenManager.setAccessToken(payload.accessToken);
-      if (payload.refreshToken) {
-        tokenManager.setRefreshToken(payload.refreshToken);
-      }
+      tokenManager.setRefreshToken(payload.refreshToken);
 
       const nextPath = searchParams.get("next");
       if (nextPath?.startsWith("/")) {
-        router.replace(`/${locale}${nextPath}`);
+        router.replace(resolveNextPath(nextPath, locale));
         return;
       }
 
       router.replace(`/${locale}/dashboard`);
     } catch (error: unknown) {
-      const message = error instanceof ApiError ? error.message : "Unable to sign in";
+      const message = error instanceof ApiError ? error.message : commonT("unableToSignIn");
       setError("root", { message });
     }
   };
@@ -77,9 +83,7 @@ export default function LoginPage() {
         <>
           <span className={styles.illustrationBadge}>{t("badge")}</span>
           <div className={styles.illustrationTitle}>{t("illustrationTitle")}</div>
-          <div className={styles.illustrationText}>
-            {t("illustrationText")}
-          </div>
+          <div className={styles.illustrationText}>{t("illustrationText")}</div>
           <WifiOutlinedIcon sx={{ fontSize: 120, color: "#2563eb", mt: 2 }} />
         </>
       }
@@ -102,8 +106,8 @@ export default function LoginPage() {
               required: commonT("emailRequired"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: commonT("invalidEmail"),
-              },
+                message: commonT("invalidEmail")
+              }
             }}
           />
           <TextInputField
@@ -114,14 +118,11 @@ export default function LoginPage() {
             type="password"
             startIcon={<LockOutlinedIcon fontSize="small" />}
             rules={{
-              required: commonT("passwordRequired"),
+              required: commonT("passwordRequired")
             }}
           />
           <div className={styles.helperRow}>
-            <FormControlLabel
-              control={<Checkbox size="small" {...register("remember")} />}
-              label={t("rememberMe")}
-            />
+            <FormControlLabel control={<Checkbox size="small" {...register("remember")} />} label={t("rememberMe")} />
             <Link href={`/${locale}/forgot-password`}>{t("forgotPassword")}</Link>
           </div>
           <Button
@@ -135,7 +136,7 @@ export default function LoginPage() {
               py: 1.2,
               fontWeight: 600,
               bgcolor: "#2563eb",
-              "&:hover": { bgcolor: "#1d4ed8" },
+              "&:hover": { bgcolor: "#1d4ed8" }
             }}
           >
             {t("submit")}

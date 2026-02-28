@@ -19,8 +19,12 @@
       "passwordLabel": "Password",
       "passwordPlaceholder": "••••••••",
       "passwordRequired": "Password is required",
+      "passwordMismatch": "Passwords do not match",
       "acceptTerms": "I accept the",
-      "termsAndConditions": "Terms and Conditions"
+      "termsAndConditions": "Terms and Conditions",
+      "acceptTermsRequired": "You must accept the terms and conditions",
+      "unableToSignIn": "Unable to sign in",
+      "unableToRegister": "Unable to register"
     },
     "login": {
       "title": "Sign in",
@@ -289,6 +293,60 @@
         "vietnam": "Vietnam",
         "searchPlaceholder": "Search country...",
         "noOptions": "No country found"
+      }
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "state": {
+        "loading": "Loading dashboard...",
+        "error": "Unable to load dashboard data."
+      },
+      "action": {
+        "retry": "Retry",
+        "refresh": "Refresh"
+      },
+      "kpi": {
+        "todaySales": "Today sales",
+        "todayVisitors": "Today visitors",
+        "weekVisitors": "Week visitors",
+        "change": "Change: {value}%"
+      },
+      "latestCustomers": {
+        "title": "Latest customers"
+      },
+      "transactions": {
+        "title": "Recent transactions",
+        "status": {
+          "COMPLETED": "Completed",
+          "IN_PROGRESS": "In progress",
+          "CANCELLED": "Cancelled"
+        }
+      }
+    },
+    "reportsPage": {
+      "title": "Reports",
+      "overviewTitle": "Reports Overview",
+      "performanceTitle": "Reports Performance",
+      "state": {
+        "loading": "Loading report data...",
+        "error": "Unable to load report data."
+      },
+      "action": {
+        "retry": "Retry",
+        "refresh": "Refresh"
+      },
+      "summary": {
+        "points": "Data points",
+        "templates": "Templates total",
+        "invoicing": "Invoicing total"
+      },
+      "transactions": {
+        "title": "Recent transactions",
+        "status": {
+          "COMPLETED": "Completed",
+          "IN_PROGRESS": "In progress",
+          "CANCELLED": "Cancelled"
+        }
       }
     }
   }

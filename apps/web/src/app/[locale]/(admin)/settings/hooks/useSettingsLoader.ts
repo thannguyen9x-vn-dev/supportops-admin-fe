@@ -3,8 +3,10 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 
-import { mockFetchSettings } from "../settings.mock";
+import { settingsService } from "@/features/settings/services/settings.service";
+
 import type { LoadState, SettingsData } from "../settings.types";
+import { toNotificationPreferences, toProfileFormValues } from "../settings.mapper";
 
 type UseSettingsLoaderReturn = {
   data: SettingsData | null;
@@ -21,14 +23,21 @@ export function useSettingsLoader(): UseSettingsLoaderReturn {
     setLoadState("loading");
 
     try {
-      const response = await mockFetchSettings();
-      if (!response) {
+      const [{ data: profile }, { data: preferences }] = await Promise.all([
+        settingsService.getProfile(),
+        settingsService.getPreferences()
+      ]);
+
+      if (!profile) {
         setLoadState("empty");
         setData(null);
         return;
       }
 
-      setData(response);
+      setData({
+        profile: toProfileFormValues(profile),
+        notifications: toNotificationPreferences(preferences)
+      });
       setLoadState("ready");
     } catch {
       setLoadState("error");

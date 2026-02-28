@@ -5,11 +5,13 @@ import { Avatar, ButtonBase, Menu, MenuItem } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState, type MouseEvent } from "react";
 
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import { mockUser } from "../../../../shared/mock/user";
 import styles from "./header.module.css";
 
 export function UserMenu() {
   const t = useTranslations("header");
+  const { logout, user } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isOpen = Boolean(anchorEl);
 
@@ -21,6 +23,16 @@ export function UserMenu() {
     setAnchorEl(null);
   };
 
+  const handleSignOut = () => {
+    handleClose();
+    logout();
+  };
+
+  const displayName = user ? `${user.firstName} ${user.lastName}`.trim() : mockUser.name;
+  const initials = user
+    ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase()
+    : mockUser.initials;
+
   return (
     <>
       <ButtonBase
@@ -31,8 +43,8 @@ export function UserMenu() {
         aria-controls="header-user-menu"
         aria-label={t("userMenuAriaLabel")}
       >
-        <Avatar sx={{ width: 32, height: 32 }}>{mockUser.initials}</Avatar>
-        <span className={styles.userButtonName}>{mockUser.name}</span>
+        <Avatar sx={{ width: 32, height: 32 }}>{initials}</Avatar>
+        <span className={styles.userButtonName}>{displayName}</span>
         <KeyboardArrowDownIcon fontSize="small" />
       </ButtonBase>
 
@@ -44,7 +56,7 @@ export function UserMenu() {
         keepMounted
       >
         <MenuItem onClick={handleClose}>{t("profile")}</MenuItem>
-        <MenuItem onClick={handleClose}>{t("signOut")}</MenuItem>
+        <MenuItem onClick={handleSignOut}>{t("signOut")}</MenuItem>
       </Menu>
     </>
   );

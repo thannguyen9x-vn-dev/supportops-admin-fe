@@ -1,65 +1,132 @@
-## Import and Styling Rules (apps/web)
+# AGENTS.md — SupportOps Platform
 
-- In `apps/web`:
-  - Use `@/` for cross-feature imports or when relative path depth is 3 levels or more.
-  - Use `./` and `../` for local imports in the same feature (typically 2 levels or fewer).
-  - Keep workspace package imports as `@supportops/*`.
+## Project Overview
+SupportOps is a multi-tenant SaaS Operations Platform built with:
+- **Frontend**: Next.js 15 (App Router) + TypeScript + MUI-based design system
+- **Backend**: Java 21 + Spring Boot 3.4 + Gradle
+- **Database**: PostgreSQL 16 + Flyway migrations
+- **Monorepo**: pnpm workspaces
 
-- Styling:
-  - Use a hybrid approach.
-  - Use CSS Modules for layout/shell/positioning/responsive structure (for example: Sidebar, Header, Dashboard layout).
-  - Use MUI components for interactive UI primitives (for example: Button, Input, Avatar, Menu, Dialog).
-  - In CSS Modules, prefer MUI CSS variables (`--mui-*`) over hardcoded hex values.
-  - Avoid all-in `sx` for large layout shells unless explicitly requested.
+Business model: Subscription-based (Freelancer / Company / Enterprise tiers).
+Users can manage tasks (Kanban), products, invoices, billing, and internal messages.
 
-## Preferred import ordering (TS/TSX)
+## Monorepo Structure
 
-- Group imports in this order, top to bottom:
-  - React and framework imports (`react`, `next/*`, `next-intl`).
-  - Third-party libraries (`@mui/*`, other npm packages).
-  - Workspace packages (`@supportops/*`).
-  - App alias imports (`@/*`).
-  - Relative imports (`../*`, `./*`).
-  - Side-effect/style imports (for example `./file.module.css`) last.
+```text
+root/
+├── apps/
+│   ├── web/                    # Next.js Frontend
+│   └── api/                    # Java Spring Boot Backend
+├── shared/
+│   ├── ui/                     # Shared UI components (React + MUI)
+│   └── contracts/              # API types, Zod schemas, endpoint constants
+├── docs/                       # Documentation
+├── pnpm-workspace.yaml
+└── AGENTS.md                   # This file
+```
 
-- Keep one blank line between groups.
-- Within a group, sort imports alphabetically by module path when practical.
-- Prefer `import type { ... }` for type-only imports.
-- Avoid deep relative imports (3+ levels) when `@/*` can express intent more clearly.
+## Key Principles
 
-## Project Guardrails (supportops-admin)
+### 1. Backend-Agnostic Frontend
+- Frontend NEVER hardcodes backend URLs.
+- All API calls go through `apiClient.ts` → `services/*.service.ts`.
+- All types come from `@supportops/contracts`.
+- Changing backend = changing ONE env variable (`NEXT_PUBLIC_API_BASE_URL`).
 
-- Scope:
-  - `apps/web` is the Next.js App Router application.
-  - `shared/ui/*` contains shared packages and must not import from `apps/web`.
+### 2. Contracts as Single Source of Truth
+- `shared/contracts/` defines ALL API types, Zod schemas, and endpoint paths.
+- Both FE and BE MUST conform to these contracts.
+- When adding a new API endpoint, update `shared/contracts/` FIRST.
 
-- Edit boundaries:
-  - When changing theme/form packages, edit source files under `shared/*/src`.
-  - Do not edit build outputs under `shared/*/dist` unless explicitly requested.
+### 3. Multi-Tenancy
+- Every data table has `tenant_id` column.
+- Tenant is resolved from JWT claims on every request.
+- Backend uses `TenantContext` (ThreadLocal) to scope queries.
 
-- TypeScript:
-  - Keep strict type-safety and avoid `any` unless explicitly justified.
-  - Prefer explicit, narrow types for props, config objects, and helper return values.
+### 4. Consistent API Response Format
+```json
+// Success
+{
+  "data": T,
+  "meta": { "page": 1, "size": 20, "total": 100, "totalPages": 5 }
+}
 
-- Next.js App Router:
-  - Default to Server Components; add `'use client'` only when state/effects/browser APIs are required.
-  - Keep app-level providers in `apps/web/src/app/layout.tsx`.
-  - Avoid moving heavy client logic into server layouts.
+// Error
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Email is required",
+    "details": [...],
+    "traceId": "uuid"
+  }
+}
+```
 
-- i18n:
-  - Do not hardcode user-facing strings when they belong to translated UI.
-  - Add new keys consistently across `apps/web/src/i18n/messages/en.json` and `apps/web/src/i18n/messages/vi.json`.
+### 5. Module-Based Architecture
+Both FE and BE are organized by feature modules:
+- `auth`, `user`, `product`, `message`, `dashboard`, `kanban`, `subscription`, `billing`, `invoice`
 
-- Accessibility:
-  - Interactive controls must have an accessible name (`aria-label` or visible text).
-  - Preserve keyboard and focus behavior for buttons, menus, inputs, and dialogs.
-  - Do not replace semantic controls (for example `button`) with generic clickable `div`s.
+## Coding Standards
 
-- Validation before handoff:
-  - Run `pnpm --filter web exec tsc --noEmit`.
-  - Run `pnpm --filter web lint` when changes affect app code.
-  - If any command cannot be run, state the reason clearly in the final report.
+### TypeScript (Frontend)
+- Strict mode enabled
+- No `any` — use `unknown` if truly unknown, then narrow
+- Prefer `interface` over `type` for object shapes
+- Use barrel exports (`index.ts`) per module
+- File naming: `kebab-case.ts` for utils, `PascalCase.tsx` for components
 
-- Change discipline:
-  - Keep changes scoped to the task.
-  - Avoid broad renames/refactors unless explicitly requested.
+### Java (Backend)
+- Java 21 features allowed (records, pattern matching, sealed classes)
+- Follow Spring Boot conventions
+- Use Lombok (`@Data`, `@Builder`, `@Slf4j`) for boilerplate reduction
+- Use MapStruct for DTO ↔ Entity mapping
+- Validation via `jakarta.validation` annotations
+- All exceptions through `GlobalExceptionHandler`
+
+### Git Commits
+- Follow Conventional Commits: `feat:`, `fix:`, `refactor:`, `docs:`, `test:`, `chore:`
+- Scope by module: `feat(auth): add login endpoint`
+- Keep commits atomic — one logical change per commit
+
+## Important File Locations
+
+| Purpose | Path |
+|---|---|
+| API Client | `apps/web/src/lib/api/apiClient.ts` |
+| Auth Context | `apps/web/src/lib/auth/AuthContext.tsx` |
+| Token Manager | `apps/web/src/lib/auth/tokenManager.ts` |
+| Environment Config | `apps/web/src/lib/config/env.ts` |
+| API Contracts | `shared/contracts/src/` |
+| API Endpoints | `shared/contracts/src/endpoints.ts` |
+| Zod Schemas | `shared/contracts/src/schemas/` |
+| Feature Services | `apps/web/src/features/*/services/` |
+| Spring Boot Main | `apps/api/src/main/java/com/supportops/api/` |
+| Flyway Migrations | `apps/api/src/main/resources/db/migration/` |
+| Global Exception Handler | `apps/api/.../common/exception/GlobalExceptionHandler.java` |
+
+## Testing
+
+### Frontend
+- Unit tests: Vitest
+- Component tests: React Testing Library
+- E2E: Playwright (future)
+- Test files: `*.test.ts` / `*.test.tsx` colocated with source
+
+### Backend
+- Unit tests: JUnit 5 + Mockito
+- Integration tests: Testcontainers (PostgreSQL)
+- Test files: mirror `src/main` structure under `src/test`
+- Base class: `BaseIntegrationTest.java` with Testcontainers setup
+
+## How to Run
+
+```bash
+# Frontend
+cd apps/web && pnpm dev           # http://localhost:3000
+
+# Backend
+cd apps/api && ./gradlew bootRun  # http://localhost:8080
+
+# Infrastructure
+cd apps/api && docker compose up -d  # PostgreSQL + Redis + MinIO
+```

@@ -4,9 +4,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { useToast } from "@/features/common/toast/useToast";
+import { settingsService } from "@/features/settings/services/settings.service";
 
-import { MOCK_SETTINGS_DATA, mockSave } from "../settings.mock";
 import type { ProfileFormValues, SubmitState } from "../settings.types";
+import { toUpdateProfileRequest } from "../settings.mapper";
 
 type UseProfileFormOptions = {
   onSaved: (values: ProfileFormValues) => void;
@@ -20,16 +21,28 @@ export function useProfileForm({ t, onSaved }: UseProfileFormOptions) {
   const {
     control,
     handleSubmit,
-    reset,
+    reset
   } = useForm<ProfileFormValues>({
-    defaultValues: MOCK_SETTINGS_DATA.profile,
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      birthday: "",
+      phoneNumber: "",
+      address: "",
+      country: "US",
+      email: "",
+      organization: "",
+      zipCode: "",
+      city: "",
+      department: ""
+    }
   });
 
   const onSubmit = async (values: ProfileFormValues) => {
     setSubmitState("saving");
 
     try {
-      await mockSave();
+      await settingsService.updateProfile(toUpdateProfileRequest(values));
       onSaved(values);
       setSubmitState("success");
       toast.success(t("state.saved"));

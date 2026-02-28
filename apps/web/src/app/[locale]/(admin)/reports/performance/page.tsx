@@ -1,7 +1,5 @@
-import { getTranslations } from "next-intl/server";
+import { ReportView } from "@/features/reports/components/ReportView";
 
-export default async function ReportsPerformancePage() {
-  const t = await getTranslations("pages");
-  return <div>{t("reportsPerformanceComingSoon")}</div>;
+export default function ReportsPerformancePage() {
+  return <ReportView period="year" titleKey="performanceTitle" />;
 }
-

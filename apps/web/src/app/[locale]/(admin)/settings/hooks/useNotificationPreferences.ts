@@ -3,8 +3,9 @@
 import { useCallback, useState } from "react";
 
 import { useToast } from "@/features/common/toast/useToast";
+import { settingsService } from "@/features/settings/services/settings.service";
 
-import { mockSave } from "../settings.mock";
+import { toUserPreferences } from "../settings.mapper";
 import type { NotificationItemKey, NotificationPreference } from "../settings.types";
 
 type UseNotificationPreferencesOptions = {
@@ -19,27 +20,26 @@ export function useNotificationPreferences({ t }: UseNotificationPreferencesOpti
     (key: NotificationItemKey, checked: boolean) => {
       let previousEnabled: boolean | undefined;
 
-      setPreferences((prev) =>
-        prev.map((item) => {
-          if (item.key !== key) {
-            return item;
+      setPreferences((current) => {
+        const updatedPreferences = current.map((item) =>
+          item.key === key
+            ? ((previousEnabled = item.enabled), { ...item, enabled: checked })
+            : item
+        );
+
+        void settingsService.updatePreferences(toUserPreferences(updatedPreferences)).catch(() => {
+          const rollbackEnabled = previousEnabled;
+          if (rollbackEnabled === undefined) {
+            return;
           }
 
-          previousEnabled = item.enabled;
-          return { ...item, enabled: checked };
-        }),
-      );
+          setPreferences((prev) =>
+            prev.map((item) => (item.key === key ? { ...item, enabled: rollbackEnabled } : item))
+          );
+          toast.error(t("state.saveError"));
+        });
 
-      void mockSave().catch(() => {
-        const rollbackEnabled = previousEnabled;
-        if (rollbackEnabled === undefined) {
-          return;
-        }
-
-        setPreferences((prev) =>
-          prev.map((item) => (item.key === key ? { ...item, enabled: rollbackEnabled } : item)),
-        );
-        toast.error(t("state.saveError"));
+        return updatedPreferences;
       });
     },
     [t, toast],

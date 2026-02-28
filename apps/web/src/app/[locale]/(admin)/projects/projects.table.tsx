@@ -63,9 +63,9 @@ export function createProductColumns({
         />
       ),
     }),
-    columnHelper.accessor("id", {
+    columnHelper.accessor("displayId", {
       header: t("table.columns.id"),
-      cell: (context) => `#${context.getValue()}`,
+      cell: (context) => context.getValue(),
     }),
     columnHelper.accessor("price", {
       header: t("table.columns.price"),
