@@ -6,13 +6,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
+      "@supportops/contracts": ["../../shared/contracts/src"],
       "@supportops/ui-theme": ["../../shared/ui/theme/src"],
       "@supportops/ui-form": ["../../shared/ui/form/src"],
       "@supportops/ui-avatar": ["../../shared/ui/avatar/dist"],
       "@supportops/ui-file-upload": ["../../shared/ui/file-upload/dist"]
     }
   },
-  "include": ["next-env.d.ts", "src"],
+  "include": ["next-env.d.ts", "src", "../../shared/contracts/src/**/*"],
   "references": [
     { "path": "../../shared/ui/theme" },
     { "path": "../../shared/ui/form" }

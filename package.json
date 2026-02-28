@@ -4,7 +4,7 @@
   "packageManager": "pnpm@9.0.0",
   "scripts": {
     "dev": "pnpm -r --parallel dev",
-    "dev:web": "pnpm --filter @supportops/web dev",
+    "dev:web": "cd apps/web && pnpm dev",
     "dev:theme": "pnpm --filter @supportops/ui-theme dev",
     "dev:form": "pnpm --filter @supportops/ui-form dev",
     "build": "pnpm build:types && pnpm build:packages",
@@ -22,7 +22,9 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\"",
     "prepare": "husky install",
     "commit": "pnpm exec cz",
-    "ac": "git add -A && pnpm run commit && git push"
+    "ac": "git add -A && pnpm run commit && git push",
+    "commit:auto": "git add -A && git commit -m \"chore(auto): $(date +%Y%m%d%H%M%S%N | cut -c1-16)\" && git push",
+    "ac:auto": "pnpm run commit:auto"
   },
   "config": {
     "commitizen": {
@@ -35,18 +37,19 @@
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
     "@remixicon/react": "^4.6.0",
-    "@swc/helpers": "^0.5.17"
+    "@swc/helpers": "^0.5.17",
+    "next": "16.1.6"
   },
   "devDependencies": {
-    "husky": "^9.0.0",
-    "@commitlint/config-conventional": "^17.0.0",
     "@commitlint/cli": "^17.0.0",
-    "commitizen": "^4.2.5",
-    "cz-conventional-changelog": "^3.3.0",
+    "@commitlint/config-conventional": "^17.0.0",
     "@eslint/js": "^9.39.2",
     "@pnpm/list": "^1000.2.5",
+    "commitizen": "^4.2.5",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.0.0",
     "tsup": "^8.5.1",
     "typescript": "^5",
     "typescript-eslint": "^8.54.0",

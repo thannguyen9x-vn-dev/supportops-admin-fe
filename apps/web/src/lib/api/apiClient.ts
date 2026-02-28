@@ -1,0 +1,216 @@
+import type { ApiErrorDetail, ApiResponse } from "@supportops/contracts";
+
+import { tokenManager } from "@/lib/auth/tokenManager";
+import { env } from "@/lib/config/env";
+
+export class ApiError extends Error {
+  public status: number;
+  public error: ApiErrorDetail;
+
+  constructor(status: number, error: ApiErrorDetail) {
+    super(error.message);
+    this.name = "ApiError";
+    this.status = status;
+    this.error = error;
+  }
+
+  get code() {
+    return this.error.code;
+  }
+
+  get traceId() {
+    return this.error.traceId;
+  }
+}
+
+interface RequestConfig extends Omit<RequestInit, "body"> {
+  params?: Record<string, string | number | boolean | undefined>;
+  skipAuth?: boolean;
+  timeout?: number;
+}
+
+type RequestConfigWithBody = RequestConfig & {
+  body?: unknown;
+};
+
+class HttpClient {
+  private baseUrl: string;
+  private defaultTimeout: number;
+
+  constructor(baseUrl: string, defaultTimeout = 30_000) {
+    this.baseUrl = baseUrl;
+    this.defaultTimeout = defaultTimeout;
+  }
+
+  private async request<T>(
+    method: string,
+    endpoint: string,
+    config: RequestConfigWithBody = {}
+  ): Promise<ApiResponse<T>> {
+    const {
+      params,
+      skipAuth = false,
+      timeout = this.defaultTimeout,
+      body,
+      headers: customHeaders,
+      ...fetchConfig
+    } = config;
+
+    const url = new URL(`${this.baseUrl}${endpoint}`, typeof window === "undefined" ? "http://localhost" : window.location.origin);
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== "") {
+          url.searchParams.set(key, String(value));
+        }
+      });
+    }
+
+    const headers = new Headers(customHeaders);
+    headers.set("x-trace-id", crypto.randomUUID());
+
+    if (body && !(body instanceof FormData)) {
+      headers.set("Content-Type", "application/json");
+    }
+
+    if (!skipAuth) {
+      const token = tokenManager.getAccessToken();
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+    }
+
+    let requestBody: BodyInit | undefined;
+    if (body instanceof FormData) {
+      requestBody = body;
+    } else if (body !== undefined) {
+      requestBody = JSON.stringify(body);
+    }
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+    try {
+      const response = await fetch(url.toString(), {
+        ...fetchConfig,
+        method,
+        headers,
+        body: requestBody,
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (response.status === 401 && !skipAuth) {
+        const refreshed = await this.tryRefreshToken();
+        if (refreshed) {
+          return this.request<T>(method, endpoint, {
+            ...config,
+            skipAuth: false
+          });
+        }
+
+        tokenManager.clear();
+        if (typeof window !== "undefined") {
+          window.location.href = "/login";
+        }
+      }
+
+      if (!response.ok) {
+        let errorDetail: ApiErrorDetail;
+        try {
+          const errorBody = (await response.json()) as { error?: ApiErrorDetail };
+          errorDetail =
+            errorBody.error || {
+              code: "UNKNOWN_ERROR",
+              message: `HTTP ${response.status}: ${response.statusText}`
+            };
+        } catch {
+          errorDetail = {
+            code: "UNKNOWN_ERROR",
+            message: `HTTP ${response.status}: ${response.statusText}`
+          };
+        }
+        throw new ApiError(response.status, errorDetail);
+      }
+
+      if (response.status === 204) {
+        return { data: null as T };
+      }
+
+      return (await response.json()) as ApiResponse<T>;
+    } catch (error) {
+      clearTimeout(timeoutId);
+
+      if (error instanceof ApiError) {
+        throw error;
+      }
+
+      if (error instanceof DOMException && error.name === "AbortError") {
+        throw new ApiError(408, {
+          code: "REQUEST_TIMEOUT",
+          message: "Request timed out"
+        });
+      }
+
+      throw new ApiError(0, {
+        code: "NETWORK_ERROR",
+        message: "Network error — please check your connection"
+      });
+    }
+  }
+
+  private async tryRefreshToken(): Promise<boolean> {
+    const refreshToken = tokenManager.getRefreshToken();
+    if (!refreshToken) {
+      return false;
+    }
+
+    try {
+      const response = await fetch(`${this.baseUrl}/auth/refresh`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refreshToken })
+      });
+
+      if (!response.ok) {
+        return false;
+      }
+
+      const payload = (await response.json()) as { data?: { accessToken?: string } };
+      if (!payload.data?.accessToken) {
+        return false;
+      }
+
+      tokenManager.setAccessToken(payload.data.accessToken);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  get<T>(endpoint: string, config?: RequestConfig) {
+    return this.request<T>("GET", endpoint, config);
+  }
+
+  post<T>(endpoint: string, body?: unknown, config?: RequestConfig) {
+    return this.request<T>("POST", endpoint, { ...config, body });
+  }
+
+  put<T>(endpoint: string, body?: unknown, config?: RequestConfig) {
+    return this.request<T>("PUT", endpoint, { ...config, body });
+  }
+
+  patch<T>(endpoint: string, body?: unknown, config?: RequestConfig) {
+    return this.request<T>("PATCH", endpoint, { ...config, body });
+  }
+
+  delete<T>(endpoint: string, body?: unknown, config?: RequestConfig) {
+    return this.request<T>("DELETE", endpoint, { ...config, body });
+  }
+
+  upload<T>(endpoint: string, formData: FormData, config?: RequestConfig) {
+    return this.request<T>("POST", endpoint, { ...config, body: formData });
+  }
+}
+
+export const apiClient = new HttpClient(env.API_BASE_URL);
