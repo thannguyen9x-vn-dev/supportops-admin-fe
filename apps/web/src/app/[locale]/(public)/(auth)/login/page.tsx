@@ -9,13 +9,14 @@ import { useTranslations } from "next-intl";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-import { loginSchema } from "@supportops/contracts";
 import { TextInputField } from "@supportops/ui-form";
 
-import { useAuth } from "@/features/auth/hooks/useAuth";
+
+import { authService } from "@/features/auth/services/auth.service";
 import { ApiError } from "@/lib/api";
-import { AuthCard } from "../_components/AuthCard";
+import { tokenManager } from "@/lib/auth/tokenManager";
 import styles from "../auth.module.css";
+import {AuthCard} from "@/components/auth/AuthCard";
 
 type LoginFormValues = {
   email: string;
@@ -27,7 +28,6 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { locale } = useParams<{ locale: string }>();
-  const { login } = useAuth();
   const t = useTranslations("auth.login");
   const commonT = useTranslations("auth.common");
   const {
@@ -45,37 +45,26 @@ export default function LoginPage() {
   });
 
   const onSubmit = async (data: LoginFormValues) => {
-    const validated = loginSchema.safeParse({
-      email: data.email,
-      password: data.password,
-    });
-
-    if (!validated.success) {
-      const issues = validated.error.issues as Array<{ path: Array<string | number>; message: string }>;
-      issues.forEach((issue) => {
-        const field = issue.path[0];
-        if (field === "email" || field === "password") {
-          setError(field, { message: issue.message });
-        }
-      });
-      return;
-    }
-
     try {
-      await login({
+      const { data: payload } = await authService.login({
         email: data.email,
         password: data.password,
       });
 
-      const redirectTarget = searchParams.get("next");
-      if (redirectTarget?.startsWith("/")) {
-        router.replace(`/${locale}${redirectTarget}`);
+      tokenManager.setAccessToken(payload.accessToken);
+      if (payload.refreshToken) {
+        tokenManager.setRefreshToken(payload.refreshToken);
+      }
+
+      const nextPath = searchParams.get("next");
+      if (nextPath?.startsWith("/")) {
+        router.replace(`/${locale}${nextPath}`);
         return;
       }
 
       router.replace(`/${locale}/dashboard`);
-    } catch (error) {
-      const message = error instanceof ApiError ? error.message : t("genericError");
+    } catch (error: unknown) {
+      const message = error instanceof ApiError ? error.message : "Unable to sign in";
       setError("root", { message });
     }
   };
@@ -135,7 +124,6 @@ export default function LoginPage() {
             />
             <Link href={`/${locale}/forgot-password`}>{t("forgotPassword")}</Link>
           </div>
-          {errors.root?.message ? <Alert severity="error">{errors.root.message}</Alert> : null}
           <Button
             type="submit"
             variant="contained"
@@ -150,8 +138,9 @@ export default function LoginPage() {
               "&:hover": { bgcolor: "#1d4ed8" },
             }}
           >
-            {isSubmitting ? t("submitting") : t("submit")}
+            {t("submit")}
           </Button>
+          {errors.root?.message ? <Alert severity="error">{errors.root.message}</Alert> : null}
         </div>
       </form>
     </AuthCard>

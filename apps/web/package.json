@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:webpack": "TURBOPACK=0 next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
@@ -13,6 +14,7 @@
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
     "@mui/material-nextjs": "^7.3.7",
+    "@supportops/contracts": "workspace:*",
     "@supportops/ui-avatar": "workspace:*",
     "@supportops/ui-file-upload": "workspace:*",
     "@supportops/ui-form": "workspace:*",

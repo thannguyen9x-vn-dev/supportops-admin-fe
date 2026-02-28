@@ -28,10 +28,29 @@ class TokenManager {
     }
   }
 
+  getRefreshToken(): string | null {
+    if (typeof window === "undefined") {
+      return null;
+    }
+    return localStorage.getItem(env.REFRESH_TOKEN_KEY);
+  }
+
+  setRefreshToken(token: string): void {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(env.REFRESH_TOKEN_KEY, token);
+    }
+  }
+
+  setTokens(accessToken: string, refreshToken: string): void {
+    this.setAccessToken(accessToken);
+    this.setRefreshToken(refreshToken);
+  }
+
   clear(): void {
     this.accessToken = null;
     if (typeof window !== "undefined") {
       sessionStorage.removeItem(env.ACCESS_TOKEN_KEY);
+      localStorage.removeItem(env.REFRESH_TOKEN_KEY);
     }
   }
 

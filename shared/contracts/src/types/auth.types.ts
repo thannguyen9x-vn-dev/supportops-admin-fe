@@ -5,6 +5,7 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   accessToken: string;
+  refreshToken: string;
   expiresIn: number;
   user: AuthUser;
 }
@@ -30,8 +31,13 @@ export interface RegisterRequest {
 
 export interface RegisterResponse {
   accessToken: string;
+  refreshToken: string;
   expiresIn: number;
   user: AuthUser;
+}
+
+export interface RefreshTokenRequest {
+  refreshToken: string;
 }
 
 export interface RefreshTokenResponse {

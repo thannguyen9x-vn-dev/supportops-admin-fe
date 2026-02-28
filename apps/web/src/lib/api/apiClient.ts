@@ -95,7 +95,6 @@ class HttpClient {
         method,
         headers,
         body: requestBody,
-        credentials: fetchConfig.credentials ?? "include",
         signal: controller.signal
       });
 
@@ -161,11 +160,16 @@ class HttpClient {
   }
 
   private async tryRefreshToken(): Promise<boolean> {
+    const refreshToken = tokenManager.getRefreshToken();
+    if (!refreshToken) {
+      return false;
+    }
+
     try {
       const response = await fetch(`${this.baseUrl}/auth/refresh`, {
         method: "POST",
-        credentials: "include",
-        headers: { "x-trace-id": crypto.randomUUID() }
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refreshToken })
       });
 
       if (!response.ok) {

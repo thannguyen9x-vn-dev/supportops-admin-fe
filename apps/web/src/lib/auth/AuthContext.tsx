@@ -1,8 +1,8 @@
 "use client";
 
+import type { AuthUser, LoginRequest, RegisterRequest } from "@supportops/contracts";
 import type { ReactNode } from "react";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import type { AuthUser, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from "@supportops/contracts";
 
 import { ENDPOINTS, apiClient } from "@/lib/api";
 
@@ -29,11 +29,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     const init = async () => {
-      try {
-        const { data } = await apiClient.get<AuthUser>(ENDPOINTS.USERS.ME);
-        setUser(data);
-      } catch {
-        tokenManager.clear();
+      if (tokenManager.isAuthenticated()) {
+        try {
+          const { data } = await apiClient.get<AuthUser>(ENDPOINTS.USERS.ME);
+          setUser(data);
+        } catch {
+          tokenManager.clear();
+        }
       }
       setIsLoading(false);
     };
@@ -42,16 +44,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = useCallback(async (credentials: LoginRequest) => {
-    const { data } = await apiClient.post<LoginResponse>(ENDPOINTS.AUTH.LOGIN, credentials, { skipAuth: true });
+    const { data } = await apiClient.post<{
+      accessToken: string;
+      refreshToken: string;
+      user: AuthUser;
+    }>(ENDPOINTS.AUTH.LOGIN, credentials, { skipAuth: true });
 
-    tokenManager.setAccessToken(data.accessToken);
+    tokenManager.setTokens(data.accessToken, data.refreshToken);
     setUser(data.user);
   }, []);
 
   const register = useCallback(async (payload: RegisterRequest) => {
-    const { data } = await apiClient.post<RegisterResponse>(ENDPOINTS.AUTH.REGISTER, payload, { skipAuth: true });
+    const { data } = await apiClient.post<{
+      accessToken: string;
+      refreshToken: string;
+      user: AuthUser;
+    }>(ENDPOINTS.AUTH.REGISTER, payload, { skipAuth: true });
 
-    tokenManager.setAccessToken(data.accessToken);
+    tokenManager.setTokens(data.accessToken, data.refreshToken);
     setUser(data.user);
   }, []);
 

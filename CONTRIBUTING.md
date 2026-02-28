@@ -27,3 +27,15 @@ git ac        # equivalent git alias
 The commit message is validated by commitlint via a `commit-msg` Husky hook.
 
 If you ever need to reinitialise the hooks run `pnpm run prepare`.
+
+For situations where you don’t want to type or think about a message at
+all, we provide a quick auto‑commit helper which generates a unique code.
+The message is still a valid conventional commit, using `chore(auto)` as the
+header.
+
+```bash
+pnpm run ac:auto      # stages everything, creates a timestamp-based message, pushes
+```
+
+Each run creates messages such as `chore(auto): 20260226123456789012` so you
+can still identify a change if you look at the history.

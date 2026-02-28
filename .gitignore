@@ -1,7 +1,6 @@
 node_modules
 **/*.tsbuildinfo
-
+.history/
 .DS_Store
 **/.DS_Store
-.history/
 .idea/workspace.xml
