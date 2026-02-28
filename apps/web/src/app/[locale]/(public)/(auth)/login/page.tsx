@@ -3,14 +3,17 @@
 import EmailIcon from "@mui/icons-material/Email";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import WifiOutlinedIcon from "@mui/icons-material/WifiOutlined";
-import { Button, Checkbox, FormControlLabel } from "@mui/material";
+import { Alert, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import { TextInputField } from "@supportops/ui-form";
 
+import { authService } from "@/features/auth/services/auth.service";
+import { ApiError } from "@/lib/api";
+import { tokenManager } from "@/lib/auth/tokenManager";
 import { AuthCard } from "../_components/AuthCard";
 import styles from "../auth.module.css";
 
@@ -21,10 +24,18 @@ type LoginFormValues = {
 };
 
 export default function LoginPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const { locale } = useParams<{ locale: string }>();
   const t = useTranslations("auth.login");
   const commonT = useTranslations("auth.common");
-  const { control, handleSubmit, register } = useForm<LoginFormValues>({
+  const {
+    control,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+    register,
+    setError,
+  } = useForm<LoginFormValues>({
     defaultValues: {
       email: "",
       password: "",
@@ -32,8 +43,29 @@ export default function LoginPage() {
     },
   });
 
-  const onSubmit = (data: LoginFormValues) => {
-    console.log(data);
+  const onSubmit = async (data: LoginFormValues) => {
+    try {
+      const { data: payload } = await authService.login({
+        email: data.email,
+        password: data.password,
+      });
+
+      tokenManager.setAccessToken(payload.accessToken);
+      if (payload.refreshToken) {
+        tokenManager.setRefreshToken(payload.refreshToken);
+      }
+
+      const nextPath = searchParams.get("next");
+      if (nextPath?.startsWith("/")) {
+        router.replace(`/${locale}${nextPath}`);
+        return;
+      }
+
+      router.replace(`/${locale}/dashboard`);
+    } catch (error: unknown) {
+      const message = error instanceof ApiError ? error.message : "Unable to sign in";
+      setError("root", { message });
+    }
   };
 
   return (
@@ -95,6 +127,7 @@ export default function LoginPage() {
             type="submit"
             variant="contained"
             fullWidth
+            disabled={isSubmitting}
             sx={{
               borderRadius: 2,
               textTransform: "none",
@@ -106,6 +139,7 @@ export default function LoginPage() {
           >
             {t("submit")}
           </Button>
+          {errors.root?.message ? <Alert severity="error">{errors.root.message}</Alert> : null}
         </div>
       </form>
     </AuthCard>
