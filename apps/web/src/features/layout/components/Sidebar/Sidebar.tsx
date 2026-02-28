@@ -4,18 +4,68 @@ import { Avatar } from "@mui/material";
 import { useParams, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
+import type { UserRole } from "@supportops/contracts";
 
-import { mockUser } from "@/shared/mock/user";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import { navigationConfig } from "../../config/navigation";
 import { useSidebar } from "../../context/SidebarContext";
+import type { NavGroup, NavItem } from "../../types";
 import { SidebarGroup } from "./SidebarGroup";
 import styles from "./sidebar.module.css";
+
+function hasRoleAccess(item: NavItem, role?: UserRole): boolean {
+  if (!item.allowedRoles?.length) {
+    return true;
+  }
+
+  if (!role) {
+    return false;
+  }
+
+  return item.allowedRoles.includes(role);
+}
+
+function filterNavigationByRole(groups: NavGroup[], role?: UserRole): NavGroup[] {
+  const filteredGroups: NavGroup[] = [];
+
+  groups.forEach((group) => {
+    const items: NavItem[] = [];
+
+    group.items.forEach((item) => {
+      if (!hasRoleAccess(item, role)) {
+        return;
+      }
+
+      const filteredChildren = item.children?.filter((child) => hasRoleAccess(child, role));
+      if (item.children && !filteredChildren?.length) {
+        return;
+      }
+
+      items.push({
+        ...item,
+        children: filteredChildren,
+      });
+    });
+
+    if (items.length > 0) {
+      filteredGroups.push({
+        ...group,
+        items,
+      });
+    }
+  });
+
+  return filteredGroups;
+}
 
 export function Sidebar() {
   const { locale } = useParams<{ locale: string }>();
   const pathname = usePathname();
   const { isCollapsed, isMobileOpen, closeMobileSidebar } = useSidebar();
+  const { user } = useAuth();
   const t = useTranslations();
+  const roleLabel = user?.role.replace("_", " ") ?? "";
+  const filteredNavigation = filterNavigationByRole(navigationConfig, user?.role);
 
   useEffect(() => {
     closeMobileSidebar();
@@ -44,7 +94,7 @@ export function Sidebar() {
         </div>
 
         <nav className={styles.nav}>
-          {navigationConfig.map((group) => (
+          {filteredNavigation.map((group) => (
             <SidebarGroup
               key={group.groupLabel}
               group={group}
@@ -58,10 +108,12 @@ export function Sidebar() {
 
         {!isCollapsed ? (
           <div className={styles.footer}>
-            <Avatar sx={{ width: 36, height: 36 }}>{mockUser.initials}</Avatar>
+            <Avatar src={user?.avatarUrl ?? undefined} sx={{ width: 36, height: 36 }}>
+              {`${user?.firstName?.[0] ?? ""}${user?.lastName?.[0] ?? ""}`.trim() || "U"}
+            </Avatar>
             <div className={styles.userInfo}>
-              <p className={styles.userName}>{mockUser.name}</p>
-              <p className={styles.userRole}>{mockUser.role}</p>
+              <p className={styles.userName}>{`${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim() || "-"}</p>
+              <p className={styles.userRole}>{roleLabel}</p>
             </div>
           </div>
         ) : null}

@@ -32,7 +32,9 @@
       "footerAction": "Create an account",
       "rememberMe": "Remember me",
       "forgotPassword": "Forgot password?",
-      "submit": "Sign In"
+      "submit": "Sign In",
+      "submitting": "Signing in...",
+      "genericError": "Unable to sign in. Please try again."
     },
     "register": {
       "title": "Create your free account",
@@ -45,11 +47,17 @@
       "fullNameLabel": "Full name",
       "fullNamePlaceholder": "Alex Johnson",
       "fullNameRequired": "Name is required",
+      "organizationLabel": "Organization",
+      "organizationPlaceholder": "SupportOps Inc.",
+      "organizationRequired": "Organization is required",
       "passwordPlaceholder": "Create a password",
       "confirmPasswordLabel": "Confirm password",
       "confirmPasswordPlaceholder": "Repeat your password",
       "confirmPasswordRequired": "Confirm your password",
-      "submit": "Create account"
+      "passwordMismatch": "Passwords do not match",
+      "submit": "Create account",
+      "submitting": "Creating account...",
+      "genericError": "Unable to create account. Please try again."
     },
     "forgotPassword": {
       "title": "Forgot your password?",

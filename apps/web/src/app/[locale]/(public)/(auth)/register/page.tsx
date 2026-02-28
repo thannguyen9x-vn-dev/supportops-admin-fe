@@ -3,19 +3,23 @@
 import EmailIcon from "@mui/icons-material/Email";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import { Button, Checkbox, FormControlLabel } from "@mui/material";
+import { Alert, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
+import { registerSchema } from "@supportops/contracts";
 import { TextInputField } from "@supportops/ui-form";
 
-import { AuthCard } from "../../../../../components/auth/AuthCard";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { ApiError } from "@/lib/api";
+import { AuthCard } from "../_components/AuthCard";
 import styles from "../auth.module.css";
 
 type RegisterFormValues = {
   fullName: string;
+  organizationName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -23,12 +27,21 @@ type RegisterFormValues = {
 };
 
 export default function RegisterPage() {
+  const router = useRouter();
   const { locale } = useParams<{ locale: string }>();
+  const { register: registerAuth } = useAuth();
   const t = useTranslations("auth.register");
   const commonT = useTranslations("auth.common");
-  const { control, handleSubmit, register } = useForm<RegisterFormValues>({
+  const {
+    control,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+    register,
+    setError,
+  } = useForm<RegisterFormValues>({
     defaultValues: {
       fullName: "",
+      organizationName: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -36,8 +49,53 @@ export default function RegisterPage() {
     },
   });
 
-  const onSubmit = (data: RegisterFormValues) => {
-    console.log(data);
+  const onSubmit = async (data: RegisterFormValues) => {
+    const [firstNameRaw, ...rest] = data.fullName.trim().split(/\s+/);
+    const firstName = firstNameRaw || data.fullName.trim();
+    const lastName = rest.join(" ");
+    const validated = registerSchema.safeParse({
+      email: data.email,
+      password: data.password,
+      confirmPassword: data.confirmPassword,
+      firstName,
+      lastName: lastName || firstName,
+      organizationName: data.organizationName,
+    });
+
+    if (!validated.success) {
+      const issues = validated.error.issues as Array<{ path: Array<string | number>; message: string }>;
+      issues.forEach((issue) => {
+        const field = issue.path[0];
+        if (field === "firstName" || field === "lastName") {
+          setError("fullName", { message: t("fullNameRequired") });
+          return;
+        }
+
+        if (
+          field === "email" ||
+          field === "password" ||
+          field === "confirmPassword" ||
+          field === "organizationName"
+        ) {
+          setError(field, { message: issue.message });
+        }
+      });
+      return;
+    }
+
+    try {
+      await registerAuth({
+        email: data.email,
+        password: data.password,
+        firstName,
+        lastName: lastName || firstName,
+        organizationName: data.organizationName,
+      });
+      router.replace(`/${locale}/dashboard`);
+    } catch (error) {
+      const message = error instanceof ApiError ? error.message : t("genericError");
+      setError("root", { message });
+    }
   };
 
   return (
@@ -88,6 +146,16 @@ export default function RegisterPage() {
             }}
           />
           <TextInputField
+            name="organizationName"
+            control={control}
+            label={t("organizationLabel")}
+            placeholder={t("organizationPlaceholder")}
+            startIcon={<PersonOutlineIcon fontSize="small" />}
+            rules={{
+              required: t("organizationRequired"),
+            }}
+          />
+          <TextInputField
             name="password"
             control={control}
             label={commonT("passwordLabel")}
@@ -118,10 +186,12 @@ export default function RegisterPage() {
               </span>
             }
           />
+          {errors.root?.message ? <Alert severity="error">{errors.root.message}</Alert> : null}
           <Button
             type="submit"
             variant="contained"
             fullWidth
+            disabled={isSubmitting}
             sx={{
               borderRadius: 2,
               textTransform: "none",
@@ -131,7 +201,7 @@ export default function RegisterPage() {
               "&:hover": { bgcolor: "#1d4ed8" },
             }}
           >
-            {t("submit")}
+            {isSubmitting ? t("submitting") : t("submit")}
           </Button>
         </div>
       </form>

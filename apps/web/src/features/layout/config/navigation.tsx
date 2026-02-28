@@ -21,16 +21,19 @@ export const navigationConfig: NavGroup[] = [
         href: "/projects",
         icon: <FolderOutlinedIcon fontSize="small" />,
         badge: 3,
+        allowedRoles: ["ADMIN", "SUPER_ADMIN"],
       },
       {
         label: "nav.team",
         href: "/team",
         icon: <PeopleOutlinedIcon fontSize="small" />,
+        allowedRoles: ["ADMIN", "SUPER_ADMIN"],
       },
       {
         label: "nav.calendar",
         href: "/calendar",
         icon: <CalendarMonthOutlinedIcon fontSize="small" />,
+        allowedRoles: ["ADMIN", "SUPER_ADMIN"],
       },
     ],
   },
@@ -41,16 +44,19 @@ export const navigationConfig: NavGroup[] = [
         label: "nav.reports",
         href: "/reports",
         icon: <BarChartOutlinedIcon fontSize="small" />,
+        allowedRoles: ["ADMIN", "SUPER_ADMIN"],
         children: [
           {
             label: "nav.reportsOverview",
             href: "/reports/overview",
             icon: <BarChartOutlinedIcon fontSize="small" />,
+            allowedRoles: ["ADMIN", "SUPER_ADMIN"],
           },
           {
             label: "nav.reportsPerformance",
             href: "/reports/performance",
             icon: <BarChartOutlinedIcon fontSize="small" />,
+            allowedRoles: ["ADMIN", "SUPER_ADMIN"],
           },
         ],
       },
@@ -67,4 +73,3 @@ export const navigationConfig: NavGroup[] = [
     ],
   },
 ];
-
