@@ -32,7 +32,9 @@
       "footerAction": "Tạo tài khoản",
       "rememberMe": "Ghi nhớ tôi",
       "forgotPassword": "Quên mật khẩu?",
-      "submit": "Đăng nhập"
+      "submit": "Đăng nhập",
+      "submitting": "Đang đăng nhập...",
+      "genericError": "Không thể đăng nhập. Vui lòng thử lại."
     },
     "register": {
       "title": "Tạo tài khoản miễn phí",
@@ -45,11 +47,17 @@
       "fullNameLabel": "Họ và tên",
       "fullNamePlaceholder": "Nguyễn Văn A",
       "fullNameRequired": "Tên là bắt buộc",
+      "organizationLabel": "Tổ chức",
+      "organizationPlaceholder": "SupportOps Inc.",
+      "organizationRequired": "Tổ chức là bắt buộc",
       "passwordPlaceholder": "Tạo mật khẩu",
       "confirmPasswordLabel": "Xác nhận mật khẩu",
       "confirmPasswordPlaceholder": "Nhập lại mật khẩu",
       "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu",
-      "submit": "Tạo tài khoản"
+      "passwordMismatch": "Mật khẩu không khớp",
+      "submit": "Tạo tài khoản",
+      "submitting": "Đang tạo tài khoản...",
+      "genericError": "Không thể tạo tài khoản. Vui lòng thử lại."
     },
     "forgotPassword": {
       "title": "Quên mật khẩu?",

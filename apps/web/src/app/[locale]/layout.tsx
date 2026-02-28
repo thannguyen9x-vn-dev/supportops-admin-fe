@@ -3,6 +3,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { AuthProvider } from "@/lib/auth/AuthContext";
 import { locales } from "../../i18n/config";
 
 export default async function LocaleLayout({
@@ -21,7 +22,11 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+<<<<<<< Updated upstream
       <div data-locale={locale}>{children}</div>
+=======
+      <AuthProvider>{children}</AuthProvider>
+>>>>>>> Stashed changes
     </NextIntlClientProvider>
   );
 }

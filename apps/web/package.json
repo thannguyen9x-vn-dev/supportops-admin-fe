@@ -4,6 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+<<<<<<< Updated upstream
+=======
+    "dev:webpack": "TURBOPACK=0 next dev",
+>>>>>>> Stashed changes
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
