@@ -4,23 +4,25 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-<<<<<<< Updated upstream
-=======
-    "dev:webpack": "TURBOPACK=0 next dev",
->>>>>>> Stashed changes
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@date-fns/tz": "^1.2.0",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7",
+    "@mui/material-nextjs": "^7.3.7",
+    "@supportops/ui-avatar": "workspace:*",
+    "@supportops/ui-file-upload": "workspace:*",
     "@supportops/ui-form": "workspace:*",
+    "@tanstack/react-table": "^8.21.3",
+    "currency.js": "^2.0.4",
+    "date-fns": "^4.1.0",
     "next": "16.1.6",
     "next-intl": "^4.4.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "@mui/icons-material": "^7.3.7",
-    "@mui/material": "^7.3.7",
-    "@mui/material-nextjs": "^7.3.7",
     "react-hook-form": "^7"
   },
   "devDependencies": {
@@ -29,7 +31,6 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
-    "typescript": "^5"
-    
+    "typescript": "^5.9.3"
   }
 }

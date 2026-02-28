@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 
 import { TextInputField } from "@supportops/ui-form";
 
-import { AuthCard } from "../_components/AuthCard";
+import { AuthCard } from "../../../../../components/auth/AuthCard";
 import styles from "../auth.module.css";
 
 type ForgotFormValues = {

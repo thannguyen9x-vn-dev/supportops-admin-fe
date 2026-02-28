@@ -5,10 +5,186 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e580c7ae-fb73-488e-9fcc-d01a73763fd1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.history/.husky/commit-msg_20260226183317" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/.husky/commit-msg_20260226183346" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/CONTRIBUTING_20260226183326.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/CONTRIBUTING_20260226183346.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213150326.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213153832.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213200225.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213201403.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213201434.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213201605.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213201608.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213201635.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213201638.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213201708.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213201711.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260213201736.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260216190900.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/app/[locale]/(admin)/settings/page_20260216200539.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/components/auth/AuthCard_20260202213900.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/features/layout/components/DashboardLayout/dashboard-layout.module_20260213123911.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/apps/web/src/features/layout/components/DashboardLayout/dashboard-layout.module_20260213200647.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/commitlint.config_20260226183311.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/commitlint.config_20260226183347.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/package_20260226183654.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/package_20260226183707.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/shared/ui/form/src/field/input/TextInputField.types_20260202215740.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/shared/ui/form/src/field/input/TextInputField.types_20260213144727.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/shared/ui/form/src/field/input/TextInputField_20260213195725.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.history/shared/ui/form/src/field/input/TextInputField_20260213201538.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.husky/commit-msg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/supportops-admin.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AGENTS.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CONTRIBUTING.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/AGENTS.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/calendar/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/dashboard/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/ProjectsPageClient.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/components/DeleteProductsDialog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/components/ProductDialog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/components/ProductFormFields.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/components/ProductsToolbar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/hooks/useProjects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/projects.mock.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/projects.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/projects.table.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/projects/projects.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/reports/overview/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/reports/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/reports/performance/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/AGENTS.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/components/NotificationSettingsCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/components/PasswordForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/components/ProfileCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/components/ProfileForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/hooks/useNotificationPreferences.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/hooks/usePasswordForm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/hooks/useProfileForm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/hooks/useSettingsLoader.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/settings.mock.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/settings.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/settings/settings.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(admin)/team/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/api/upload/avatar/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/components/auth/AuthCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/common/components/AppToast.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/common/components/dialogs/ConfirmDialog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/common/components/dialogs/FormDialog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/common/hooks/useDialogState.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/common/toast/ToastProvider.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/common/toast/useToast.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/layout/components/DashboardLayout/DashboardLayout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/layout/components/DashboardLayout/dashboard-layout.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/layout/components/Header/Header.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/layout/components/Header/SearchBar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/layout/components/Header/header.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/layout/components/Sidebar/SidebarGroup.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/layout/components/Sidebar/SidebarItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/layout/components/Sidebar/sidebar.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/layout/context/SidebarContext.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/table/components/ClientDataTable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/table/components/DataTable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/table/components/EditableCell.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/table/components/client-data-table.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/table/components/data-table.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/table/hooks/useClientTable.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/table/hooks/useTanStackTable.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/features/table/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/shared/constants/countries.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/shared/mock/user.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/commitlint.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/admin-mvp.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/AGENTS.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/AGENTS.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/dist/index.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/dist/index.cjs.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/dist/index.d.cts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/dist/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/dist/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/dist/index.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/src/Avatar.constants.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/src/Avatar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/src/Avatar.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/tsconfig.tsup.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/avatar/tsup.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/AGENTS.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/dist/index.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/dist/index.cjs.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/dist/index.d.cts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/dist/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/dist/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/dist/index.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/src/AvatarUpload.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/src/FileUpload.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/src/FileUpload.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/src/ImageCropDialog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/src/fileUpload.constants.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/src/useFileUpload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/src/useFileUpload.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/src/useImageCrop.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/tsconfig.tsup.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/file-upload/tsup.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/form/src/field/input/SelectOptionField.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/form/src/field/input/SelectOptionField.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/form/src/field/input/TextAreaField.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/ui/form/src/field/input/TextAreaField.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201103240.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201105712.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201105757.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201110049.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201115442.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201115839.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201121511.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201121942.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201123925.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201124325.json" beforeDir="false" afterPath="$PROJECT_DIR$/.history/package_20260226183425.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201133908.json" beforeDir="false" afterPath="$PROJECT_DIR$/.history/package_20260226183421.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201133919.json" beforeDir="false" afterPath="$PROJECT_DIR$/.history/package_20260226183347.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.history/package_20260201151759.json" beforeDir="false" afterPath="$PROJECT_DIR$/.history/package_20260226183344.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/proxy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/[locale]/(private)/dashboard/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/[locale]/(private)/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/[locale]/(private)/projects/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/[locale]/(private)/settings/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/[locale]/(public)/(auth)/_components/AuthCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/.history/apps/web/src/components/auth/AuthCard_20260201163723.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/[locale]/(public)/(auth)/forgot-password/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(public)/(auth)/forgot-password/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/[locale]/(public)/(auth)/reset-password/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/[locale]/(public)/(auth)/reset-password/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/i18n/messages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/i18n/messages/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/i18n/messages/vi.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/i18n/messages/vi.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/form/dist/index.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/form/dist/index.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/form/dist/index.cjs.map" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/form/dist/index.cjs.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/form/dist/index.d.cts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/form/dist/index.d.cts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/form/dist/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/form/dist/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/form/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/form/dist/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/form/dist/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/form/dist/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/form/src/field/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/form/src/field/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/form/src/field/input/TextInputField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/form/src/field/input/TextInputField.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/form/src/field/input/TextInputField.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/form/src/field/input/TextInputField.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/theme/dist/index.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/theme/dist/index.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/theme/dist/index.cjs.map" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/theme/dist/index.cjs.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/theme/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/theme/dist/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/theme/dist/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/theme/dist/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ui/theme/src/ThemeProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ui/theme/src/ThemeProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.base.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.base.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +192,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="400" />
+    <option name="cachedIndexableFilesCount" value="401" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -42,15 +218,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "feature/settings-page",
-    "last_opened_file_path": "/Users/thannguyennham/work/projects/supportops-admin-fe",
+    "git-widget-placeholder": "Merging feature/login-page",
+    "last_opened_file_path": "/Users/thannguyennham/projects/supportops/supportops-admin-fe",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "pnpm",
     "settings.editor.selected.configurable": "ml.llm.LLMThirdPartyAiProvidersConfigurable",
-    "ts.external.directory.path": "/Users/thannguyennham/work/projects/supportops-admin-fe/node_modules/typescript/lib"
+    "ts.external.directory.path": "/Users/thannguyennham/projects/supportops/supportops-admin-fe/node_modules/typescript/lib"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -72,5 +248,11 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="additionalRoots">
+      <list>
+        <option value="$PROJECT_DIR$/shared/ui/file-upload/dist" />
+        <option value="$PROJECT_DIR$/shared/ui/avatar/dist" />
+      </list>
+    </option>
   </component>
 </project>

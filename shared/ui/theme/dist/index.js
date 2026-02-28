@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider as ThemeProvider$1 } from '@mui/material/styles';
 import t, { useMemo } from 'react';
-import { jsx, jsxs } from 'react/jsx-runtime';
-import { StyledEngineProvider, CssBaseline, Button, alpha, Stack, Box } from '@mui/material';
+import { jsxs, jsx } from 'react/jsx-runtime';
+import { CssBaseline, Button, alpha, Stack, Box } from '@mui/material';
 
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
@@ -4583,10 +4583,10 @@ function createAppTheme() {
 }
 function ThemeProvider({ children }) {
   const theme = useMemo(() => createAppTheme(), []);
-  return /* @__PURE__ */ jsx(StyledEngineProvider, { injectFirst: true, children: /* @__PURE__ */ jsxs(ThemeProvider$1, { theme, children: [
+  return /* @__PURE__ */ jsxs(ThemeProvider$1, { theme, children: [
     /* @__PURE__ */ jsx(CssBaseline, {}),
     children
-  ] }) });
+  ] });
 }
 
 export { ThemeProvider, colors_exports as colors, createAppTheme };

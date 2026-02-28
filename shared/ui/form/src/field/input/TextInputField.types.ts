@@ -1,10 +1,9 @@
-// packages/ui/form/src/field/input/TextInputField.types.ts
-
 import type {TextFieldProps} from '@mui/material/TextField'
 import type {ReactNode} from 'react'
 import type {Control, FieldPath, FieldValues, RegisterOptions} from 'react-hook-form'
 
 export type TextInputFieldStatus = 'default' | 'success' | 'error'
+export type TextInputFieldType = 'text' | 'email'
 
 export interface TextInputFieldProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -37,4 +36,6 @@ export interface TextInputFieldProps<
   errorIcon?: ReactNode
 
   hideEmptyHelperText?: boolean
+
+  inputType?: TextInputFieldType
 }

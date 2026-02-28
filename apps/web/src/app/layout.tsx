@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
+import { ThemeProvider } from "@supportops/ui-theme";
+
+import { ToastProvider } from "@/features/common/toast/ToastProvider";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,13 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        style={{
-          fontFamily:
-            '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-        }}
-      >
-        {children}
+      <body suppressHydrationWarning>
+        <AppRouterCacheProvider>
+          <ThemeProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

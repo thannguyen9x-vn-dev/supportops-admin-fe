@@ -84,5 +84,220 @@
       "confirmNewPasswordRequired": "Confirm your password",
       "submit": "Reset password"
     }
+  },
+  "nav": {
+    "main": "MAIN",
+    "analytics": "ANALYTICS",
+    "system": "SYSTEM",
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "team": "Team",
+    "calendar": "Calendar",
+    "reports": "Reports",
+    "reportsOverview": "Overview",
+    "reportsPerformance": "Performance",
+    "settings": "Settings"
+  },
+  "header": {
+    "searchPlaceholder": "Search...",
+    "toggleNavigationAriaLabel": "Toggle navigation",
+    "closeNavigationAriaLabel": "Close navigation",
+    "notificationsAriaLabel": "Notifications",
+    "userMenuAriaLabel": "Open user menu",
+    "profile": "Profile",
+    "signOut": "Sign out"
+  },
+  "pages": {
+    "dashboardComingSoon": "Dashboard - coming soon",
+    "projectsComingSoon": "Projects - coming soon",
+    "teamComingSoon": "Team - coming soon",
+    "calendarComingSoon": "Calendar - coming soon",
+    "settingsComingSoon": "Settings - coming soon",
+    "reportsComingSoon": "Reports - coming soon",
+    "reportsOverviewComingSoon": "Reports overview - coming soon",
+    "reportsPerformanceComingSoon": "Reports performance - coming soon",
+    "projects": {
+      "state": {
+        "loading": "Loading products...",
+        "error": "Unable to load products. Please try again.",
+        "empty": "No products match your current filters.",
+        "created": "Product created successfully",
+        "updated": "Product updated successfully",
+        "deleted": "{count, plural, one {# product deleted} other {# products deleted}}",
+        "saveError": "Unable to save product. Please try again.",
+        "deleteError": "Unable to delete products. Please try again."
+      },
+      "action": {
+        "retry": "Retry"
+      },
+      "toolbar": {
+        "searchPlaceholder": "Search by name, technology, or id",
+        "filterByStatusAria": "Filter products by status",
+        "addProduct": "Add product",
+        "deleteSelected": "{count, plural, =0 {Delete selected} one {Delete 1 selected} other {Delete # selected}}"
+      },
+      "statusFilter": {
+        "all": "All statuses",
+        "active": "Active",
+        "draft": "Draft",
+        "archived": "Archived"
+      },
+      "status": {
+        "active": "Active",
+        "draft": "Draft",
+        "archived": "Archived"
+      },
+      "table": {
+        "ariaLabel": "Products table",
+        "selectAll": "Select all products in this page",
+        "selectRow": "Select product {name}",
+        "editAria": "Edit product {name}",
+        "columns": {
+          "name": "Name",
+          "technology": "Technology",
+          "id": "ID",
+          "price": "Price",
+          "status": "Status",
+          "updatedAt": "Updated",
+          "action": "Action"
+        }
+      },
+      "dialog": {
+        "createTitle": "Add product",
+        "editTitle": "Edit product",
+        "save": "Save",
+        "saving": "Saving...",
+        "cancel": "Cancel",
+        "fields": {
+          "name": "Product name",
+          "technology": "Technology",
+          "price": "Price (USD)",
+          "status": "Status"
+        }
+      },
+      "deleteDialog": {
+        "title": "Delete selected products",
+        "description": "{count, plural, one {This action will delete 1 product.} other {This action will delete # products.}}",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "deleting": "Deleting..."
+      },
+      "validation": {
+        "nameRequired": "Product name is required",
+        "technologyRequired": "Technology is required",
+        "priceRequired": "Price is required",
+        "pricePositive": "Price must be greater than 0"
+      }
+    },
+    "settings": {
+      "state": {
+        "loading": "Loading settings...",
+        "error": "Unable to load settings. Please try again.",
+        "empty": "No settings data is available yet.",
+        "saved": "Saved successfully",
+        "saveError": "Save failed. Please try again."
+      },
+      "action": {
+        "retry": "Retry",
+        "reload": "Reload",
+        "update": "Update",
+        "saving": "Saving...",
+        "savePreferences": "Save preferences"
+      },
+      "profile": {
+        "userRole": "Senior Software Engineer",
+        "changePicture": "Change picture",
+        "avatarUploadSuccess": "Avatar uploaded successfully",
+        "avatarUploadError": "Unable to upload avatar. Please try again.",
+        "avatarUploadTypeError": "Unsupported image format. Use JPG, PNG, or WEBP.",
+        "avatarUploadSizeError": "Image is too large. Maximum file size is 2 MB.",
+        "generalInfoTitle": "General information",
+        "fields": {
+          "firstName": "First name",
+          "lastName": "Last name",
+          "birthday": "Birthday",
+          "phoneNumber": "Phone number",
+          "address": "Address",
+          "country": "Country",
+          "email": "Email",
+          "organization": "Organization",
+          "zipCode": "Zip/Postal code",
+          "city": "City",
+          "department": "Department"
+        }
+      },
+      "password": {
+        "title": "Password information",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
+        "placeholders": {
+          "currentPassword": "Enter your current password",
+          "newPassword": "Enter your new password",
+          "confirmNewPassword": "Confirm your new password"
+        },
+        "requirements": {
+          "title": "Password requirements:",
+          "description": "Ensure that these requirements are met:",
+          "minLength": "At least 10 characters (and up to 100 characters)",
+          "lowercase": "At least one lowercase character",
+          "specialCharacter": "Inclusion of at least one special character, e.g., ! @ # ?"
+        }
+      },
+      "notifications": {
+        "alertsTitle": "Alerts & Notifications",
+        "alertsDescription": "You can set up Themesberg to get notifications",
+        "emailTitle": "Email Settings",
+        "emailDescription": "You can set up Themesberg to get email notifications",
+        "items": {
+          "companyNews": {
+            "title": "Company News",
+            "description": "Get Themesberg news, announcements, and product updates"
+          },
+          "accountActivity": {
+            "title": "Account Activity",
+            "description": "Get important notifications about you or activity you've missed"
+          },
+          "meetupsNearYou": {
+            "title": "Meetups Near You",
+            "description": "Get an email when a Dribbble Meetup is posted close to my location"
+          },
+          "newMessages": {
+            "title": "New Messages",
+            "description": "Get Themesberg news, announcements, and product updates"
+          },
+          "ratingReminders": {
+            "title": "Rating reminders",
+            "description": "Send an email reminding me to rate an item a week after purchase"
+          },
+          "itemUpdateNotifications": {
+            "title": "Item update notifications",
+            "description": "Send an email when an item I've purchased is updated"
+          },
+          "itemCommentNotifications": {
+            "title": "Item comment notifications",
+            "description": "Send me an email when someone comments on one of my items"
+          },
+          "buyerReviewNotifications": {
+            "title": "Buyer review notifications",
+            "description": "Send me an email when someone leaves a review with their rating"
+          }
+        }
+      },
+      "validation": {
+        "required": "This field is required",
+        "invalidEmail": "Invalid email address",
+        "passwordMin": "Password must be at least 10 characters",
+        "passwordFormat": "Password must include one lowercase letter and one special character",
+        "passwordMismatch": "New passwords do not match"
+      },
+      "countries": {
+        "unitedStates": "United States",
+        "canada": "Canada",
+        "vietnam": "Vietnam",
+        "searchPlaceholder": "Search country...",
+        "noOptions": "No country found"
+      }
+    }
   }
 }
