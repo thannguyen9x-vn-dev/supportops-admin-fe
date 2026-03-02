@@ -1,93 +1,133 @@
 # AGENTS.md — Frontend (apps/web)
 
 ## Tech Stack
-- Next.js 15 (App Router)
+- Next.js 15+ (App Router) — SSR / SSG / Hybrid Rendering
 - TypeScript 5.7+ (strict mode)
 - MUI-based design system (`shared/ui`)
 - next-intl for i18n (EN + VI)
 - Zod for form validation
 - React Hook Form
+- TanStack Table v8 (complex table with inline editing)
 - pnpm workspace
+
+## Testing Stack
+- Unit / Component: Jest + React Testing Library
+- E2E / Integration: Playwright
+- API Mocking: MSW for both Jest and Playwright
 
 ## Architecture — Layer Diagram
 
 ```text
-┌──────────────────────────────────────────┐
-│  app/[locale]/          (Route Pages)    │  Thin: compose + layout only
-├──────────────────────────────────────────┤
-│  features/*/components/ (UI Components)  │  Visual + user interaction
-├──────────────────────────────────────────┤
-│  features/*/hooks/      (Custom Hooks)   │  Data fetching + state logic
-├──────────────────────────────────────────┤
-│  features/*/services/   (API Services)   │  Call apiClient, return typed data
-├──────────────────────────────────────────┤
-│  lib/api/apiClient.ts   (HTTP Client)    │  fetch wrapper, auth, errors
-├──────────────────────────────────────────┤
-│  @supportops/contracts  (Shared Types)   │  Types + Schemas + Endpoints
-└──────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│  app/[locale]/               (Route Layer)                 │
+│  ├── page.tsx                Server Component (default)    │
+│  ├── loading.tsx             Streaming / Suspense          │
+│  ├── error.tsx               Error Boundary                │
+│  └── layout.tsx              Shared Layout                 │
+├────────────────────────────────────────────────────────────┤
+│  features/*/components/      (UI Components)               │
+│  ├── ServerComponent.tsx     RSC — data fetch at server    │
+│  └── ClientComponent.tsx     'use client' — interactivity  │
+├────────────────────────────────────────────────────────────┤
+│  features/*/hooks/           (Client Hooks)                │
+│  └── use[Feature].ts         state / mutations             │
+├────────────────────────────────────────────────────────────┤
+│  features/*/services/        (API Services)                │
+│  ├── [module].service.ts     Client-side (browser fetch)   │
+│  └── [module].server.ts      Server-side (server fetch)    │
+├────────────────────────────────────────────────────────────┤
+│  features/*/tables/          (Table Definitions)           │
+│  ├── columns.tsx             TanStack column defs          │
+│  ├── cells/                  Custom cell renderers         │
+│  └── filters/                Table filter components       │
+├────────────────────────────────────────────────────────────┤
+│  lib/api/                                                  │
+│  ├── apiClient.ts            Browser HTTP client           │
+│  └── serverApiClient.ts      Server HTTP client (RSC)      │
+├────────────────────────────────────────────────────────────┤
+│  @supportops/contracts       (Shared Types + Schemas)      │
+└────────────────────────────────────────────────────────────┘
 ```
 
-**Data flow**: Page → Component → Hook → Service → apiClient → Backend
+Data flow: `Page -> Component -> Hook -> Service -> apiClient/serverApiClient -> Backend`
 
-## Rules for Each Layer
+## Rendering Strategy Guide
 
-### Route Pages (`app/[locale]/(admin)/*/page.tsx`)
-- Thin only: compose components + route concerns
-- No business logic or direct data fetching in page components
+### SSG
+Use for public pages with infrequent data updates.
+- Example: pricing, plans, login/register shell
+- Use `export const revalidate = ...` + `generateStaticParams`
 
-### Feature Components (`features/*/components/*.tsx`)
-- One clear responsibility per component
-- Use hooks for data (never call service directly)
-- Always handle loading/error/empty states
-- All user-facing text via `useTranslations()`
+### SSR
+Use for user-specific or sensitive data.
+- Example: dashboard, settings, billing, invoices
+- Use `export const dynamic = 'force-dynamic'`
 
-### Custom Hooks (`features/*/hooks/*.ts`)
-- Encapsulate fetch + state logic
-- Call services (not `apiClient` directly)
-- Return typed state `{ data, isLoading, error, refetch? }`
+### Hybrid (SSR shell + client interactivity)
+Use when initial data must be server-rendered but interactions are rich on client.
+- Example: products table with search/filter/edit modal
+- Pattern: server loader fetches initial payload -> pass to client shell -> URL-driven transitions (`router.push` / `router.refresh`)
 
-### Services (`features/*/services/*.service.ts`)
-- Pure API functions, no React state/hooks
-- Import endpoints/types from `@supportops/contracts`
-- Never hardcode API URLs
+## Server vs Client Services
 
-### Contracts Usage
-1. Add/update types in `shared/contracts/src/types/[module].types.ts`
-2. Add endpoint in `shared/contracts/src/endpoints.ts`
-3. Add schema in `shared/contracts/src/schemas/` if form-based
-4. Export from `shared/contracts/src/index.ts`
-5. Then implement service → hook → component
+### `*.server.ts`
+- Runs only on server components / route handlers
+- Uses `serverApiClient`
+- Can read forwarded headers/cookies
 
-### API Client (`lib/api/apiClient.ts`)
-- Do not modify without explicit instruction
-- Handles auth, refresh, trace-id, timeout, normalized errors
+### `*.service.ts`
+- Runs in browser
+- Uses `apiClient`
+- Handles in-memory token flow via existing auth utilities
 
-### i18n
-- All UI strings use i18n
-- Files: `apps/web/src/i18n/messages/en.json`, `vi.json`
+## Route Conventions
+Each route folder should include:
+- `page.tsx`: main server component
+- `loading.tsx`: fallback for route-level suspense
+- `error.tsx`: client error boundary
+- `not-found.tsx`: 404 state
 
-### Naming Convention
-| Type | Convention | Example |
-|---|---|---|
-| Component | `PascalCase.tsx` | `ProductTable.tsx` |
-| Hook | `camelCase.ts` | `useProducts.ts` |
-| Service | `kebab-case.service.ts` | `product.service.ts` |
-| Type file | `kebab-case.types.ts` | `product.types.ts` |
-| Schema file | `kebab-case.schema.ts` | `product.schema.ts` |
-| Test file | `*.test.ts(x)` | `ProductTable.test.tsx` |
-| Utility | `camelCase.ts` | `formatCurrency.ts` |
+## Complex Table Convention (TanStack v8)
 
-### Import Order
-1. React/Next imports
-2. Third-party imports
-3. `@supportops/*` imports
-4. `@/*` absolute imports
-5. Relative imports
+```text
+features/[module]/tables/
+├── [Module]DataTable.tsx
+├── columns.tsx
+├── cells/
+├── filters/
+├── toolbar/
+└── hooks/
+```
 
-### Strict DO NOTs
-- ❌ Import `apiClient` directly inside components
-- ❌ Use `any`
-- ❌ Hardcode URLs or UI strings
-- ❌ Put business logic in page files
-- ❌ Skip loading/error/empty states
-- ❌ Modify `shared/ui/` or `lib/api/apiClient.ts` without explicit request
+Required capabilities:
+- Server pagination + URL sync
+- Column sorting/filtering
+- Row selection + bulk actions
+- Inline edit with pending-change buffer
+- Save all / discard all flows
+
+## Testing Architecture
+
+```text
+apps/web/
+├── __tests__/
+│   ├── setup/
+│   ├── mocks/
+│   └── helpers/
+├── e2e/
+├── jest.config.ts
+└── playwright.config.ts
+```
+
+- Jest for unit/component tests
+- Playwright for e2e
+- MSW as shared API mocking layer
+
+## Key Rules
+- Default to Server Component. Add `'use client'` only when needed.
+- Never hardcode backend URL. Use env + API clients.
+- Types and endpoints must come from `@supportops/contracts`.
+- UI text must go through `next-intl` messages.
+- Keep page files thin; move logic to features/services/hooks.
+- Do not import `apiClient` directly inside components.
+- No `any`.

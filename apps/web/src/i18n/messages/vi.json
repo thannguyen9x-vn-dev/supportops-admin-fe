@@ -121,7 +121,10 @@
         "updated": "Cập nhật sản phẩm thành công",
         "deleted": "{count, plural, one {Đã xóa # sản phẩm} other {Đã xóa # sản phẩm}}",
         "saveError": "Không thể lưu sản phẩm. Vui lòng thử lại.",
-        "deleteError": "Không thể xóa sản phẩm. Vui lòng thử lại."
+        "deleteError": "Không thể xóa sản phẩm. Vui lòng thử lại.",
+        "saveAllSummarySuccess": "Đã lưu thành công {successCount, plural, one {# dòng} other {# dòng}}.",
+        "saveAllSummaryPartial": "Đã lưu {successCount, plural, one {# dòng} other {# dòng}}. Thất bại: {failedCount, plural, one {# dòng} other {# dòng}}.",
+        "saveAllSummaryFailed": "Không thể lưu {failedCount, plural, one {# dòng} other {# dòng}}. Vui lòng thử lại."
       },
       "action": {
         "retry": "Thử lại"
@@ -130,7 +133,8 @@
         "searchPlaceholder": "Tìm theo tên, công nghệ hoặc mã id",
         "filterByStatusAria": "Lọc sản phẩm theo trạng thái",
         "addProduct": "Thêm sản phẩm",
-        "deleteSelected": "{count, plural, =0 {Xóa mục đã chọn} one {Xóa 1 mục đã chọn} other {Xóa # mục đã chọn}}"
+        "deleteSelected": "{count, plural, =0 {Xóa mục đã chọn} one {Xóa 1 mục đã chọn} other {Xóa # mục đã chọn}}",
+        "search": "Tìm kiếm"
       },
       "statusFilter": {
         "all": "Tất cả trạng thái",
@@ -155,7 +159,9 @@
           "price": "Giá",
           "status": "Trạng thái",
           "updatedAt": "Cập nhật",
-          "action": "Hành động"
+          "action": "Hành động",
+          "category": "Danh mục",
+          "brand": "Thương hiệu"
         }
       },
       "dialog": {
@@ -182,7 +188,15 @@
         "nameRequired": "Tên sản phẩm là bắt buộc",
         "technologyRequired": "Công nghệ là bắt buộc",
         "priceRequired": "Giá là bắt buộc",
-        "pricePositive": "Giá phải lớn hơn 0"
+        "pricePositive": "Giá phải lớn hơn 0",
+        "statusRequired": "Trạng thái là bắt buộc"
+      },
+      "tableToolbar": {
+        "selectedCount": "{count, plural, one {Đã chọn # mục} other {Đã chọn # mục}}",
+        "bulkDelete": "Xóa đã chọn",
+        "unsavedChanges": "Có thay đổi chưa lưu",
+        "discardAll": "Bỏ tất cả",
+        "saveAll": "Lưu tất cả"
       }
     },
     "settings": {

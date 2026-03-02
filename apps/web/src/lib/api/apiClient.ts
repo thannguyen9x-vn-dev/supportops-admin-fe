@@ -213,4 +213,4 @@ class HttpClient {
   }
 }
 
-export const apiClient = new HttpClient(env.API_BASE_URL);
+export const apiClient = new HttpClient(env.NEXT_PUBLIC_API_BASE_URL);

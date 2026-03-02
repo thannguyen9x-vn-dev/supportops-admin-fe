@@ -1,4 +1,3 @@
-import type {Color, PaletteColor, SimplePaletteColorOptions} from '@mui/material/styles'
 import { RadiusScale } from '../constant/radius'
 import '@mui/material/IconButton'
 import '@mui/material/Chip'
@@ -843,4 +842,3 @@ declare module '@mui/material/Chip' {
     neutral: true
   }
 }
-

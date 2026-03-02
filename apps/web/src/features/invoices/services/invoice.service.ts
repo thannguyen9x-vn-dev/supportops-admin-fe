@@ -16,7 +16,7 @@ export const invoiceService = {
   getById: (id: string) => apiClient.get<Invoice>(ENDPOINTS.INVOICES.DETAIL(id)),
 
   downloadPdf: async (id: string): Promise<Blob> => {
-    const response = await fetch(`${env.API_BASE_URL}${ENDPOINTS.INVOICES.PDF(id)}`, {
+    const response = await fetch(`${env.NEXT_PUBLIC_API_BASE_URL}${ENDPOINTS.INVOICES.PDF(id)}`, {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("supportops_access_token") || ""}`
       }

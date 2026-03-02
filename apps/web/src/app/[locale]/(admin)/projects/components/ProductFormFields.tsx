@@ -1,96 +1,61 @@
 "use client";
 
-import { Controller } from "react-hook-form";
-import type { Control, FieldErrors } from "react-hook-form";
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-} from "@mui/material";
+import type { UseFormReturn } from "react-hook-form";
+import { Stack } from "@mui/material";
+import { NumberField, SelectField, TextField } from "@supportops/ui";
 
 import type { ProductStatus } from "../projects.types";
 
-type ProductDialogFormValues = {
+export type ProductDialogFormValues = {
   name: string;
   technology: string;
-  price: string;
+  price: number | undefined;
   status: ProductStatus;
 };
 
 type ProductFormFieldsProps = {
-  control: Control<ProductDialogFormValues>;
-  errors: FieldErrors<ProductDialogFormValues>;
+  form: UseFormReturn<ProductDialogFormValues>;
   t: (key: string) => string;
 };
 
-export function ProductFormFields({ control, errors, t }: ProductFormFieldsProps) {
+export function ProductFormFields({ form, t }: ProductFormFieldsProps) {
   return (
     <Stack spacing={2} sx={{ pt: 1 }}>
-      <Controller
-        control={control}
+      <TextField<ProductDialogFormValues>
+        autoComplete="off"
+        form={form}
+        label={t("dialog.fields.name")}
         name="name"
-        rules={{ required: t("validation.nameRequired") }}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            autoFocus
-            error={Boolean(errors.name)}
-            helperText={errors.name?.message}
-            label={t("dialog.fields.name")}
-          />
-        )}
+        required
       />
 
-      <Controller
-        control={control}
+      <TextField<ProductDialogFormValues>
+        autoComplete="off"
+        form={form}
+        label={t("dialog.fields.technology")}
         name="technology"
-        rules={{ required: t("validation.technologyRequired") }}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            error={Boolean(errors.technology)}
-            helperText={errors.technology?.message}
-            label={t("dialog.fields.technology")}
-          />
-        )}
+        required
       />
 
-      <Controller
-        control={control}
+      <NumberField<ProductDialogFormValues>
+        form={form}
+        label={t("dialog.fields.price")}
+        min={1}
         name="price"
-        rules={{
-          required: t("validation.priceRequired"),
-          validate: (value) => Number(value) > 0 || t("validation.pricePositive"),
-        }}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            error={Boolean(errors.price)}
-            helperText={errors.price?.message}
-            inputProps={{ min: 0, step: 1 }}
-            label={t("dialog.fields.price")}
-            type="number"
-          />
-        )}
+        required
+        step={1}
       />
 
-      <FormControl>
-        <InputLabel id="product-status-label">{t("dialog.fields.status")}</InputLabel>
-        <Controller
-          control={control}
-          name="status"
-          render={({ field }) => (
-            <Select {...field} label={t("dialog.fields.status")} labelId="product-status-label">
-              <MenuItem value="active">{t("status.active")}</MenuItem>
-              <MenuItem value="draft">{t("status.draft")}</MenuItem>
-              <MenuItem value="archived">{t("status.archived")}</MenuItem>
-            </Select>
-          )}
-        />
-      </FormControl>
+      <SelectField<ProductDialogFormValues>
+        form={form}
+        label={t("dialog.fields.status")}
+        name="status"
+        options={[
+          { label: t("status.active"), value: "active" },
+          { label: t("status.draft"), value: "draft" },
+          { label: t("status.archived"), value: "archived" }
+        ]}
+      />
     </Stack>
   );
 }

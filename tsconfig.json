@@ -2,6 +2,7 @@
   "files": [],
   "references": [
     { "path": "./shared/contracts" },
+    { "path": "./shared/ui" },
     { "path": "./shared/ui/theme" },
     { "path": "./shared/ui/form" },
     { "path": "./apps/web" }

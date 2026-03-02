@@ -121,7 +121,10 @@
         "updated": "Product updated successfully",
         "deleted": "{count, plural, one {# product deleted} other {# products deleted}}",
         "saveError": "Unable to save product. Please try again.",
-        "deleteError": "Unable to delete products. Please try again."
+        "deleteError": "Unable to delete products. Please try again.",
+        "saveAllSummarySuccess": "Saved {successCount, plural, one {# row} other {# rows}} successfully.",
+        "saveAllSummaryPartial": "Saved {successCount, plural, one {# row} other {# rows}}. Failed: {failedCount, plural, one {# row} other {# rows}}.",
+        "saveAllSummaryFailed": "Failed to save {failedCount, plural, one {# row} other {# rows}}. Please try again."
       },
       "action": {
         "retry": "Retry"
@@ -130,7 +133,8 @@
         "searchPlaceholder": "Search by name, technology, or id",
         "filterByStatusAria": "Filter products by status",
         "addProduct": "Add product",
-        "deleteSelected": "{count, plural, =0 {Delete selected} one {Delete 1 selected} other {Delete # selected}}"
+        "deleteSelected": "{count, plural, =0 {Delete selected} one {Delete 1 selected} other {Delete # selected}}",
+        "search": "Search"
       },
       "statusFilter": {
         "all": "All statuses",
@@ -155,7 +159,9 @@
           "price": "Price",
           "status": "Status",
           "updatedAt": "Updated",
-          "action": "Action"
+          "action": "Action",
+          "category": "Category",
+          "brand": "Brand"
         }
       },
       "dialog": {
@@ -182,7 +188,15 @@
         "nameRequired": "Product name is required",
         "technologyRequired": "Technology is required",
         "priceRequired": "Price is required",
-        "pricePositive": "Price must be greater than 0"
+        "pricePositive": "Price must be greater than 0",
+        "statusRequired": "Status is required"
+      },
+      "tableToolbar": {
+        "selectedCount": "{count, plural, one {# selected} other {# selected}}",
+        "bulkDelete": "Bulk delete",
+        "unsavedChanges": "Unsaved changes",
+        "discardAll": "Discard all",
+        "saveAll": "Save all"
       }
     },
     "settings": {
