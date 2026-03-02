@@ -4,6 +4,7 @@ export type ProductStatus = "active" | "draft" | "archived";
 
 export type Product = {
   id: string;
+  displayId: string;
   name: string;
   technology: string;
   price: number;
@@ -17,4 +18,3 @@ export type ProductDraft = {
   price: number;
   status: ProductStatus;
 };
-

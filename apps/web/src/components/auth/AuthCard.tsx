@@ -2,16 +2,20 @@
 'use client'
 
 import Box from '@mui/material/Box'
-import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-import type { ReactNode } from 'react'
+import type { SxProps, Theme } from '@mui/material/styles'
+import { Children, type ReactNode } from 'react'
 
 interface AuthCardProps {
   title: string
   subtitle?: string
-  illustration: ReactNode
+  illustration?: ReactNode
   children: ReactNode
   footer?: ReactNode
+  titleSx?: SxProps<Theme>
+  illustrationPanelSx?: SxProps<Theme>
+  formPanelSx?: SxProps<Theme>
+  maxWidth?: number
 }
 
 export function AuthCard({
@@ -20,49 +24,83 @@ export function AuthCard({
   illustration,
   children,
   footer,
+  titleSx,
+  illustrationPanelSx,
+  formPanelSx,
+  maxWidth = 900,
 }: AuthCardProps) {
+  const hasIllustration = Children.count(illustration) > 0
+
   return (
-    <Paper
-      elevation={0}
+    <Box
+      component='section'
       sx={{
         display: 'flex',
         borderRadius: 3,
         overflow: 'hidden',
-        maxWidth: 900,
+        width: `min(${maxWidth}px, calc(100vw - 32px))`,
+        maxWidth: '100%',
         mx: 'auto',
-        boxShadow: 4,
-        flexDirection: {xs: 'column', md: 'row'},
+        boxShadow: 'none',
+        border: '1px solid #E2E8F0',
+        bgcolor: '#FFFFFF',
+        backgroundColor: '#FFFFFF',
+        backgroundImage: 'none !important',
+        flexDirection: 'column',
+        '@media (min-width: 960px)': {
+          flexDirection: 'row',
+        },
       }}
     >
-      {/* Illustration Panel */}
-      <Box
-        sx={{
-          flex: {md: '0 0 45%'},
-          background: (theme) =>
-            `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-          p: {xs: 4, md: 6},
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'primary.contrastText',
-        }}
-      >
-        {illustration}
-      </Box>
+      {hasIllustration ? (
+        <Box
+          sx={{
+            flex: '0 0 auto',
+            background: (theme) =>
+              `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+            p: {xs: '24px 16px', md: '24px 16px'},
+            minHeight: {xs: 180, sm: 220},
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'primary.contrastText',
+            '@media (min-width: 960px)': {
+              flex: '0 0 45%',
+              minHeight: 'auto',
+            },
+            ...illustrationPanelSx,
+          }}
+        >
+          {illustration}
+        </Box>
+      ) : null}
 
       {/* Form Panel */}
       <Box
         sx={{
           flex: 1,
-          p: {xs: 4, md: 6},
+          p: {xs: '24px 16px', md: '24px 16px'},
+          bgcolor: '#FFFFFF',
+          backgroundColor: '#FFFFFF',
+          backgroundImage: 'none !important',
           display: 'flex',
           flexDirection: 'column',
           gap: 3,
+          ...formPanelSx,
         }}
       >
         <Box>
-          <Typography variant="h5" fontWeight={700}>
+          <Typography
+            variant="h5"
+            fontWeight={700}
+            sx={{
+              fontSize: { xs: '2rem', md: '2.625rem' },
+              lineHeight: 1.12,
+              letterSpacing: '-0.02em',
+              ...titleSx,
+            }}
+          >
             {title}
           </Typography>
           {subtitle && (
@@ -99,6 +137,6 @@ export function AuthCard({
           </Box>
         )}
       </Box>
-    </Paper>
+    </Box>
   )
 }

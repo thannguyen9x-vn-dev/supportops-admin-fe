@@ -29,7 +29,7 @@ interface SelectOptionFieldProps<TFieldValues extends FieldValues = FieldValues,
 declare const SelectOptionField: <TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>, TValue extends string | number = Extract<FieldPathValue<TFieldValues, TName>, string | number>>(props: SelectOptionFieldProps<TFieldValues, TName, TValue>) => ReactElement;
 
 type TextInputFieldStatus = 'default' | 'success' | 'error';
-type TextInputFieldType = 'text' | 'email';
+type TextInputFieldType = 'text' | 'email' | 'password';
 interface TextInputFieldProps<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>> extends Omit<TextFieldProps, 'name' | 'error'> {
     name: TName;
     control: Control<TFieldValues>;
@@ -46,6 +46,7 @@ interface TextInputFieldProps<TFieldValues extends FieldValues = FieldValues, TN
     errorIcon?: ReactNode;
     hideEmptyHelperText?: boolean;
     inputType?: TextInputFieldType;
+    showPasswordToggle?: boolean;
 }
 
 declare const TextInputField: <TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>(props: TextInputFieldProps<TFieldValues, TName>) => ReactElement;

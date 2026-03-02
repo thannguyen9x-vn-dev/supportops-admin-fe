@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useState, type MouseEvent } from "react";
 
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import { mockUser } from "../../../../shared/mock/user";
 import styles from "./header.module.css";
 
 export function UserMenu() {
@@ -13,8 +14,6 @@ export function UserMenu() {
   const { logout, user } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isOpen = Boolean(anchorEl);
-  const displayName = `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim() || "User";
-  const initials = `${user?.firstName?.[0] ?? ""}${user?.lastName?.[0] ?? ""}`.trim() || "U";
 
   const handleOpen = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -23,6 +22,16 @@ export function UserMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleSignOut = () => {
+    handleClose();
+    logout();
+  };
+
+  const displayName = user ? `${user.firstName} ${user.lastName}`.trim() : mockUser.name;
+  const initials = user
+    ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase()
+    : mockUser.initials;
 
   return (
     <>
@@ -34,9 +43,7 @@ export function UserMenu() {
         aria-controls="header-user-menu"
         aria-label={t("userMenuAriaLabel")}
       >
-        <Avatar src={user?.avatarUrl ?? undefined} sx={{ width: 32, height: 32 }}>
-          {initials}
-        </Avatar>
+        <Avatar sx={{ width: 32, height: 32 }}>{initials}</Avatar>
         <span className={styles.userButtonName}>{displayName}</span>
         <KeyboardArrowDownIcon fontSize="small" />
       </ButtonBase>
@@ -49,14 +56,7 @@ export function UserMenu() {
         keepMounted
       >
         <MenuItem onClick={handleClose}>{t("profile")}</MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            logout();
-          }}
-        >
-          {t("signOut")}
-        </MenuItem>
+        <MenuItem onClick={handleSignOut}>{t("signOut")}</MenuItem>
       </Menu>
     </>
   );

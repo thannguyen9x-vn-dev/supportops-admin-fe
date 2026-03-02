@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { useToast } from "@/features/common/toast/useToast";
+import { settingsService } from "@/features/settings/services/settings.service";
 
-import { mockSave } from "../settings.mock";
 import type { PasswordFormValues, SubmitState } from "../settings.types";
 
 type UsePasswordFormOptions = {
@@ -41,7 +41,11 @@ export function usePasswordForm({ t }: UsePasswordFormOptions) {
     setSubmitState("saving");
 
     try {
-      await mockSave();
+      await settingsService.changePassword({
+        currentPassword: values.currentPassword,
+        newPassword: values.newPassword,
+        confirmPassword: values.confirmNewPassword
+      });
       reset({
         currentPassword: "",
         newPassword: "",

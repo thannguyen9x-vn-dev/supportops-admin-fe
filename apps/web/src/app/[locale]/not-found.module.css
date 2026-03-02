@@ -1,0 +1,122 @@
+.page {
+  min-height: 100vh;
+  background: #f1f5f9;
+  color: #0f172a;
+  font-family: "Plus Jakarta Sans", "Satoshi", "Lexend", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.brandMark {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0f172a 10%, #1e293b 45%, #3b82f6 100%);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 18px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav a.active {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.ctaLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #334155;
+  font-weight: 600;
+}
+
+.main {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.card {
+  width: 100%;
+  min-height: calc(100vh - 77px);
+  border-radius: 0;
+  background: #f1f5f9;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 56px 24px 72px;
+}
+
+.imageWrap {
+  position: relative;
+  width: min(360px, calc(100vw - 48px));
+  aspect-ratio: 1 / 1;
+}
+
+.title {
+  margin-top: 16px;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.subtitle {
+  margin-top: 12px;
+  color: #64748b;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+}
+
+@media (max-width: 900px) {
+  .header {
+    padding: 14px 16px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .card {
+    min-height: calc(100vh - 65px);
+    padding: 40px 16px 56px;
+  }
+}

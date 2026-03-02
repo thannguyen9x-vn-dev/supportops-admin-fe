@@ -1,7 +1,5 @@
-import { getTranslations } from "next-intl/server";
+import { DashboardOverview } from "@/features/dashboard/components/DashboardOverview";
 
-export default async function DashboardPage() {
-  const t = await getTranslations("pages");
-  return <div>{t("dashboardComingSoon")}</div>;
+export default function DashboardPage() {
+  return <DashboardOverview />;
 }
-

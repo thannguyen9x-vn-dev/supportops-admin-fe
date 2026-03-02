@@ -19,8 +19,15 @@
       "passwordLabel": "Mật khẩu",
       "passwordPlaceholder": "••••••••",
       "passwordRequired": "Mật khẩu là bắt buộc",
+      "passwordMin": "Mật khẩu phải có ít nhất 10 ký tự",
+      "passwordMax": "Mật khẩu tối đa 32 ký tự",
+      "passwordFormat": "Mật khẩu phải có chữ hoa, chữ thường, số và ký tự đặc biệt",
+      "passwordMismatch": "Mật khẩu xác nhận không khớp",
       "acceptTerms": "Tôi đồng ý với",
-      "termsAndConditions": "Điều khoản và Điều kiện"
+      "termsAndConditions": "Điều khoản và Điều kiện",
+      "acceptTermsRequired": "Bạn phải đồng ý với điều khoản và điều kiện",
+      "unableToSignIn": "Không thể đăng nhập",
+      "unableToRegister": "Không thể đăng ký"
     },
     "login": {
       "title": "Đăng nhập",
@@ -32,9 +39,7 @@
       "footerAction": "Tạo tài khoản",
       "rememberMe": "Ghi nhớ tôi",
       "forgotPassword": "Quên mật khẩu?",
-      "submit": "Đăng nhập",
-      "submitting": "Đang đăng nhập...",
-      "genericError": "Không thể đăng nhập. Vui lòng thử lại."
+      "submit": "Đăng nhập"
     },
     "register": {
       "title": "Tạo tài khoản miễn phí",
@@ -47,17 +52,18 @@
       "fullNameLabel": "Họ và tên",
       "fullNamePlaceholder": "Nguyễn Văn A",
       "fullNameRequired": "Tên là bắt buộc",
-      "organizationLabel": "Tổ chức",
-      "organizationPlaceholder": "SupportOps Inc.",
-      "organizationRequired": "Tổ chức là bắt buộc",
       "passwordPlaceholder": "Tạo mật khẩu",
       "confirmPasswordLabel": "Xác nhận mật khẩu",
       "confirmPasswordPlaceholder": "Nhập lại mật khẩu",
       "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu",
-      "passwordMismatch": "Mật khẩu không khớp",
-      "submit": "Tạo tài khoản",
-      "submitting": "Đang tạo tài khoản...",
-      "genericError": "Không thể tạo tài khoản. Vui lòng thử lại."
+      "passwordRequirements": {
+        "minLength": "Ít nhất 10 ký tự (và tối đa 32 ký tự)",
+        "lowercase": "Có ít nhất một ký tự chữ thường",
+        "uppercase": "Có ít nhất một ký tự chữ HOA",
+        "number": "Có ít nhất một chữ số",
+        "specialCharacter": "Có ít nhất một ký tự đặc biệt, ví dụ: ! @ # ?"
+      },
+      "submit": "Tạo tài khoản"
     },
     "forgotPassword": {
       "title": "Quên mật khẩu?",
@@ -125,7 +131,10 @@
         "updated": "Cập nhật sản phẩm thành công",
         "deleted": "{count, plural, one {Đã xóa # sản phẩm} other {Đã xóa # sản phẩm}}",
         "saveError": "Không thể lưu sản phẩm. Vui lòng thử lại.",
-        "deleteError": "Không thể xóa sản phẩm. Vui lòng thử lại."
+        "deleteError": "Không thể xóa sản phẩm. Vui lòng thử lại.",
+        "saveAllSummarySuccess": "Đã lưu thành công {successCount, plural, one {# dòng} other {# dòng}}.",
+        "saveAllSummaryPartial": "Đã lưu {successCount, plural, one {# dòng} other {# dòng}}. Thất bại: {failedCount, plural, one {# dòng} other {# dòng}}.",
+        "saveAllSummaryFailed": "Không thể lưu {failedCount, plural, one {# dòng} other {# dòng}}. Vui lòng thử lại."
       },
       "action": {
         "retry": "Thử lại"
@@ -134,7 +143,8 @@
         "searchPlaceholder": "Tìm theo tên, công nghệ hoặc mã id",
         "filterByStatusAria": "Lọc sản phẩm theo trạng thái",
         "addProduct": "Thêm sản phẩm",
-        "deleteSelected": "{count, plural, =0 {Xóa mục đã chọn} one {Xóa 1 mục đã chọn} other {Xóa # mục đã chọn}}"
+        "deleteSelected": "{count, plural, =0 {Xóa mục đã chọn} one {Xóa 1 mục đã chọn} other {Xóa # mục đã chọn}}",
+        "search": "Tìm kiếm"
       },
       "statusFilter": {
         "all": "Tất cả trạng thái",
@@ -159,7 +169,9 @@
           "price": "Giá",
           "status": "Trạng thái",
           "updatedAt": "Cập nhật",
-          "action": "Hành động"
+          "action": "Hành động",
+          "category": "Danh mục",
+          "brand": "Thương hiệu"
         }
       },
       "dialog": {
@@ -186,7 +198,15 @@
         "nameRequired": "Tên sản phẩm là bắt buộc",
         "technologyRequired": "Công nghệ là bắt buộc",
         "priceRequired": "Giá là bắt buộc",
-        "pricePositive": "Giá phải lớn hơn 0"
+        "pricePositive": "Giá phải lớn hơn 0",
+        "statusRequired": "Trạng thái là bắt buộc"
+      },
+      "tableToolbar": {
+        "selectedCount": "{count, plural, one {Đã chọn # mục} other {Đã chọn # mục}}",
+        "bulkDelete": "Xóa đã chọn",
+        "unsavedChanges": "Có thay đổi chưa lưu",
+        "discardAll": "Bỏ tất cả",
+        "saveAll": "Lưu tất cả"
       }
     },
     "settings": {
@@ -239,8 +259,10 @@
         "requirements": {
           "title": "Yêu cầu mật khẩu:",
           "description": "Đảm bảo các yêu cầu sau được đáp ứng:",
-          "minLength": "Ít nhất 10 ký tự (và tối đa 100 ký tự)",
+          "minLength": "Ít nhất 10 ký tự (và tối đa 32 ký tự)",
           "lowercase": "Có ít nhất một ký tự chữ thường",
+          "uppercase": "Có ít nhất một ký tự chữ HOA",
+          "number": "Có ít nhất một chữ số",
           "specialCharacter": "Có ít nhất một ký tự đặc biệt, ví dụ: ! @ # ?"
         }
       },
@@ -288,7 +310,8 @@
         "required": "Trường này là bắt buộc",
         "invalidEmail": "Địa chỉ email không hợp lệ",
         "passwordMin": "Mật khẩu phải có ít nhất 10 ký tự",
-        "passwordFormat": "Mật khẩu phải có ít nhất 1 chữ thường và 1 ký tự đặc biệt",
+        "passwordMax": "Mật khẩu tối đa 32 ký tự",
+        "passwordFormat": "Mật khẩu phải có chữ hoa, chữ thường, số và ký tự đặc biệt",
         "passwordMismatch": "Mật khẩu mới không khớp"
       },
       "countries": {
@@ -297,6 +320,60 @@
         "vietnam": "Việt Nam",
         "searchPlaceholder": "Tìm quốc gia...",
         "noOptions": "Không tìm thấy quốc gia"
+      }
+    },
+    "dashboard": {
+      "title": "Bảng điều khiển",
+      "state": {
+        "loading": "Đang tải dữ liệu bảng điều khiển...",
+        "error": "Không thể tải dữ liệu bảng điều khiển."
+      },
+      "action": {
+        "retry": "Thử lại",
+        "refresh": "Làm mới"
+      },
+      "kpi": {
+        "todaySales": "Doanh số hôm nay",
+        "todayVisitors": "Khách truy cập hôm nay",
+        "weekVisitors": "Khách truy cập tuần",
+        "change": "Biến động: {value}%"
+      },
+      "latestCustomers": {
+        "title": "Khách hàng mới nhất"
+      },
+      "transactions": {
+        "title": "Giao dịch gần đây",
+        "status": {
+          "COMPLETED": "Hoàn tất",
+          "IN_PROGRESS": "Đang xử lý",
+          "CANCELLED": "Đã hủy"
+        }
+      }
+    },
+    "reportsPage": {
+      "title": "Báo cáo",
+      "overviewTitle": "Tổng quan báo cáo",
+      "performanceTitle": "Hiệu suất báo cáo",
+      "state": {
+        "loading": "Đang tải dữ liệu báo cáo...",
+        "error": "Không thể tải dữ liệu báo cáo."
+      },
+      "action": {
+        "retry": "Thử lại",
+        "refresh": "Làm mới"
+      },
+      "summary": {
+        "points": "Điểm dữ liệu",
+        "templates": "Tổng templates",
+        "invoicing": "Tổng invoicing"
+      },
+      "transactions": {
+        "title": "Giao dịch gần đây",
+        "status": {
+          "COMPLETED": "Hoàn tất",
+          "IN_PROGRESS": "Đang xử lý",
+          "CANCELLED": "Đã hủy"
+        }
       }
     }
   }

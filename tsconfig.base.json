@@ -29,6 +29,7 @@
     "baseUrl": ".",
     "paths": {
       "@supportops/contracts": ["./shared/contracts/src"],
+      "@supportops/ui": ["./shared/ui/src"],
       "@supportops/ui-theme": ["./shared/ui/theme/src"],
       "@supportops/ui-form": ["./shared/ui/form/src"],
       "@supportops/ui-avatar": ["./shared/ui/avatar/dist"],

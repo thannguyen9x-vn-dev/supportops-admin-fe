@@ -14,9 +14,12 @@ var styles = require('@mui/material/styles');
 var TextField = require('@mui/material/TextField');
 var KeyboardArrowDownRoundedIcon = require('@mui/icons-material/KeyboardArrowDownRounded');
 var jsxRuntime = require('react/jsx-runtime');
+var IconButton = require('@mui/material/IconButton');
 var InputAdornment = require('@mui/material/InputAdornment');
 var CheckCircleOutlineIcon = require('@mui/icons-material/CheckCircleOutline');
 var ErrorOutlineIcon = require('@mui/icons-material/ErrorOutline');
+var VisibilityOffOutlinedIcon = require('@mui/icons-material/VisibilityOffOutlined');
+var VisibilityOutlinedIcon = require('@mui/icons-material/VisibilityOutlined');
 
 function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
 
@@ -30,9 +33,12 @@ var MenuItem__default = /*#__PURE__*/_interopDefault(MenuItem);
 var Paper__default = /*#__PURE__*/_interopDefault(Paper);
 var TextField__default = /*#__PURE__*/_interopDefault(TextField);
 var KeyboardArrowDownRoundedIcon__default = /*#__PURE__*/_interopDefault(KeyboardArrowDownRoundedIcon);
+var IconButton__default = /*#__PURE__*/_interopDefault(IconButton);
 var InputAdornment__default = /*#__PURE__*/_interopDefault(InputAdornment);
 var CheckCircleOutlineIcon__default = /*#__PURE__*/_interopDefault(CheckCircleOutlineIcon);
 var ErrorOutlineIcon__default = /*#__PURE__*/_interopDefault(ErrorOutlineIcon);
+var VisibilityOffOutlinedIcon__default = /*#__PURE__*/_interopDefault(VisibilityOffOutlinedIcon);
+var VisibilityOutlinedIcon__default = /*#__PURE__*/_interopDefault(VisibilityOutlinedIcon);
 
 // src/field/input/SelectOptionField.tsx
 function getBorderRadiusPx(value) {
@@ -512,7 +518,8 @@ var StyledTextField2 = styles.styled(TextField__default.default, {
         WebkitTextFillColor: theme.palette.grey[700],
         caretColor: theme.palette.grey[700],
         "&::placeholder": {
-          color: theme.palette.grey[500],
+          color: theme.palette.grey[400],
+          fontWeight: 400,
           opacity: 1
         },
         "&:focus": {
@@ -597,6 +604,7 @@ function TextInputFieldInner(props) {
     errorIcon = /* @__PURE__ */ jsxRuntime.jsx(ErrorOutlineIcon__default.default, { fontSize: "small" }),
     hideEmptyHelperText = false,
     inputType = "text",
+    showPasswordToggle = true,
     id,
     disabled,
     ...textFieldProps
@@ -630,6 +638,9 @@ function TextInputFieldInner(props) {
     }
     return helperText;
   }, [error, fieldStatus, helperText, successMessage]);
+  const configuredType = textFieldProps.type ?? inputType;
+  const isPasswordField = configuredType === "password";
+  const [isPasswordVisible, setIsPasswordVisible] = react.useState(false);
   const startAdornment = react.useMemo(() => {
     if (!startIcon && fieldStatus === "default") return void 0;
     const icon = fieldStatus === "success" ? successIcon : fieldStatus === "error" ? errorIcon : startIcon;
@@ -638,11 +649,28 @@ function TextInputFieldInner(props) {
   }, [errorIcon, fieldStatus, startIcon, successIcon]);
   const endAdornment = react.useMemo(() => {
     if (!startIcon && fieldStatus !== "default") return void 0;
-    if (!endIcon) return void 0;
-    return /* @__PURE__ */ jsxRuntime.jsx(InputAdornment__default.default, { position: "end", children: endIcon });
-  }, [endIcon, fieldStatus, startIcon]);
+    const passwordToggle = isPasswordField && showPasswordToggle ? /* @__PURE__ */ jsxRuntime.jsx(
+      IconButton__default.default,
+      {
+        "aria-label": isPasswordVisible ? "Hide password" : "Show password",
+        edge: "end",
+        onClick: () => setIsPasswordVisible((prev) => !prev),
+        size: "small",
+        sx: {
+          color: "grey.500",
+          bgcolor: "transparent",
+          "&:hover": { bgcolor: "transparent" }
+        },
+        children: isPasswordVisible ? /* @__PURE__ */ jsxRuntime.jsx(VisibilityOutlinedIcon__default.default, { fontSize: "small" }) : /* @__PURE__ */ jsxRuntime.jsx(VisibilityOffOutlinedIcon__default.default, { fontSize: "small" })
+      }
+    ) : null;
+    const resolvedEndIcon = endIcon ?? passwordToggle;
+    if (!resolvedEndIcon) return void 0;
+    return /* @__PURE__ */ jsxRuntime.jsx(InputAdornment__default.default, { position: "end", children: resolvedEndIcon });
+  }, [endIcon, fieldStatus, isPasswordField, isPasswordVisible, showPasswordToggle, startIcon]);
   const showHelper = !hideEmptyHelperText || helperTextContent;
   const inputId = id ?? String(name);
+  const renderedType = isPasswordField && showPasswordToggle && !endIcon ? isPasswordVisible ? "text" : "password" : configuredType;
   return /* @__PURE__ */ jsxRuntime.jsxs(Box__default.default, { sx: { width: "100%" }, children: [
     label ? /* @__PURE__ */ jsxRuntime.jsx(StyledFieldLabel2, { htmlFor: inputId, children: label }) : null,
     /* @__PURE__ */ jsxRuntime.jsx(
@@ -664,7 +692,7 @@ function TextInputFieldInner(props) {
           },
           ...textFieldProps.slotProps
         },
-        type: textFieldProps.type ?? inputType,
+        type: renderedType,
         variant: "outlined"
       }
     ),

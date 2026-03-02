@@ -1,31 +1,68 @@
-## Shared UI Package Standards
+# AGENTS.md — Shared UI Package (`shared/ui`)
 
-These rules apply to all packages under `shared/ui/*`.
+## Purpose
+`@supportops/ui` is the reusable UI library for SupportOps.
 
-## Package boundaries
+- Scope: shared headless hooks + shared styled components.
+- Out of scope: feature/business logic, API calls, domain services.
+- Consumption: imported by `apps/web` and future apps.
 
-- `shared/ui/*` must not import from `apps/web`.
-- Keep components framework-agnostic and reusable across apps.
+## Architecture
+`shared/ui` follows a layered model:
 
-## Component package structure
+1. `src/headless/*`: UI-agnostic hooks (state/logic/a11y only).
+2. `src/components/*`: styled components consuming headless hooks.
+3. Feature composition lives outside this package (`apps/web/src/features/*`).
 
-```
-shared/ui/[package]/
-  src/
-    [Component].tsx
-    [Component].types.ts
-    [component].constants.ts (optional)
-    index.ts
-  package.json
-  tsconfig.json
-  tsup.config.ts
-```
+Dependency direction must stay one-way:
+`features -> components -> headless`.
 
-## Rules
+## Package Boundaries
+- Do not import from `apps/web/*` or backend packages.
+- Do not import business contracts in shared UI unless explicitly requested.
+- Keep APIs generic and reusable across modules.
 
-- Public API only through `src/index.ts`.
-- Avoid business/domain logic in shared UI components.
-- Support accessibility by default (`aria-*`, semantic controls).
-- Export types alongside components/hooks.
-- Clean up object URLs/timers/subscriptions in client hooks/components.
-- Do not edit `dist/` manually unless explicitly requested.
+## Coding Rules
+- Use strict TypeScript, avoid `any`.
+- Export public APIs through `src/index.ts`.
+- Also export at nearest barrel (`headless/index.ts`, `components/index.ts`).
+- Keep files small and composable.
+- Prefer semantic HTML and proper keyboard support.
+- Add ARIA attributes for interactive controls.
+
+## Headless Hook Rules
+- No JSX rendering in headless hooks.
+- No CSS/styling concerns in headless hooks.
+- Return stable handlers when practical (`useCallback`).
+- Provide typed options/return interfaces in `types.ts`.
+
+## Styled Component Rules
+- Accept all UI text/config via props.
+- Handle error/loading/empty/disabled states.
+- Keep implementation presentation-focused.
+- Avoid implicit coupling to one feature/module.
+
+## Form Field Convention
+For `src/components/form/fields/*`:
+- Props include `name`, optional `form`, and UI options.
+- Bind using `useFormField` from headless layer.
+- Forward accessibility attributes (`aria-invalid`, `aria-describedby`).
+- Surface validation errors consistently.
+
+## Virtual List Convention
+For `src/components/virtual-list/*`:
+- Use headless virtual hooks.
+- Require explicit container `height`.
+- Expose `renderItem` render-prop API.
+- Support empty state and loading state when relevant.
+
+## Export Convention
+When adding a hook/component:
+1. Export from its local folder index.
+2. Export from `src/headless/index.ts` or `src/components/index.ts`.
+3. Export from `src/index.ts` if it is public.
+
+## Safety Checks Before Finish
+- `pnpm --filter @supportops/ui typecheck`
+- Ensure no accidental imports from app-level code.
+- Ensure generated `dist/` is not manually edited.

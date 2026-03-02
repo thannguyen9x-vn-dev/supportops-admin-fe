@@ -4,112 +4,126 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { Alert, Button, Checkbox, FormControlLabel } from "@mui/material";
+import { TextInputField } from "@supportops/ui-form";
+import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 
-import { registerSchema } from "@supportops/contracts";
-import { TextInputField } from "@supportops/ui-form";
-
-import { useAuth } from "@/features/auth/hooks/useAuth";
+import { authService } from "@/features/auth/services/auth.service";
 import { ApiError } from "@/lib/api";
-import { AuthCard } from "../_components/AuthCard";
+import { tokenManager } from "@/lib/auth/tokenManager";
+import { buildPasswordRules, getPasswordRequirementState } from "@/lib/validation/passwordPolicy";
+
+import { AuthCard } from "@/components/auth/AuthCard";
+import { PasswordRequirementChecklist } from "@/components/password/PasswordRequirementChecklist";
+
 import styles from "../auth.module.css";
 
 type RegisterFormValues = {
   fullName: string;
-  organizationName: string;
   email: string;
   password: string;
   confirmPassword: string;
   acceptTerms: boolean;
 };
 
+function splitFullName(fullName: string): { firstName: string; lastName: string } {
+  const parts = fullName
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  const firstName = parts[0] ?? "";
+  const lastName = parts.slice(1).join(" ") || firstName;
+
+  return { firstName, lastName };
+}
+
 export default function RegisterPage() {
   const router = useRouter();
   const { locale } = useParams<{ locale: string }>();
-  const { register: registerAuth } = useAuth();
   const t = useTranslations("auth.register");
   const commonT = useTranslations("auth.common");
+  const [imageLoadError, setImageLoadError] = useState(false);
   const {
     control,
     formState: { errors, isSubmitting },
     handleSubmit,
     register,
-    setError,
+    setError
   } = useForm<RegisterFormValues>({
     defaultValues: {
       fullName: "",
-      organizationName: "",
       email: "",
       password: "",
       confirmPassword: "",
-      acceptTerms: false,
-    },
+      acceptTerms: false
+    }
   });
 
+  const password = useWatch({
+    control,
+    name: "password"
+  });
+  const passwordRequirements = getPasswordRequirementState(password ?? "");
+
   const onSubmit = async (data: RegisterFormValues) => {
-    const [firstNameRaw, ...rest] = data.fullName.trim().split(/\s+/);
-    const firstName = firstNameRaw || data.fullName.trim();
-    const lastName = rest.join(" ");
-    const validated = registerSchema.safeParse({
-      email: data.email,
-      password: data.password,
-      confirmPassword: data.confirmPassword,
-      firstName,
-      lastName: lastName || firstName,
-      organizationName: data.organizationName,
-    });
-
-    if (!validated.success) {
-      const issues = validated.error.issues as Array<{ path: Array<string | number>; message: string }>;
-      issues.forEach((issue) => {
-        const field = issue.path[0];
-        if (field === "firstName" || field === "lastName") {
-          setError("fullName", { message: t("fullNameRequired") });
-          return;
-        }
-
-        if (
-          field === "email" ||
-          field === "password" ||
-          field === "confirmPassword" ||
-          field === "organizationName"
-        ) {
-          setError(field, { message: issue.message });
-        }
-      });
-      return;
-    }
+    const { firstName, lastName } = splitFullName(data.fullName);
 
     try {
-      await registerAuth({
+      const { data: payload } = await authService.register({
         email: data.email,
         password: data.password,
         firstName,
-        lastName: lastName || firstName,
-        organizationName: data.organizationName,
+        lastName,
+        organizationName: `${firstName || "SupportOps"} Workspace`
       });
+
+      tokenManager.setAccessToken(payload.accessToken);
+
       router.replace(`/${locale}/dashboard`);
-    } catch (error) {
-      const message = error instanceof ApiError ? error.message : t("genericError");
+    } catch (error: unknown) {
+      const message = error instanceof ApiError ? error.message : commonT("unableToRegister");
       setError("root", { message });
     }
   };
 
   return (
     <AuthCard
+      maxWidth={1040}
       title={t("title")}
       subtitle={t("subtitle")}
+      titleSx={{ fontSize: { xs: "1.9rem", md: "1.9rem" } }}
+      illustrationPanelSx={{
+        background: "#FFFFFF",
+        backgroundColor: "#FFFFFF",
+        color: "text.primary",
+      }}
+      formPanelSx={{
+        background: "#FFFFFF",
+        backgroundColor: "#FFFFFF",
+        backgroundImage: "none",
+      }}
       illustration={
         <>
-          <span className={styles.illustrationBadge}>{t("badge")}</span>
-          <div className={styles.illustrationTitle}>{t("illustrationTitle")}</div>
-          <div className={styles.illustrationText}>
-            {t("illustrationText")}
-          </div>
-          <PersonOutlineIcon sx={{ fontSize: 120, color: "#1d4ed8", mt: 2 }} />
+          {!imageLoadError ? (
+            <div className={styles.illustrationImageWrap}>
+              <Image
+                src="/images/auth/register-illustration.png"
+                alt="Register illustration"
+                fill
+                sizes="900px"
+                className={styles.illustrationImage}
+                onError={() => setImageLoadError(true)}
+                priority
+              />
+            </div>
+          ) : (
+            <PersonOutlineIcon sx={{ fontSize: 120, color: "#1d4ed8", mt: 2 }} />
+          )}
         </>
       }
       footer={
@@ -119,16 +133,33 @@ export default function RegisterPage() {
         </>
       }
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+        <input
+          type="text"
+          name="register-username"
+          autoComplete="username"
+          tabIndex={-1}
+          aria-hidden="true"
+          style={{ position: "absolute", opacity: 0, pointerEvents: "none", height: 0, width: 0 }}
+        />
+        <input
+          type="password"
+          name="register-password"
+          autoComplete="new-password"
+          tabIndex={-1}
+          aria-hidden="true"
+          style={{ position: "absolute", opacity: 0, pointerEvents: "none", height: 0, width: 0 }}
+        />
         <div className={styles.fields}>
           <TextInputField
             name="fullName"
             control={control}
             label={t("fullNameLabel")}
             placeholder={t("fullNamePlaceholder")}
+            autoComplete="off"
             startIcon={<PersonOutlineIcon fontSize="small" />}
             rules={{
-              required: t("fullNameRequired"),
+              required: t("fullNameRequired")
             }}
           />
           <TextInputField
@@ -136,23 +167,14 @@ export default function RegisterPage() {
             control={control}
             label={commonT("emailLabel")}
             placeholder={commonT("emailPlaceholder")}
+            autoComplete="off"
             startIcon={<EmailIcon fontSize="small" />}
             rules={{
               required: commonT("emailRequired"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: commonT("invalidEmail"),
-              },
-            }}
-          />
-          <TextInputField
-            name="organizationName"
-            control={control}
-            label={t("organizationLabel")}
-            placeholder={t("organizationPlaceholder")}
-            startIcon={<PersonOutlineIcon fontSize="small" />}
-            rules={{
-              required: t("organizationRequired"),
+                message: commonT("invalidEmail")
+              }
             }}
           />
           <TextInputField
@@ -161,10 +183,44 @@ export default function RegisterPage() {
             label={commonT("passwordLabel")}
             placeholder={t("passwordPlaceholder")}
             type="password"
+            autoComplete="new-password"
             startIcon={<LockOutlinedIcon fontSize="small" />}
-            rules={{
+            rules={buildPasswordRules<RegisterFormValues, "password">({
               required: commonT("passwordRequired"),
-            }}
+              min: commonT("passwordMin"),
+              max: commonT("passwordMax"),
+              format: commonT("passwordFormat")
+            })}
+          />
+          <PasswordRequirementChecklist
+            className={styles.passwordChecklist}
+            items={[
+              {
+                key: "minLength",
+                label: t("passwordRequirements.minLength"),
+                met: passwordRequirements.minLength
+              },
+              {
+                key: "lowercase",
+                label: t("passwordRequirements.lowercase"),
+                met: passwordRequirements.lowercase
+              },
+              {
+                key: "uppercase",
+                label: t("passwordRequirements.uppercase"),
+                met: passwordRequirements.uppercase
+              },
+              {
+                key: "number",
+                label: t("passwordRequirements.number"),
+                met: passwordRequirements.number
+              },
+              {
+                key: "specialCharacter",
+                label: t("passwordRequirements.specialCharacter"),
+                met: passwordRequirements.specialCharacter
+              }
+            ]}
           />
           <TextInputField
             name="confirmPassword"
@@ -172,21 +228,29 @@ export default function RegisterPage() {
             label={t("confirmPasswordLabel")}
             placeholder={t("confirmPasswordPlaceholder")}
             type="password"
+            autoComplete="new-password"
             startIcon={<LockOutlinedIcon fontSize="small" />}
             rules={{
               required: t("confirmPasswordRequired"),
+              validate: (value: string) => value === password || commonT("passwordMismatch")
             }}
           />
           <FormControlLabel
-            control={<Checkbox size="small" {...register("acceptTerms")} />}
+            control={
+              <Checkbox
+                size="small"
+                {...register("acceptTerms", {
+                  required: commonT("acceptTermsRequired")
+                })}
+              />
+            }
             label={
               <span>
-                {commonT("acceptTerms")}{" "}
-                <Link href={`/${locale}/terms`}>{commonT("termsAndConditions")}</Link>
+                {commonT("acceptTerms")} <Link href={`/${locale}/terms`}>{commonT("termsAndConditions")}</Link>
               </span>
             }
           />
-          {errors.root?.message ? <Alert severity="error">{errors.root.message}</Alert> : null}
+          {errors.acceptTerms?.message ? <Alert severity="error">{errors.acceptTerms.message}</Alert> : null}
           <Button
             type="submit"
             variant="contained"
@@ -198,11 +262,12 @@ export default function RegisterPage() {
               py: 1.2,
               fontWeight: 600,
               bgcolor: "#2563eb",
-              "&:hover": { bgcolor: "#1d4ed8" },
+              "&:hover": { bgcolor: "#1d4ed8" }
             }}
           >
-            {isSubmitting ? t("submitting") : t("submit")}
+            {t("submit")}
           </Button>
+          {errors.root?.message ? <Alert severity="error">{errors.root.message}</Alert> : null}
         </div>
       </form>
     </AuthCard>

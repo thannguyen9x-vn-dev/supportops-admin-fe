@@ -1,8 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-
-import { ConfirmDialog } from "@/features/common/components/dialogs/ConfirmDialog";
+import { ConfirmDialog } from "@supportops/ui";
 
 type DeleteProductsDialogProps = {
   isDeleting: boolean;

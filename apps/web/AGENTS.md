@@ -1,69 +1,133 @@
-## Frontend Standards (React + TypeScript + Next.js)
+# AGENTS.md — Frontend (apps/web)
 
-These rules apply to all files under `apps/web`.
+## Tech Stack
+- Next.js 15+ (App Router) — SSR / SSG / Hybrid Rendering
+- TypeScript 5.7+ (strict mode)
+- MUI-based design system (`shared/ui`)
+- next-intl for i18n (EN + VI)
+- Zod for form validation
+- React Hook Form
+- TanStack Table v8 (complex table with inline editing)
+- pnpm workspace
 
-## Architecture
+## Testing Stack
+- Unit / Component: Jest + React Testing Library
+- E2E / Integration: Playwright
+- API Mocking: MSW for both Jest and Playwright
 
-- `app/` (routes) should stay thin: compose sections/hooks, avoid heavy business logic.
-- `features/` may import from `shared/` but should not import across unrelated features.
-- `shared/` should contain reusable app-level constants/utilities only.
+## Architecture — Layer Diagram
 
-## Page/File Splitting
-
-When a page or feature exceeds around 150 lines or has multiple concerns, split it:
-
+```text
+┌────────────────────────────────────────────────────────────┐
+│  app/[locale]/               (Route Layer)                 │
+│  ├── page.tsx                Server Component (default)    │
+│  ├── loading.tsx             Streaming / Suspense          │
+│  ├── error.tsx               Error Boundary                │
+│  └── layout.tsx              Shared Layout                 │
+├────────────────────────────────────────────────────────────┤
+│  features/*/components/      (UI Components)               │
+│  ├── ServerComponent.tsx     RSC — data fetch at server    │
+│  └── ClientComponent.tsx     'use client' — interactivity  │
+├────────────────────────────────────────────────────────────┤
+│  features/*/hooks/           (Client Hooks)                │
+│  └── use[Feature].ts         state / mutations             │
+├────────────────────────────────────────────────────────────┤
+│  features/*/services/        (API Services)                │
+│  ├── [module].service.ts     Client-side (browser fetch)   │
+│  └── [module].server.ts      Server-side (server fetch)    │
+├────────────────────────────────────────────────────────────┤
+│  features/*/tables/          (Table Definitions)           │
+│  ├── columns.tsx             TanStack column defs          │
+│  ├── cells/                  Custom cell renderers         │
+│  └── filters/                Table filter components       │
+├────────────────────────────────────────────────────────────┤
+│  lib/api/                                                  │
+│  ├── apiClient.ts            Browser HTTP client           │
+│  └── serverApiClient.ts      Server HTTP client (RSC)      │
+├────────────────────────────────────────────────────────────┤
+│  @supportops/contracts       (Shared Types + Schemas)      │
+└────────────────────────────────────────────────────────────┘
 ```
-[feature-or-page]/
-  page.tsx (compose/orchestrate only)
-  [name].types.ts
-  [name].mock.ts or [name].api.ts
-  [name].module.css
-  components/
-  hooks/
-  utils/
+
+Data flow: `Page -> Component -> Hook -> Service -> apiClient/serverApiClient -> Backend`
+
+## Rendering Strategy Guide
+
+### SSG
+Use for public pages with infrequent data updates.
+- Example: pricing, plans, login/register shell
+- Use `export const revalidate = ...` + `generateStaticParams`
+
+### SSR
+Use for user-specific or sensitive data.
+- Example: dashboard, settings, billing, invoices
+- Use `export const dynamic = 'force-dynamic'`
+
+### Hybrid (SSR shell + client interactivity)
+Use when initial data must be server-rendered but interactions are rich on client.
+- Example: products table with search/filter/edit modal
+- Pattern: server loader fetches initial payload -> pass to client shell -> URL-driven transitions (`router.push` / `router.refresh`)
+
+## Server vs Client Services
+
+### `*.server.ts`
+- Runs only on server components / route handlers
+- Uses `serverApiClient`
+- Can read forwarded headers/cookies
+
+### `*.service.ts`
+- Runs in browser
+- Uses `apiClient`
+- Handles in-memory token flow via existing auth utilities
+
+## Route Conventions
+Each route folder should include:
+- `page.tsx`: main server component
+- `loading.tsx`: fallback for route-level suspense
+- `error.tsx`: client error boundary
+- `not-found.tsx`: 404 state
+
+## Complex Table Convention (TanStack v8)
+
+```text
+features/[module]/tables/
+├── [Module]DataTable.tsx
+├── columns.tsx
+├── cells/
+├── filters/
+├── toolbar/
+└── hooks/
 ```
 
-Rules:
-- Put scope-specific types in `*.types.ts`.
-- Put mock data/API access in `*.mock.ts` or `*.api.ts`.
-- Move local UI blocks into `components/`.
-- Move stateful logic into focused hooks in `hooks/`.
+Required capabilities:
+- Server pagination + URL sync
+- Column sorting/filtering
+- Row selection + bulk actions
+- Inline edit with pending-change buffer
+- Save all / discard all flows
 
-## Components
+## Testing Architecture
 
-- Prefer `export function ComponentName(...)` over `React.FC`.
-- Props name must be `ComponentNameProps`.
-- Keep one concern per component.
-- Use `useTranslations(...)` inside components; avoid passing `t` deeply unless necessary.
+```text
+apps/web/
+├── __tests__/
+│   ├── setup/
+│   ├── mocks/
+│   └── helpers/
+├── e2e/
+├── jest.config.ts
+└── playwright.config.ts
+```
 
-## Hooks
+- Jest for unit/component tests
+- Playwright for e2e
+- MSW as shared API mocking layer
 
-- One hook = one concern.
-- Hook names: `useXxx`.
-- Return objects for readability when returning 3+ values.
-- Clean up side effects (timers, object URLs, subscriptions).
-- Avoid stale closures in async updates; use functional updates or refs where appropriate.
-
-## TypeScript
-
-- Keep strict typing. Avoid `any`.
-- Prefer `type` for unions and computed types.
-- Prefer `interface` for prop object shapes.
-- Explicitly type exported function signatures.
-
-## Next.js App Router
-
-- Default to Server Components; add `'use client'` only when required.
-- Keep route-level components focused on composition.
-- Use route handlers in `app/api/*` for internal APIs.
-
-## Styling
-
-- Use CSS Modules for layout/shell structure.
-- Use MUI for interactive primitives.
-- Prefer theme tokens / `--mui-*` CSS variables over hardcoded values.
-
-## Validation before handoff
-
-- Run `pnpm --filter web exec tsc --noEmit` for app code changes.
-- Run `pnpm --filter web lint` for app code changes.
+## Key Rules
+- Default to Server Component. Add `'use client'` only when needed.
+- Never hardcode backend URL. Use env + API clients.
+- Types and endpoints must come from `@supportops/contracts`.
+- UI text must go through `next-intl` messages.
+- Keep page files thin; move logic to features/services/hooks.
+- Do not import `apiClient` directly inside components.
+- No `any`.

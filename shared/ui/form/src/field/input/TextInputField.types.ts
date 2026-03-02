@@ -3,7 +3,7 @@ import type {ReactNode} from 'react'
 import type {Control, FieldPath, FieldValues, RegisterOptions} from 'react-hook-form'
 
 export type TextInputFieldStatus = 'default' | 'success' | 'error'
-export type TextInputFieldType = 'text' | 'email'
+export type TextInputFieldType = 'text' | 'email' | 'password'
 
 export interface TextInputFieldProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -38,4 +38,6 @@ export interface TextInputFieldProps<
   hideEmptyHelperText?: boolean
 
   inputType?: TextInputFieldType
+
+  showPasswordToggle?: boolean
 }

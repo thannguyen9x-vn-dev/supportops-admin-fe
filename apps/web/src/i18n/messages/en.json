@@ -19,8 +19,15 @@
       "passwordLabel": "Password",
       "passwordPlaceholder": "••••••••",
       "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 10 characters",
+      "passwordMax": "Password must be at most 32 characters",
+      "passwordFormat": "Password must include uppercase, lowercase, number, and special character",
+      "passwordMismatch": "Passwords do not match",
       "acceptTerms": "I accept the",
-      "termsAndConditions": "Terms and Conditions"
+      "termsAndConditions": "Terms and Conditions",
+      "acceptTermsRequired": "You must accept the terms and conditions",
+      "unableToSignIn": "Unable to sign in",
+      "unableToRegister": "Unable to register"
     },
     "login": {
       "title": "Sign in",
@@ -32,9 +39,7 @@
       "footerAction": "Create an account",
       "rememberMe": "Remember me",
       "forgotPassword": "Forgot password?",
-      "submit": "Sign In",
-      "submitting": "Signing in...",
-      "genericError": "Unable to sign in. Please try again."
+      "submit": "Sign In"
     },
     "register": {
       "title": "Create your free account",
@@ -47,17 +52,18 @@
       "fullNameLabel": "Full name",
       "fullNamePlaceholder": "Alex Johnson",
       "fullNameRequired": "Name is required",
-      "organizationLabel": "Organization",
-      "organizationPlaceholder": "SupportOps Inc.",
-      "organizationRequired": "Organization is required",
       "passwordPlaceholder": "Create a password",
       "confirmPasswordLabel": "Confirm password",
       "confirmPasswordPlaceholder": "Repeat your password",
       "confirmPasswordRequired": "Confirm your password",
-      "passwordMismatch": "Passwords do not match",
-      "submit": "Create account",
-      "submitting": "Creating account...",
-      "genericError": "Unable to create account. Please try again."
+      "passwordRequirements": {
+        "minLength": "At least 10 characters (and up to 32 characters)",
+        "lowercase": "At least one lowercase character",
+        "uppercase": "At least one UPPERCASE letter",
+        "number": "At least one number",
+        "specialCharacter": "Inclusion of at least one special character, e.g., ! @ # ?"
+      },
+      "submit": "Create account"
     },
     "forgotPassword": {
       "title": "Forgot your password?",
@@ -125,7 +131,10 @@
         "updated": "Product updated successfully",
         "deleted": "{count, plural, one {# product deleted} other {# products deleted}}",
         "saveError": "Unable to save product. Please try again.",
-        "deleteError": "Unable to delete products. Please try again."
+        "deleteError": "Unable to delete products. Please try again.",
+        "saveAllSummarySuccess": "Saved {successCount, plural, one {# row} other {# rows}} successfully.",
+        "saveAllSummaryPartial": "Saved {successCount, plural, one {# row} other {# rows}}. Failed: {failedCount, plural, one {# row} other {# rows}}.",
+        "saveAllSummaryFailed": "Failed to save {failedCount, plural, one {# row} other {# rows}}. Please try again."
       },
       "action": {
         "retry": "Retry"
@@ -134,7 +143,8 @@
         "searchPlaceholder": "Search by name, technology, or id",
         "filterByStatusAria": "Filter products by status",
         "addProduct": "Add product",
-        "deleteSelected": "{count, plural, =0 {Delete selected} one {Delete 1 selected} other {Delete # selected}}"
+        "deleteSelected": "{count, plural, =0 {Delete selected} one {Delete 1 selected} other {Delete # selected}}",
+        "search": "Search"
       },
       "statusFilter": {
         "all": "All statuses",
@@ -159,7 +169,9 @@
           "price": "Price",
           "status": "Status",
           "updatedAt": "Updated",
-          "action": "Action"
+          "action": "Action",
+          "category": "Category",
+          "brand": "Brand"
         }
       },
       "dialog": {
@@ -186,7 +198,15 @@
         "nameRequired": "Product name is required",
         "technologyRequired": "Technology is required",
         "priceRequired": "Price is required",
-        "pricePositive": "Price must be greater than 0"
+        "pricePositive": "Price must be greater than 0",
+        "statusRequired": "Status is required"
+      },
+      "tableToolbar": {
+        "selectedCount": "{count, plural, one {# selected} other {# selected}}",
+        "bulkDelete": "Bulk delete",
+        "unsavedChanges": "Unsaved changes",
+        "discardAll": "Discard all",
+        "saveAll": "Save all"
       }
     },
     "settings": {
@@ -239,8 +259,10 @@
         "requirements": {
           "title": "Password requirements:",
           "description": "Ensure that these requirements are met:",
-          "minLength": "At least 10 characters (and up to 100 characters)",
+          "minLength": "At least 10 characters (and up to 32 characters)",
           "lowercase": "At least one lowercase character",
+          "uppercase": "At least one UPPERCASE letter",
+          "number": "At least one number",
           "specialCharacter": "Inclusion of at least one special character, e.g., ! @ # ?"
         }
       },
@@ -288,7 +310,8 @@
         "required": "This field is required",
         "invalidEmail": "Invalid email address",
         "passwordMin": "Password must be at least 10 characters",
-        "passwordFormat": "Password must include one lowercase letter and one special character",
+        "passwordMax": "Password must be at most 32 characters",
+        "passwordFormat": "Password must include uppercase, lowercase, number, and special character",
         "passwordMismatch": "New passwords do not match"
       },
       "countries": {
@@ -297,6 +320,60 @@
         "vietnam": "Vietnam",
         "searchPlaceholder": "Search country...",
         "noOptions": "No country found"
+      }
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "state": {
+        "loading": "Loading dashboard...",
+        "error": "Unable to load dashboard data."
+      },
+      "action": {
+        "retry": "Retry",
+        "refresh": "Refresh"
+      },
+      "kpi": {
+        "todaySales": "Today sales",
+        "todayVisitors": "Today visitors",
+        "weekVisitors": "Week visitors",
+        "change": "Change: {value}%"
+      },
+      "latestCustomers": {
+        "title": "Latest customers"
+      },
+      "transactions": {
+        "title": "Recent transactions",
+        "status": {
+          "COMPLETED": "Completed",
+          "IN_PROGRESS": "In progress",
+          "CANCELLED": "Cancelled"
+        }
+      }
+    },
+    "reportsPage": {
+      "title": "Reports",
+      "overviewTitle": "Reports Overview",
+      "performanceTitle": "Reports Performance",
+      "state": {
+        "loading": "Loading report data...",
+        "error": "Unable to load report data."
+      },
+      "action": {
+        "retry": "Retry",
+        "refresh": "Refresh"
+      },
+      "summary": {
+        "points": "Data points",
+        "templates": "Templates total",
+        "invoicing": "Invoicing total"
+      },
+      "transactions": {
+        "title": "Recent transactions",
+        "status": {
+          "COMPLETED": "Completed",
+          "IN_PROGRESS": "In progress",
+          "CANCELLED": "Cancelled"
+        }
       }
     }
   }

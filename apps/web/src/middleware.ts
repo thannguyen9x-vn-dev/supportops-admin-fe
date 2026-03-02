@@ -1,5 +1,6 @@
 import createMiddleware from "next-intl/middleware";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 import { defaultLocale, locales } from "./i18n/config";
 
@@ -11,6 +12,11 @@ const intlMiddleware = createMiddleware({
 
 const publicPaths = ["/login", "/register", "/forgot-password", "/pricing", "/reset-password"];
 
+function getLocaleFromPath(pathname: string): string {
+  const match = pathname.match(/^\/(en|vi)(\/|$)/);
+  return match?.[1] ?? defaultLocale;
+}
+
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const response = intlMiddleware(request);
@@ -20,8 +26,10 @@ export default function middleware(request: NextRequest) {
   const hasRefreshToken = request.cookies.has("supportops_refresh_token");
 
   if (!isPublicRoute && !hasRefreshToken) {
-    // Soft guard only: access token is stored client-side and verified in AuthContext.
-    // If you later move refresh token to httpOnly cookie, enable redirect here.
+    const locale = getLocaleFromPath(pathname);
+    const loginUrl = new URL(`/${locale}/login`, request.url);
+    loginUrl.searchParams.set("next", pathname);
+    return NextResponse.redirect(loginUrl);
   }
 
   return response;

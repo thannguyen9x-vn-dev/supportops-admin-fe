@@ -133,3 +133,14 @@ Start with Slice A (`Settings`) and lock these first:
 3. Save interaction states
 
 After Slice A is stable, reuse the same list/form patterns for `Sales` and `Messages`.
+
+## 11) Architecture backlog reference
+
+For cross-cutting frontend concerns (security/performance/rendering), use:
+
+- `docs/tech-debt/frontend-architecture.md`
+
+Before implementing or reviewing auth/list/rendering work:
+1. Check trigger rules in that document.
+2. Link the related item ID (`FA-01`..`FA-04`) in your task/PR.
+3. Use the PR checklist there to avoid regressions.

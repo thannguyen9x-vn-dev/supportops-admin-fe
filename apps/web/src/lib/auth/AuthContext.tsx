@@ -46,22 +46,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const login = useCallback(async (credentials: LoginRequest) => {
     const { data } = await apiClient.post<{
       accessToken: string;
-      refreshToken: string;
+      refreshToken?: string;
       user: AuthUser;
     }>(ENDPOINTS.AUTH.LOGIN, credentials, { skipAuth: true });
 
-    tokenManager.setTokens(data.accessToken, data.refreshToken);
+    tokenManager.setAccessToken(data.accessToken);
     setUser(data.user);
   }, []);
 
   const register = useCallback(async (payload: RegisterRequest) => {
     const { data } = await apiClient.post<{
       accessToken: string;
-      refreshToken: string;
+      refreshToken?: string;
       user: AuthUser;
     }>(ENDPOINTS.AUTH.REGISTER, payload, { skipAuth: true });
 
-    tokenManager.setTokens(data.accessToken, data.refreshToken);
+    tokenManager.setAccessToken(data.accessToken);
     setUser(data.user);
   }, []);
 

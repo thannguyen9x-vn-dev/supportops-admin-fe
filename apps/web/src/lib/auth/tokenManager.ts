@@ -1,5 +1,21 @@
 import { env } from "@/lib/config/env";
 
+function getCookieValue(name: string): string | null {
+  if (typeof document === "undefined") {
+    return null;
+  }
+
+  const cookie = document.cookie
+    .split("; ")
+    .find((entry) => entry.startsWith(`${name}=`));
+
+  if (!cookie) {
+    return null;
+  }
+
+  return decodeURIComponent(cookie.split("=")[1] ?? "");
+}
+
 class TokenManager {
   private accessToken: string | null = null;
 
@@ -32,18 +48,21 @@ class TokenManager {
     if (typeof window === "undefined") {
       return null;
     }
-    return localStorage.getItem(env.REFRESH_TOKEN_KEY);
+
+    // Legacy fallback only: old sessions may still have refresh token in storage/cookie.
+    return localStorage.getItem(env.REFRESH_TOKEN_KEY) ?? getCookieValue(env.REFRESH_TOKEN_KEY);
   }
 
-  setRefreshToken(token: string): void {
-    if (typeof window !== "undefined") {
-      localStorage.setItem(env.REFRESH_TOKEN_KEY, token);
-    }
+  setRefreshToken(_token: string): void {
+    // Intentionally no-op.
+    // Refresh token must be stored as HttpOnly cookie by backend/BFF, not accessible from JS.
   }
 
-  setTokens(accessToken: string, refreshToken: string): void {
+  setTokens(accessToken: string, refreshToken?: string): void {
     this.setAccessToken(accessToken);
-    this.setRefreshToken(refreshToken);
+    if (refreshToken) {
+      this.setRefreshToken(refreshToken);
+    }
   }
 
   clear(): void {
@@ -51,6 +70,7 @@ class TokenManager {
     if (typeof window !== "undefined") {
       sessionStorage.removeItem(env.ACCESS_TOKEN_KEY);
       localStorage.removeItem(env.REFRESH_TOKEN_KEY);
+      document.cookie = `${env.REFRESH_TOKEN_KEY}=; Path=/; Max-Age=0; SameSite=Lax`;
     }
   }
 

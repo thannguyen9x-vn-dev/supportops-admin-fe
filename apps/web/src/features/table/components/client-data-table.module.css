@@ -1,9 +1,0 @@
-.table :global(.MuiTableCell-head) {
-  background-color: var(--mui-palette-grey-100);
-  font-weight: 700;
-  color: var(--mui-palette-grey-700);
-}
-
-.rowSelected {
-  background-color: var(--mui-palette-action-selected);
-}
