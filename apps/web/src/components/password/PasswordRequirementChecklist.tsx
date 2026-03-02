@@ -1,8 +1,5 @@
 "use client";
 
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-
 type PasswordRequirementChecklistProps = {
   items: Array<{
     key: string;
@@ -14,23 +11,15 @@ type PasswordRequirementChecklistProps = {
 
 export function PasswordRequirementChecklist({ items, className }: PasswordRequirementChecklistProps) {
   return (
-    <ul className={className} style={{ listStyle: "none", paddingLeft: 0, margin: 0 }}>
+    <ul className={className} style={{ margin: 0 }}>
       {items.map((item) => (
         <li
           key={item.key}
           style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            color: item.met ? "#16a34a" : "var(--mui-palette-grey-500)",
+            color: item.met ? "var(--mui-palette-primary-main)" : "var(--mui-palette-grey-500)",
           }}
         >
-          {item.met ? (
-            <CheckCircleIcon fontSize="small" sx={{ color: "#16a34a" }} />
-          ) : (
-            <RadioButtonUncheckedIcon fontSize="small" sx={{ color: "var(--mui-palette-grey-400)" }} />
-          )}
-          <span>{item.label}</span>
+          {item.label}
         </li>
       ))}
     </ul>

@@ -4,9 +4,11 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
+import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { TextInputField } from "@supportops/ui-form";
@@ -25,6 +27,7 @@ export default function ResetPasswordPage() {
   const { locale } = useParams<{ locale: string }>();
   const t = useTranslations("auth.resetPassword");
   const commonT = useTranslations("auth.common");
+  const [imageLoadError, setImageLoadError] = useState(false);
   const { control, handleSubmit, register } = useForm<ResetFormValues>({
     defaultValues: {
       email: "",
@@ -40,16 +43,38 @@ export default function ResetPasswordPage() {
 
   return (
     <AuthCard
+      maxWidth={1040}
       title={t("title")}
       subtitle={t("subtitle")}
+      titleSx={{ fontSize: { xs: "1.9rem", md: "1.9rem" } }}
+      illustrationPanelSx={{
+        background: "#FFFFFF",
+        backgroundColor: "#FFFFFF",
+        color: "text.primary",
+      }}
+      formPanelSx={{
+        background: "#FFFFFF",
+        backgroundColor: "#FFFFFF",
+        backgroundImage: "none",
+        justifyContent: { xs: "flex-start", md: "center" },
+      }}
       illustration={
         <>
-          <span className={styles.illustrationBadge}>{t("badge")}</span>
-          <div className={styles.illustrationTitle}>{t("illustrationTitle")}</div>
-          <div className={styles.illustrationText}>
-            {t("illustrationText")}
-          </div>
-          <ShieldOutlinedIcon sx={{ fontSize: 120, color: "#2563eb", mt: 2 }} />
+          {!imageLoadError ? (
+            <div className={styles.illustrationImageWrap}>
+              <Image
+                src="/images/auth/reset-password.png"
+                alt="Reset password illustration"
+                fill
+                sizes="900px"
+                className={styles.illustrationImage}
+                onError={() => setImageLoadError(true)}
+                priority
+              />
+            </div>
+          ) : (
+            <ShieldOutlinedIcon sx={{ fontSize: 120, color: "#2563eb", mt: 2 }} />
+          )}
         </>
       }
       footer={
@@ -59,13 +84,30 @@ export default function ResetPasswordPage() {
         </>
       }
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+        <input
+          type="text"
+          name="reset-username"
+          autoComplete="username"
+          tabIndex={-1}
+          aria-hidden="true"
+          style={{ position: "absolute", opacity: 0, pointerEvents: "none", height: 0, width: 0 }}
+        />
+        <input
+          type="password"
+          name="reset-password"
+          autoComplete="new-password"
+          tabIndex={-1}
+          aria-hidden="true"
+          style={{ position: "absolute", opacity: 0, pointerEvents: "none", height: 0, width: 0 }}
+        />
         <div className={styles.fields}>
           <TextInputField
             name="email"
             control={control}
             label={commonT("emailLabel")}
             placeholder={commonT("emailPlaceholder")}
+            autoComplete="off"
             startIcon={<EmailOutlinedIcon fontSize="small" />}
             rules={{
               required: commonT("emailRequired"),
@@ -81,6 +123,7 @@ export default function ResetPasswordPage() {
             label={t("newPasswordLabel")}
             placeholder={t("newPasswordPlaceholder")}
             type="password"
+            autoComplete="new-password"
             startIcon={<VpnKeyOutlinedIcon fontSize="small" />}
             rules={{
               required: commonT("passwordRequired"),
@@ -92,6 +135,7 @@ export default function ResetPasswordPage() {
             label={t("confirmNewPasswordLabel")}
             placeholder={t("confirmNewPasswordPlaceholder")}
             type="password"
+            autoComplete="new-password"
             startIcon={<VpnKeyOutlinedIcon fontSize="small" />}
             rules={{
               required: t("confirmNewPasswordRequired"),

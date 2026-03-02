@@ -295,9 +295,9 @@ function TextInputFieldInner<
           }}
         >
           {isPasswordVisible ? (
-            <VisibilityOffOutlinedIcon fontSize="small" />
-          ) : (
             <VisibilityOutlinedIcon fontSize="small" />
+          ) : (
+            <VisibilityOffOutlinedIcon fontSize="small" />
           )}
         </IconButton>
       ) : null

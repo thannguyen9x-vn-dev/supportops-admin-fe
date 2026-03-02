@@ -20,8 +20,8 @@
       "passwordPlaceholder": "••••••••",
       "passwordRequired": "Mật khẩu là bắt buộc",
       "passwordMin": "Mật khẩu phải có ít nhất 10 ký tự",
-      "passwordMax": "Mật khẩu tối đa 100 ký tự",
-      "passwordFormat": "Mật khẩu phải có ít nhất 1 chữ thường và 1 ký tự đặc biệt",
+      "passwordMax": "Mật khẩu tối đa 32 ký tự",
+      "passwordFormat": "Mật khẩu phải có chữ hoa, chữ thường, số và ký tự đặc biệt",
       "passwordMismatch": "Mật khẩu xác nhận không khớp",
       "acceptTerms": "Tôi đồng ý với",
       "termsAndConditions": "Điều khoản và Điều kiện",
@@ -57,8 +57,10 @@
       "confirmPasswordPlaceholder": "Nhập lại mật khẩu",
       "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu",
       "passwordRequirements": {
-        "minLength": "Ít nhất 10 ký tự (và tối đa 100 ký tự)",
+        "minLength": "Ít nhất 10 ký tự (và tối đa 32 ký tự)",
         "lowercase": "Có ít nhất một ký tự chữ thường",
+        "uppercase": "Có ít nhất một ký tự chữ HOA",
+        "number": "Có ít nhất một chữ số",
         "specialCharacter": "Có ít nhất một ký tự đặc biệt, ví dụ: ! @ # ?"
       },
       "submit": "Tạo tài khoản"
@@ -257,8 +259,10 @@
         "requirements": {
           "title": "Yêu cầu mật khẩu:",
           "description": "Đảm bảo các yêu cầu sau được đáp ứng:",
-          "minLength": "Ít nhất 10 ký tự (và tối đa 100 ký tự)",
+          "minLength": "Ít nhất 10 ký tự (và tối đa 32 ký tự)",
           "lowercase": "Có ít nhất một ký tự chữ thường",
+          "uppercase": "Có ít nhất một ký tự chữ HOA",
+          "number": "Có ít nhất một chữ số",
           "specialCharacter": "Có ít nhất một ký tự đặc biệt, ví dụ: ! @ # ?"
         }
       },
@@ -306,8 +310,8 @@
         "required": "Trường này là bắt buộc",
         "invalidEmail": "Địa chỉ email không hợp lệ",
         "passwordMin": "Mật khẩu phải có ít nhất 10 ký tự",
-        "passwordMax": "Mật khẩu tối đa 100 ký tự",
-        "passwordFormat": "Mật khẩu phải có ít nhất 1 chữ thường và 1 ký tự đặc biệt",
+        "passwordMax": "Mật khẩu tối đa 32 ký tự",
+        "passwordFormat": "Mật khẩu phải có chữ hoa, chữ thường, số và ký tự đặc biệt",
         "passwordMismatch": "Mật khẩu mới không khớp"
       },
       "countries": {

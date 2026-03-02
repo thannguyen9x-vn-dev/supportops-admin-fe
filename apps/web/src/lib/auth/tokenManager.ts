@@ -1,7 +1,5 @@
 import { env } from "@/lib/config/env";
 
-const REFRESH_TOKEN_COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
-
 function getCookieValue(name: string): string | null {
   if (typeof document === "undefined") {
     return null;
@@ -51,19 +49,20 @@ class TokenManager {
       return null;
     }
 
+    // Legacy fallback only: old sessions may still have refresh token in storage/cookie.
     return localStorage.getItem(env.REFRESH_TOKEN_KEY) ?? getCookieValue(env.REFRESH_TOKEN_KEY);
   }
 
-  setRefreshToken(token: string): void {
-    if (typeof window !== "undefined") {
-      localStorage.setItem(env.REFRESH_TOKEN_KEY, token);
-      document.cookie = `${env.REFRESH_TOKEN_KEY}=${encodeURIComponent(token)}; Path=/; Max-Age=${REFRESH_TOKEN_COOKIE_MAX_AGE}; SameSite=Lax`;
-    }
+  setRefreshToken(_token: string): void {
+    // Intentionally no-op.
+    // Refresh token must be stored as HttpOnly cookie by backend/BFF, not accessible from JS.
   }
 
-  setTokens(accessToken: string, refreshToken: string): void {
+  setTokens(accessToken: string, refreshToken?: string): void {
     this.setAccessToken(accessToken);
-    this.setRefreshToken(refreshToken);
+    if (refreshToken) {
+      this.setRefreshToken(refreshToken);
+    }
   }
 
   clear(): void {

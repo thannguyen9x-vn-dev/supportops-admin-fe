@@ -21,8 +21,10 @@ export const changePasswordSchema = z
     newPassword: z
       .string()
       .min(10, "At least 10 characters")
-      .max(100, "At most 100 characters")
+      .max(32, "At most 32 characters")
       .regex(/[a-z]/, "At least one lowercase character")
+      .regex(/[A-Z]/, "At least one uppercase character")
+      .regex(/[0-9]/, "At least one number")
       .regex(/[!@#$%^&*(),.?\":{}|<>]/, "At least one special character"),
     confirmPassword: z.string()
   })

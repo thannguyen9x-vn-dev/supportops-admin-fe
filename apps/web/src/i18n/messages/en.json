@@ -20,8 +20,8 @@
       "passwordPlaceholder": "••••••••",
       "passwordRequired": "Password is required",
       "passwordMin": "Password must be at least 10 characters",
-      "passwordMax": "Password must be at most 100 characters",
-      "passwordFormat": "Password must include one lowercase letter and one special character",
+      "passwordMax": "Password must be at most 32 characters",
+      "passwordFormat": "Password must include uppercase, lowercase, number, and special character",
       "passwordMismatch": "Passwords do not match",
       "acceptTerms": "I accept the",
       "termsAndConditions": "Terms and Conditions",
@@ -57,8 +57,10 @@
       "confirmPasswordPlaceholder": "Repeat your password",
       "confirmPasswordRequired": "Confirm your password",
       "passwordRequirements": {
-        "minLength": "At least 10 characters (and up to 100 characters)",
+        "minLength": "At least 10 characters (and up to 32 characters)",
         "lowercase": "At least one lowercase character",
+        "uppercase": "At least one UPPERCASE letter",
+        "number": "At least one number",
         "specialCharacter": "Inclusion of at least one special character, e.g., ! @ # ?"
       },
       "submit": "Create account"
@@ -257,8 +259,10 @@
         "requirements": {
           "title": "Password requirements:",
           "description": "Ensure that these requirements are met:",
-          "minLength": "At least 10 characters (and up to 100 characters)",
+          "minLength": "At least 10 characters (and up to 32 characters)",
           "lowercase": "At least one lowercase character",
+          "uppercase": "At least one UPPERCASE letter",
+          "number": "At least one number",
           "specialCharacter": "Inclusion of at least one special character, e.g., ! @ # ?"
         }
       },
@@ -306,8 +310,8 @@
         "required": "This field is required",
         "invalidEmail": "Invalid email address",
         "passwordMin": "Password must be at least 10 characters",
-        "passwordMax": "Password must be at most 100 characters",
-        "passwordFormat": "Password must include one lowercase letter and one special character",
+        "passwordMax": "Password must be at most 32 characters",
+        "passwordFormat": "Password must include uppercase, lowercase, number, and special character",
         "passwordMismatch": "New passwords do not match"
       },
       "countries": {

@@ -95,7 +95,8 @@ class HttpClient {
         method,
         headers,
         body: requestBody,
-        signal: controller.signal
+        signal: controller.signal,
+        credentials: "include"
       });
 
       clearTimeout(timeoutId);
@@ -160,17 +161,27 @@ class HttpClient {
   }
 
   private async tryRefreshToken(): Promise<boolean> {
-    const refreshToken = tokenManager.getRefreshToken();
-    if (!refreshToken) {
-      return false;
-    }
-
     try {
-      const response = await fetch(`${this.baseUrl}/auth/refresh`, {
+      // Primary path: HttpOnly refresh cookie (preferred).
+      let response = await fetch(`${this.baseUrl}/auth/refresh`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ refreshToken })
+        credentials: "include"
       });
+
+      // Backward-compatible fallback for existing legacy sessions.
+      if (!response.ok) {
+        const refreshToken = tokenManager.getRefreshToken();
+        if (!refreshToken) {
+          return false;
+        }
+
+        response = await fetch(`${this.baseUrl}/auth/refresh`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ refreshToken }),
+          credentials: "include"
+        });
+      }
 
       if (!response.ok) {
         return false;

@@ -83,6 +83,16 @@ export function PasswordForm({ control, handleSubmit, onSubmit, submitState }: P
                 met: requirements.lowercase
               },
               {
+                key: "uppercase",
+                label: t("password.requirements.uppercase"),
+                met: requirements.uppercase
+              },
+              {
+                key: "number",
+                label: t("password.requirements.number"),
+                met: requirements.number
+              },
+              {
                 key: "specialCharacter",
                 label: t("password.requirements.specialCharacter"),
                 met: requirements.specialCharacter

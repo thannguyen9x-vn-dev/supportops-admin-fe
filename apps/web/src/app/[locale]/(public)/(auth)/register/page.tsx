@@ -5,9 +5,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { Alert, Button, Checkbox, FormControlLabel } from "@mui/material";
 import { TextInputField } from "@supportops/ui-form";
+import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 
 import { authService } from "@/features/auth/services/auth.service";
@@ -45,6 +47,7 @@ export default function RegisterPage() {
   const { locale } = useParams<{ locale: string }>();
   const t = useTranslations("auth.register");
   const commonT = useTranslations("auth.common");
+  const [imageLoadError, setImageLoadError] = useState(false);
   const {
     control,
     formState: { errors, isSubmitting },
@@ -80,7 +83,6 @@ export default function RegisterPage() {
       });
 
       tokenManager.setAccessToken(payload.accessToken);
-      tokenManager.setRefreshToken(payload.refreshToken);
 
       router.replace(`/${locale}/dashboard`);
     } catch (error: unknown) {
@@ -91,14 +93,37 @@ export default function RegisterPage() {
 
   return (
     <AuthCard
+      maxWidth={1040}
       title={t("title")}
       subtitle={t("subtitle")}
+      titleSx={{ fontSize: { xs: "1.9rem", md: "1.9rem" } }}
+      illustrationPanelSx={{
+        background: "#FFFFFF",
+        backgroundColor: "#FFFFFF",
+        color: "text.primary",
+      }}
+      formPanelSx={{
+        background: "#FFFFFF",
+        backgroundColor: "#FFFFFF",
+        backgroundImage: "none",
+      }}
       illustration={
         <>
-          <span className={styles.illustrationBadge}>{t("badge")}</span>
-          <div className={styles.illustrationTitle}>{t("illustrationTitle")}</div>
-          <div className={styles.illustrationText}>{t("illustrationText")}</div>
-          <PersonOutlineIcon sx={{ fontSize: 120, color: "#1d4ed8", mt: 2 }} />
+          {!imageLoadError ? (
+            <div className={styles.illustrationImageWrap}>
+              <Image
+                src="/images/auth/register-illustration.png"
+                alt="Register illustration"
+                fill
+                sizes="900px"
+                className={styles.illustrationImage}
+                onError={() => setImageLoadError(true)}
+                priority
+              />
+            </div>
+          ) : (
+            <PersonOutlineIcon sx={{ fontSize: 120, color: "#1d4ed8", mt: 2 }} />
+          )}
         </>
       }
       footer={
@@ -168,6 +193,7 @@ export default function RegisterPage() {
             })}
           />
           <PasswordRequirementChecklist
+            className={styles.passwordChecklist}
             items={[
               {
                 key: "minLength",
@@ -178,6 +204,16 @@ export default function RegisterPage() {
                 key: "lowercase",
                 label: t("passwordRequirements.lowercase"),
                 met: passwordRequirements.lowercase
+              },
+              {
+                key: "uppercase",
+                label: t("passwordRequirements.uppercase"),
+                met: passwordRequirements.uppercase
+              },
+              {
+                key: "number",
+                label: t("passwordRequirements.number"),
+                met: passwordRequirements.number
               },
               {
                 key: "specialCharacter",

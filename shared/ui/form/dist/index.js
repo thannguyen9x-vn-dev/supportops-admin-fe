@@ -12,9 +12,12 @@ import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import { jsxs, Fragment, jsx } from 'react/jsx-runtime';
+import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 // src/field/input/SelectOptionField.tsx
 function getBorderRadiusPx(value) {
@@ -494,7 +497,8 @@ var StyledTextField2 = styled(TextField, {
         WebkitTextFillColor: theme.palette.grey[700],
         caretColor: theme.palette.grey[700],
         "&::placeholder": {
-          color: theme.palette.grey[500],
+          color: theme.palette.grey[400],
+          fontWeight: 400,
           opacity: 1
         },
         "&:focus": {
@@ -579,6 +583,7 @@ function TextInputFieldInner(props) {
     errorIcon = /* @__PURE__ */ jsx(ErrorOutlineIcon, { fontSize: "small" }),
     hideEmptyHelperText = false,
     inputType = "text",
+    showPasswordToggle = true,
     id,
     disabled,
     ...textFieldProps
@@ -612,6 +617,9 @@ function TextInputFieldInner(props) {
     }
     return helperText;
   }, [error, fieldStatus, helperText, successMessage]);
+  const configuredType = textFieldProps.type ?? inputType;
+  const isPasswordField = configuredType === "password";
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const startAdornment = useMemo(() => {
     if (!startIcon && fieldStatus === "default") return void 0;
     const icon = fieldStatus === "success" ? successIcon : fieldStatus === "error" ? errorIcon : startIcon;
@@ -620,11 +628,28 @@ function TextInputFieldInner(props) {
   }, [errorIcon, fieldStatus, startIcon, successIcon]);
   const endAdornment = useMemo(() => {
     if (!startIcon && fieldStatus !== "default") return void 0;
-    if (!endIcon) return void 0;
-    return /* @__PURE__ */ jsx(InputAdornment, { position: "end", children: endIcon });
-  }, [endIcon, fieldStatus, startIcon]);
+    const passwordToggle = isPasswordField && showPasswordToggle ? /* @__PURE__ */ jsx(
+      IconButton,
+      {
+        "aria-label": isPasswordVisible ? "Hide password" : "Show password",
+        edge: "end",
+        onClick: () => setIsPasswordVisible((prev) => !prev),
+        size: "small",
+        sx: {
+          color: "grey.500",
+          bgcolor: "transparent",
+          "&:hover": { bgcolor: "transparent" }
+        },
+        children: isPasswordVisible ? /* @__PURE__ */ jsx(VisibilityOutlinedIcon, { fontSize: "small" }) : /* @__PURE__ */ jsx(VisibilityOffOutlinedIcon, { fontSize: "small" })
+      }
+    ) : null;
+    const resolvedEndIcon = endIcon ?? passwordToggle;
+    if (!resolvedEndIcon) return void 0;
+    return /* @__PURE__ */ jsx(InputAdornment, { position: "end", children: resolvedEndIcon });
+  }, [endIcon, fieldStatus, isPasswordField, isPasswordVisible, showPasswordToggle, startIcon]);
   const showHelper = !hideEmptyHelperText || helperTextContent;
   const inputId = id ?? String(name);
+  const renderedType = isPasswordField && showPasswordToggle && !endIcon ? isPasswordVisible ? "text" : "password" : configuredType;
   return /* @__PURE__ */ jsxs(Box, { sx: { width: "100%" }, children: [
     label ? /* @__PURE__ */ jsx(StyledFieldLabel2, { htmlFor: inputId, children: label }) : null,
     /* @__PURE__ */ jsx(
@@ -646,7 +671,7 @@ function TextInputFieldInner(props) {
           },
           ...textFieldProps.slotProps
         },
-        type: textFieldProps.type ?? inputType,
+        type: renderedType,
         variant: "outlined"
       }
     ),

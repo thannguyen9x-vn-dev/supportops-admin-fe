@@ -14,8 +14,12 @@ export const authService = {
   register: (data: RegisterRequest) =>
     apiClient.post<RegisterResponse>(ENDPOINTS.AUTH.REGISTER, data, { skipAuth: true }),
 
-  refresh: (refreshToken: string) =>
-    apiClient.post<RefreshTokenResponse>(ENDPOINTS.AUTH.REFRESH, { refreshToken }, { skipAuth: true }),
+  refresh: (refreshToken?: string) =>
+    apiClient.post<RefreshTokenResponse>(
+      ENDPOINTS.AUTH.REFRESH,
+      refreshToken ? { refreshToken } : undefined,
+      { skipAuth: true }
+    ),
 
   logout: () => apiClient.post<void>(ENDPOINTS.AUTH.LOGOUT)
 };

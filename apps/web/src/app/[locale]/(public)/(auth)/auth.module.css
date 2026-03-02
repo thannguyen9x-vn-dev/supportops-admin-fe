@@ -180,6 +180,30 @@
   gap: 16px;
 }
 
+.passwordChecklist {
+  margin-top: -4px;
+  margin-left: 0;
+  padding-left: 0;
+  list-style: disc;
+  list-style-position: inside;
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.illustrationImageWrap {
+  --auth-illustration-size: min(100%, 380px);
+  width: var(--auth-illustration-size);
+  aspect-ratio: 1 / 1;
+  position: relative;
+  margin-top: 16px;
+}
+
+.illustrationImage {
+  object-fit: contain;
+}
+
 .helperRow {
   display: flex;
   align-items: center;
@@ -239,5 +263,9 @@
 
   .illustration {
     min-height: 220px;
+  }
+
+  .illustrationImageWrap {
+    --auth-illustration-size: min(100%, 300px);
   }
 }

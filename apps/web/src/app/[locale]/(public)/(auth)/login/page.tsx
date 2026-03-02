@@ -5,9 +5,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import WifiOutlinedIcon from "@mui/icons-material/WifiOutlined";
 import { Alert, Button, Checkbox, FormControlLabel } from "@mui/material";
 import { TextInputField } from "@supportops/ui-form";
+import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { authService } from "@/features/auth/services/auth.service";
@@ -38,6 +40,7 @@ export default function LoginPage() {
   const { locale } = useParams<{ locale: string }>();
   const t = useTranslations("auth.login");
   const commonT = useTranslations("auth.common");
+  const [imageLoadError, setImageLoadError] = useState(false);
   const {
     control,
     formState: { errors, isSubmitting },
@@ -60,7 +63,6 @@ export default function LoginPage() {
       });
 
       tokenManager.setAccessToken(payload.accessToken);
-      tokenManager.setRefreshToken(payload.refreshToken);
 
       const nextPath = searchParams.get("next");
       if (nextPath?.startsWith("/")) {
@@ -77,14 +79,37 @@ export default function LoginPage() {
 
   return (
     <AuthCard
+      maxWidth={1040}
       title={t("title")}
       subtitle={t("subtitle")}
+      titleSx={{ fontSize: { xs: "1.9rem", md: "1.9rem" } }}
+      illustrationPanelSx={{
+        background: "#FFFFFF",
+        backgroundColor: "#FFFFFF",
+        color: "text.primary",
+      }}
+      formPanelSx={{
+        background: "#FFFFFF",
+        backgroundColor: "#FFFFFF",
+        backgroundImage: "none",
+      }}
       illustration={
         <>
-          <span className={styles.illustrationBadge}>{t("badge")}</span>
-          <div className={styles.illustrationTitle}>{t("illustrationTitle")}</div>
-          <div className={styles.illustrationText}>{t("illustrationText")}</div>
-          <WifiOutlinedIcon sx={{ fontSize: 120, color: "#2563eb", mt: 2 }} />
+          {!imageLoadError ? (
+            <div className={styles.illustrationImageWrap}>
+              <Image
+                src="/images/auth/login-illustration.png"
+                alt="Login illustration"
+                fill
+                sizes="900px"
+                className={styles.illustrationImage}
+                onError={() => setImageLoadError(true)}
+                priority
+              />
+            </div>
+          ) : (
+            <WifiOutlinedIcon sx={{ fontSize: 120, color: "#2563eb", mt: 2 }} />
+          )}
         </>
       }
       footer={
