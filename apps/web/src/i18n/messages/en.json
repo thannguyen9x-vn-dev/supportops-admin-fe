@@ -19,6 +19,9 @@
       "passwordLabel": "Password",
       "passwordPlaceholder": "••••••••",
       "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 10 characters",
+      "passwordMax": "Password must be at most 100 characters",
+      "passwordFormat": "Password must include one lowercase letter and one special character",
       "passwordMismatch": "Passwords do not match",
       "acceptTerms": "I accept the",
       "termsAndConditions": "Terms and Conditions",
@@ -53,6 +56,11 @@
       "confirmPasswordLabel": "Confirm password",
       "confirmPasswordPlaceholder": "Repeat your password",
       "confirmPasswordRequired": "Confirm your password",
+      "passwordRequirements": {
+        "minLength": "At least 10 characters (and up to 100 characters)",
+        "lowercase": "At least one lowercase character",
+        "specialCharacter": "Inclusion of at least one special character, e.g., ! @ # ?"
+      },
       "submit": "Create account"
     },
     "forgotPassword": {
@@ -298,6 +306,7 @@
         "required": "This field is required",
         "invalidEmail": "Invalid email address",
         "passwordMin": "Password must be at least 10 characters",
+        "passwordMax": "Password must be at most 100 characters",
         "passwordFormat": "Password must include one lowercase letter and one special character",
         "passwordMismatch": "New passwords do not match"
       },

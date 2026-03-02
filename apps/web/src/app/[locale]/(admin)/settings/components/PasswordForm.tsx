@@ -2,9 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import { Button } from "@mui/material";
-import type { Control, UseFormHandleSubmit } from "react-hook-form";
+import { useWatch, type Control, type UseFormHandleSubmit } from "react-hook-form";
 
 import { TextInputField } from "@supportops/ui-form";
+
+import { PasswordRequirementChecklist } from "@/components/password/PasswordRequirementChecklist";
+import { buildPasswordRules, getPasswordRequirementState } from "@/lib/validation/passwordPolicy";
 
 import type { PasswordFormValues, SubmitState } from "../settings.types";
 
@@ -19,6 +22,8 @@ type PasswordFormProps = {
 
 export function PasswordForm({ control, handleSubmit, onSubmit, submitState }: PasswordFormProps) {
   const t = useTranslations("pages.settings");
+  const newPassword = useWatch({ control, name: "newPassword" });
+  const requirements = getPasswordRequirementState(newPassword ?? "");
 
   return (
     <section className={styles.card}>
@@ -41,17 +46,12 @@ export function PasswordForm({ control, handleSubmit, onSubmit, submitState }: P
           name="newPassword"
           placeholder={t("password.placeholders.newPassword")}
           type="password"
-          rules={{
+          rules={buildPasswordRules<PasswordFormValues, "newPassword">({
             required: t("validation.required"),
-            minLength: {
-              value: 10,
-              message: t("validation.passwordMin"),
-            },
-            pattern: {
-              value: /^(?=.*[a-z])(?=.*[^A-Za-z0-9]).+$/,
-              message: t("validation.passwordFormat"),
-            },
-          }}
+            min: t("validation.passwordMin"),
+            max: t("validation.passwordMax"),
+            format: t("validation.passwordFormat")
+          })}
         />
         <TextInputField
           control={control}
@@ -61,17 +61,34 @@ export function PasswordForm({ control, handleSubmit, onSubmit, submitState }: P
           type="password"
           rules={{
             required: t("validation.required"),
+            validate: (value: string) =>
+              value === (newPassword ?? "") || t("validation.passwordMismatch"),
           }}
         />
 
         <div className={styles.passwordRequirements}>
           <h4 className={styles.passwordRequirementsTitle}>{t("password.requirements.title")}</h4>
           <p className={styles.passwordRequirementsDescription}>{t("password.requirements.description")}</p>
-          <ul className={styles.passwordRequirementsList}>
-            <li>{t("password.requirements.minLength")}</li>
-            <li>{t("password.requirements.lowercase")}</li>
-            <li>{t("password.requirements.specialCharacter")}</li>
-          </ul>
+          <PasswordRequirementChecklist
+            className={styles.passwordRequirementsList}
+            items={[
+              {
+                key: "minLength",
+                label: t("password.requirements.minLength"),
+                met: requirements.minLength
+              },
+              {
+                key: "lowercase",
+                label: t("password.requirements.lowercase"),
+                met: requirements.lowercase
+              },
+              {
+                key: "specialCharacter",
+                label: t("password.requirements.specialCharacter"),
+                met: requirements.specialCharacter
+              }
+            ]}
+          />
         </div>
 
         <div className={styles.formActions}>

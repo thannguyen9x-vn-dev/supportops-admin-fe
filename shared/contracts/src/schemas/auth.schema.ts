@@ -11,6 +11,7 @@ export const registerSchema = z
     password: z
       .string()
       .min(10, "At least 10 characters")
+      .max(100, "At most 100 characters")
       .regex(/[a-z]/, "At least one lowercase character")
       .regex(/[!@#$%^&*(),.?\":{}|<>]/, "At least one special character"),
     confirmPassword: z.string(),

@@ -13,8 +13,10 @@ import { useForm, useWatch } from "react-hook-form";
 import { authService } from "@/features/auth/services/auth.service";
 import { ApiError } from "@/lib/api";
 import { tokenManager } from "@/lib/auth/tokenManager";
+import { buildPasswordRules, getPasswordRequirementState } from "@/lib/validation/passwordPolicy";
 
 import { AuthCard } from "@/components/auth/AuthCard";
+import { PasswordRequirementChecklist } from "@/components/password/PasswordRequirementChecklist";
 
 import styles from "../auth.module.css";
 
@@ -63,6 +65,7 @@ export default function RegisterPage() {
     control,
     name: "password"
   });
+  const passwordRequirements = getPasswordRequirementState(password ?? "");
 
   const onSubmit = async (data: RegisterFormValues) => {
     const { firstName, lastName } = splitFullName(data.fullName);
@@ -105,13 +108,30 @@ export default function RegisterPage() {
         </>
       }
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+        <input
+          type="text"
+          name="register-username"
+          autoComplete="username"
+          tabIndex={-1}
+          aria-hidden="true"
+          style={{ position: "absolute", opacity: 0, pointerEvents: "none", height: 0, width: 0 }}
+        />
+        <input
+          type="password"
+          name="register-password"
+          autoComplete="new-password"
+          tabIndex={-1}
+          aria-hidden="true"
+          style={{ position: "absolute", opacity: 0, pointerEvents: "none", height: 0, width: 0 }}
+        />
         <div className={styles.fields}>
           <TextInputField
             name="fullName"
             control={control}
             label={t("fullNameLabel")}
             placeholder={t("fullNamePlaceholder")}
+            autoComplete="off"
             startIcon={<PersonOutlineIcon fontSize="small" />}
             rules={{
               required: t("fullNameRequired")
@@ -122,6 +142,7 @@ export default function RegisterPage() {
             control={control}
             label={commonT("emailLabel")}
             placeholder={commonT("emailPlaceholder")}
+            autoComplete="off"
             startIcon={<EmailIcon fontSize="small" />}
             rules={{
               required: commonT("emailRequired"),
@@ -137,10 +158,33 @@ export default function RegisterPage() {
             label={commonT("passwordLabel")}
             placeholder={t("passwordPlaceholder")}
             type="password"
+            autoComplete="new-password"
             startIcon={<LockOutlinedIcon fontSize="small" />}
-            rules={{
-              required: commonT("passwordRequired")
-            }}
+            rules={buildPasswordRules<RegisterFormValues, "password">({
+              required: commonT("passwordRequired"),
+              min: commonT("passwordMin"),
+              max: commonT("passwordMax"),
+              format: commonT("passwordFormat")
+            })}
+          />
+          <PasswordRequirementChecklist
+            items={[
+              {
+                key: "minLength",
+                label: t("passwordRequirements.minLength"),
+                met: passwordRequirements.minLength
+              },
+              {
+                key: "lowercase",
+                label: t("passwordRequirements.lowercase"),
+                met: passwordRequirements.lowercase
+              },
+              {
+                key: "specialCharacter",
+                label: t("passwordRequirements.specialCharacter"),
+                met: passwordRequirements.specialCharacter
+              }
+            ]}
           />
           <TextInputField
             name="confirmPassword"
@@ -148,6 +192,7 @@ export default function RegisterPage() {
             label={t("confirmPasswordLabel")}
             placeholder={t("confirmPasswordPlaceholder")}
             type="password"
+            autoComplete="new-password"
             startIcon={<LockOutlinedIcon fontSize="small" />}
             rules={{
               required: t("confirmPasswordRequired"),

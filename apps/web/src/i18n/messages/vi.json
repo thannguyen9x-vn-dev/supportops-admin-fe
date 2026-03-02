@@ -19,6 +19,9 @@
       "passwordLabel": "Mật khẩu",
       "passwordPlaceholder": "••••••••",
       "passwordRequired": "Mật khẩu là bắt buộc",
+      "passwordMin": "Mật khẩu phải có ít nhất 10 ký tự",
+      "passwordMax": "Mật khẩu tối đa 100 ký tự",
+      "passwordFormat": "Mật khẩu phải có ít nhất 1 chữ thường và 1 ký tự đặc biệt",
       "passwordMismatch": "Mật khẩu xác nhận không khớp",
       "acceptTerms": "Tôi đồng ý với",
       "termsAndConditions": "Điều khoản và Điều kiện",
@@ -53,6 +56,11 @@
       "confirmPasswordLabel": "Xác nhận mật khẩu",
       "confirmPasswordPlaceholder": "Nhập lại mật khẩu",
       "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu",
+      "passwordRequirements": {
+        "minLength": "Ít nhất 10 ký tự (và tối đa 100 ký tự)",
+        "lowercase": "Có ít nhất một ký tự chữ thường",
+        "specialCharacter": "Có ít nhất một ký tự đặc biệt, ví dụ: ! @ # ?"
+      },
       "submit": "Tạo tài khoản"
     },
     "forgotPassword": {
@@ -298,6 +306,7 @@
         "required": "Trường này là bắt buộc",
         "invalidEmail": "Địa chỉ email không hợp lệ",
         "passwordMin": "Mật khẩu phải có ít nhất 10 ký tự",
+        "passwordMax": "Mật khẩu tối đa 100 ký tự",
         "passwordFormat": "Mật khẩu phải có ít nhất 1 chữ thường và 1 ký tự đặc biệt",
         "passwordMismatch": "Mật khẩu mới không khớp"
       },

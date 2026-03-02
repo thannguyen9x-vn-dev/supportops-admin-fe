@@ -1,19 +1,22 @@
 'use client'
 
 import type {ReactElement} from 'react'
-import {useMemo} from 'react'
+import {useMemo, useState} from 'react'
 import type {FieldPath, FieldValues} from 'react-hook-form'
 import {useController} from 'react-hook-form'
 
 import Box from '@mui/material/Box'
 import FormHelperText from '@mui/material/FormHelperText'
 import FormLabel from '@mui/material/FormLabel'
+import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import {styled} from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 
 import type {TextInputFieldProps, TextInputFieldStatus} from './TextInputField.types'
 
@@ -108,7 +111,8 @@ const StyledTextField = styled(TextField, {
         caretColor: theme.palette.grey[700],
 
         '&::placeholder': {
-          color: theme.palette.grey[500],
+          color: theme.palette.grey[400],
+          fontWeight: 400,
           opacity: 1,
         },
 
@@ -215,6 +219,7 @@ function TextInputFieldInner<
     errorIcon = <ErrorOutlineIcon fontSize="small" />,
     hideEmptyHelperText = false,
     inputType = 'text',
+    showPasswordToggle = true,
     id,
     disabled,
     ...textFieldProps
@@ -258,6 +263,10 @@ function TextInputFieldInner<
     return helperText
   }, [error, fieldStatus, helperText, successMessage])
 
+  const configuredType = textFieldProps.type ?? inputType
+  const isPasswordField = configuredType === 'password'
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+
   const startAdornment = useMemo(() => {
     if (!startIcon && fieldStatus === 'default') return undefined
 
@@ -272,13 +281,41 @@ function TextInputFieldInner<
   const endAdornment = useMemo(() => {
     if (!startIcon && fieldStatus !== 'default') return undefined
 
-    if (!endIcon) return undefined
+    const passwordToggle =
+      isPasswordField && showPasswordToggle ? (
+        <IconButton
+          aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
+          edge="end"
+          onClick={() => setIsPasswordVisible(prev => !prev)}
+          size="small"
+          sx={{
+            color: 'grey.500',
+            bgcolor: 'transparent',
+            '&:hover': {bgcolor: 'transparent'},
+          }}
+        >
+          {isPasswordVisible ? (
+            <VisibilityOffOutlinedIcon fontSize="small" />
+          ) : (
+            <VisibilityOutlinedIcon fontSize="small" />
+          )}
+        </IconButton>
+      ) : null
 
-    return <InputAdornment position="end">{endIcon}</InputAdornment>
-  }, [endIcon, fieldStatus, startIcon])
+    const resolvedEndIcon = endIcon ?? passwordToggle
+    if (!resolvedEndIcon) return undefined
+
+    return <InputAdornment position="end">{resolvedEndIcon}</InputAdornment>
+  }, [endIcon, fieldStatus, isPasswordField, isPasswordVisible, showPasswordToggle, startIcon])
 
   const showHelper = !hideEmptyHelperText || helperTextContent
   const inputId = id ?? String(name)
+  const renderedType =
+    isPasswordField && showPasswordToggle && !endIcon
+      ? isPasswordVisible
+        ? 'text'
+        : 'password'
+      : configuredType
 
   return (
     <Box sx={{width: '100%'}}>
@@ -301,7 +338,7 @@ function TextInputFieldInner<
           },
           ...textFieldProps.slotProps,
         }}
-        type={textFieldProps.type ?? inputType}
+        type={renderedType}
         variant="outlined"
       />
 
