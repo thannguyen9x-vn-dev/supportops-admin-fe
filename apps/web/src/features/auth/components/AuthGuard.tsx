@@ -59,7 +59,7 @@ export function AuthGuard({ children }: AuthGuardProps) {
     }
 
     if (!canAccessPath(pathWithoutLocale, user?.role)) {
-      router.replace(`/${locale}/dashboard`);
+      router.replace(`/${locale}/access-denied`);
     }
   }, [isAuthenticated, isLoading, locale, pathname, router, user?.role]);
 
