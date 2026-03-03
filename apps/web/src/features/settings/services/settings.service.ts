@@ -6,7 +6,8 @@ import type {
   UserSession
 } from "@supportops/contracts";
 
-import { ENDPOINTS, apiClient } from "@/lib/api";
+import { ENDPOINTS, apiClient, graphqlQuery } from "@/lib/api";
+import { MeSettingsDocument, type MeSettingsQuery } from "@/graphql/generated";
 
 export const settingsService = {
   getProfile: () => apiClient.get<UserProfile>(ENDPOINTS.USERS.ME),
@@ -22,6 +23,11 @@ export const settingsService = {
   changePassword: (data: ChangePasswordRequest) => apiClient.put<void>(ENDPOINTS.USERS.PASSWORD, data),
 
   getPreferences: () => apiClient.get<UserPreferences>(ENDPOINTS.USERS.PREFERENCES),
+
+  getPreferencesGraphql: async () => {
+    const data = await graphqlQuery<MeSettingsQuery>(MeSettingsDocument);
+    return { data: data.meSettings };
+  },
 
   updatePreferences: (data: Partial<UserPreferences>) =>
     apiClient.put<UserPreferences>(ENDPOINTS.USERS.PREFERENCES, data),
