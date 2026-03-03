@@ -7,6 +7,7 @@ import { useToast } from "@/features/common/toast/useToast";
 import { settingsService } from "@/features/settings/services/settings.service";
 
 import type { PasswordFormValues, SubmitState } from "../settings.types";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
 type UsePasswordFormOptions = {
   t: (key: string) => string;
@@ -53,9 +54,9 @@ export function usePasswordForm({ t }: UsePasswordFormOptions) {
       });
       setSubmitState("success");
       toast.success(t("state.saved"));
-    } catch {
+    } catch (error) {
       setSubmitState("error");
-      toast.error(t("state.saveError"));
+      toast.error(getErrorMessage(error, t("state.saveError")));
     }
   };
 

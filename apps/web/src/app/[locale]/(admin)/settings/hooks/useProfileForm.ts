@@ -8,6 +8,7 @@ import { settingsService } from "@/features/settings/services/settings.service";
 
 import type { ProfileFormValues, SubmitState } from "../settings.types";
 import { toUpdateProfileRequest } from "../settings.mapper";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
 type UseProfileFormOptions = {
   onSaved: (values: ProfileFormValues) => void;
@@ -27,6 +28,7 @@ export function useProfileForm({ t, onSaved }: UseProfileFormOptions) {
       firstName: "",
       lastName: "",
       birthday: "",
+      phoneCountry: "US",
       phoneNumber: "",
       address: "",
       country: "US",
@@ -46,9 +48,9 @@ export function useProfileForm({ t, onSaved }: UseProfileFormOptions) {
       onSaved(values);
       setSubmitState("success");
       toast.success(t("state.saved"));
-    } catch {
+    } catch (error) {
       setSubmitState("error");
-      toast.error(t("state.saveError"));
+      toast.error(getErrorMessage(error, t("state.saveError")));
     }
   };
 

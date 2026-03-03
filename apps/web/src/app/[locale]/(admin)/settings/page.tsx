@@ -92,7 +92,21 @@ export default function SettingsPage() {
   return (
     <div className={styles.page}>
       <div className={styles.leftColumn}>
-        <ProfileCard firstName={data.profile.firstName} lastName={data.profile.lastName} />
+        <ProfileCard
+          avatarUrl={data.avatarUrl}
+          firstName={data.profile.firstName}
+          lastName={data.profile.lastName}
+          onAvatarUpdated={(nextAvatarUrl) => {
+            settings.setData((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    avatarUrl: nextAvatarUrl,
+                  }
+                : prev,
+            );
+          }}
+        />
 
         <NotificationSettingsCard
           description={t("notifications.alertsDescription")}

@@ -22,11 +22,9 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-<<<<<<< Updated upstream
-      <div data-locale={locale}>{children}</div>
-=======
-      <AuthProvider>{children}</AuthProvider>
->>>>>>> Stashed changes
+      <AuthProvider>
+        <div data-locale={locale}>{children}</div>
+      </AuthProvider>
     </NextIntlClientProvider>
   );
 }

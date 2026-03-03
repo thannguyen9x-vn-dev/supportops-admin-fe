@@ -3,7 +3,11 @@ import { z } from "zod";
 export const updateProfileSchema = z.object({
   firstName: z.string().min(1).optional(),
   lastName: z.string().min(1).optional(),
-  phone: z.string().optional(),
+  phone: z
+    .string()
+    .regex(/^\+\d{1,4}\s[\d\s().-]{4,20}$/, "Invalid phone format. Expected: +<code> <number>")
+    .optional()
+    .or(z.literal("")),
   birthday: z.string().optional(),
   address: z.string().optional(),
   city: z.string().optional(),

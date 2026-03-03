@@ -3,7 +3,7 @@
   max-width: 1440px;
   margin-inline: auto;
   display: grid;
-  grid-template-columns: 400px minmax(0, 1fr);
+  grid-template-columns: 460px minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -44,8 +44,31 @@
 
 .userHeader {
   display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.avatarBlock {
+  width: 132px;
+  min-height: 132px;
+  display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.avatarDialogPreview {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .userName {
@@ -55,9 +78,13 @@
 }
 
 .userRole {
-  margin-top: 4px;
+  margin-top: 2px;
   color: var(--mui-palette-grey-500);
   font-size: 14px;
+}
+
+.userInfo :global(.MuiButton-root) {
+  margin-top: 10px;
 }
 
 .formGrid {

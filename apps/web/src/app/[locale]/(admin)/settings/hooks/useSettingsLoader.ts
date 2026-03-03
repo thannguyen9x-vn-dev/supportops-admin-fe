@@ -23,9 +23,10 @@ export function useSettingsLoader(): UseSettingsLoaderReturn {
     setLoadState("loading");
 
     try {
+      const preferencesPromise = settingsService.getPreferencesGraphql().catch(() => settingsService.getPreferences());
       const [{ data: profile }, { data: preferences }] = await Promise.all([
         settingsService.getProfile(),
-        settingsService.getPreferences()
+        preferencesPromise
       ]);
 
       if (!profile) {
@@ -35,6 +36,7 @@ export function useSettingsLoader(): UseSettingsLoaderReturn {
       }
 
       setData({
+        avatarUrl: profile.avatarUrl ?? null,
         profile: toProfileFormValues(profile),
         notifications: toNotificationPreferences(preferences)
       });

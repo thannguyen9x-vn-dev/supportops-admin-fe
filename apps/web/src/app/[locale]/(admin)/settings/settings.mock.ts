@@ -1,11 +1,13 @@
 import type { SettingsData } from "./settings.types";
 
 export const MOCK_SETTINGS_DATA: SettingsData = {
+  avatarUrl: null,
   profile: {
     firstName: "Thomas",
     lastName: "Lean",
-    birthday: "12/08/1786",
-    phoneNumber: "+(12)3456 789",
+    birthday: "1786-08-12",
+    phoneCountry: "US",
+    phoneNumber: "3456 789",
     address: "California",
     country: "US",
     email: "name@example.com",

@@ -163,6 +163,36 @@ Use it as a source of truth before creating implementation tasks.
 
 ---
 
+## FA-05: GraphQL Incremental Adoption
+
+- Status: `in_progress`
+- Priority: `P1`
+- Area: Data Layer
+
+### Current State
+
+- REST remains the primary integration path.
+- GraphQL pilot added for settings query (`meSettings`) with typed documents via codegen in `apps/web`.
+
+### Target
+
+- Keep REST and GraphQL side-by-side during migration.
+- Use `.graphql` documents + codegen-generated typed documents for all new GraphQL operations.
+- Avoid string-based GraphQL queries in feature services.
+
+### Apply When
+
+- Screen needs aggregated/complex reads across domains.
+- Backend exposes a stable GraphQL query for that use case.
+
+### Definition Of Done
+
+- Operation exists in `src/graphql/documents/**`.
+- `pnpm --filter web run codegen` generates/updates typed docs successfully.
+- Service/hook consumes typed document from `src/graphql/generated.ts`.
+
+---
+
 ## PR Checklist (Copy/Paste)
 
 Use this in PR description when relevant:

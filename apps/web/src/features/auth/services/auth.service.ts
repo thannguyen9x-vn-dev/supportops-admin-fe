@@ -1,7 +1,10 @@
 import type {
+  AuthMessageResponse,
+  ForgotPasswordRequest,
   LoginRequest,
   LoginResponse,
   RefreshTokenResponse,
+  ResetPasswordRequest,
   RegisterRequest,
   RegisterResponse
 } from "@supportops/contracts";
@@ -21,5 +24,11 @@ export const authService = {
       { skipAuth: true }
     ),
 
-  logout: () => apiClient.post<void>(ENDPOINTS.AUTH.LOGOUT)
+  logout: () => apiClient.post<void>(ENDPOINTS.AUTH.LOGOUT),
+
+  forgotPassword: (data: ForgotPasswordRequest) =>
+    apiClient.post<AuthMessageResponse>(ENDPOINTS.AUTH.FORGOT_PASSWORD, data, { skipAuth: true }),
+
+  resetPassword: (data: ResetPasswordRequest) =>
+    apiClient.post<AuthMessageResponse>(ENDPOINTS.AUTH.RESET_PASSWORD, data, { skipAuth: true })
 };

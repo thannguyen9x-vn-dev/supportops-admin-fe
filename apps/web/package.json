@@ -9,11 +9,13 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "codegen": "graphql-codegen --config codegen.yml",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch"
   },
   "dependencies": {
     "@date-fns/tz": "^1.2.0",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
     "@mui/material-nextjs": "^7.3.7",
@@ -25,6 +27,8 @@
     "@tanstack/react-table": "^8.21.3",
     "currency.js": "^2.0.4",
     "date-fns": "^4.1.0",
+    "graphql": "^16.13.0",
+    "libphonenumber-js": "^1.12.38",
     "next": "16.1.6",
     "next-intl": "^4.4.0",
     "react": "19.2.3",
@@ -32,6 +36,10 @@
     "react-hook-form": "^7"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^6.1.2",
+    "@graphql-codegen/typed-document-node": "^6.1.6",
+    "@graphql-codegen/typescript": "^5.0.8",
+    "@graphql-codegen/typescript-operations": "^5.0.8",
     "@swc/jest": "^0.2.39",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
