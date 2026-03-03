@@ -7,6 +7,7 @@ import { settingsService } from "@/features/settings/services/settings.service";
 
 import { toUserPreferences } from "../settings.mapper";
 import type { NotificationItemKey, NotificationPreference } from "../settings.types";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
 type UseNotificationPreferencesOptions = {
   t: (key: string) => string;
@@ -27,7 +28,7 @@ export function useNotificationPreferences({ t }: UseNotificationPreferencesOpti
             : item
         );
 
-        void settingsService.updatePreferences(toUserPreferences(updatedPreferences)).catch(() => {
+        void settingsService.updatePreferences(toUserPreferences(updatedPreferences)).catch((error) => {
           const rollbackEnabled = previousEnabled;
           if (rollbackEnabled === undefined) {
             return;
@@ -36,7 +37,7 @@ export function useNotificationPreferences({ t }: UseNotificationPreferencesOpti
           setPreferences((prev) =>
             prev.map((item) => (item.key === key ? { ...item, enabled: rollbackEnabled } : item))
           );
-          toast.error(t("state.saveError"));
+          toast.error(getErrorMessage(error, t("state.saveError")));
         });
 
         return updatedPreferences;

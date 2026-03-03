@@ -3,7 +3,9 @@ export const ENDPOINTS = {
     LOGIN: "/auth/login",
     REGISTER: "/auth/register",
     REFRESH: "/auth/refresh",
-    LOGOUT: "/auth/logout"
+    LOGOUT: "/auth/logout",
+    FORGOT_PASSWORD: "/auth/forgot-password",
+    RESET_PASSWORD: "/auth/reset-password"
   },
 
   USERS: {

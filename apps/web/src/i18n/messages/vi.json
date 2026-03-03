@@ -73,7 +73,9 @@
       "illustrationText": "Nhập email, chúng tôi sẽ giúp bạn đăng nhập lại.",
       "footerPrompt": "Bạn đã nhớ mật khẩu?",
       "footerAction": "Quay lại đăng nhập",
-      "submit": "Khôi phục mật khẩu"
+      "submit": "Khôi phục mật khẩu",
+      "submitSuccess": "Nếu tài khoản tồn tại, chúng tôi đã gửi liên kết đặt lại mật khẩu.",
+      "submitError": "Không thể xử lý yêu cầu. Vui lòng thử lại."
     },
     "resetPassword": {
       "title": "Đặt lại mật khẩu",
@@ -88,7 +90,17 @@
       "confirmNewPasswordLabel": "Xác nhận mật khẩu mới",
       "confirmNewPasswordPlaceholder": "Nhập lại mật khẩu",
       "confirmNewPasswordRequired": "Vui lòng xác nhận mật khẩu",
-      "submit": "Đặt lại mật khẩu"
+      "submit": "Đặt lại mật khẩu",
+      "submitSuccess": "Đặt lại mật khẩu thành công. Bạn có thể đăng nhập lại ngay.",
+      "submitError": "Không thể đặt lại mật khẩu. Vui lòng thử lại.",
+      "missingToken": "Liên kết đặt lại không hợp lệ. Vui lòng yêu cầu liên kết mới.",
+      "passwordRequirements": {
+        "minLength": "Ít nhất 10 ký tự (và tối đa 32 ký tự)",
+        "lowercase": "Có ít nhất một ký tự chữ thường",
+        "uppercase": "Có ít nhất một ký tự chữ HOA",
+        "number": "Có ít nhất một chữ số",
+        "specialCharacter": "Có ít nhất một ký tự đặc biệt, ví dụ: ! @ # ?"
+      }
     }
   },
   "nav": {
@@ -231,11 +243,24 @@
         "avatarUploadError": "Không thể tải ảnh đại diện. Vui lòng thử lại.",
         "avatarUploadTypeError": "Định dạng ảnh không hỗ trợ. Vui lòng dùng JPG, PNG hoặc WEBP.",
         "avatarUploadSizeError": "Ảnh quá lớn. Kích thước tối đa là 2 MB.",
+        "avatarDialog": {
+          "title": "Cập nhật ảnh đại diện",
+          "description": "Kéo thả ảnh vào đây hoặc chọn tệp từ máy tính của bạn.",
+          "chooseFile": "Chọn ảnh",
+          "helperText": "Hỗ trợ: JPG, PNG, WEBP • Tối đa: 2 MB",
+          "preview": "Xem trước",
+          "validFile": "Tệp hợp lệ. Bạn có thể xác nhận cập nhật.",
+          "fileRequired": "Vui lòng chọn ảnh trước.",
+          "cancel": "Hủy",
+          "submit": "Áp dụng ảnh",
+          "submitting": "Đang tải lên..."
+        },
         "generalInfoTitle": "Thông tin chung",
         "fields": {
           "firstName": "Tên",
           "lastName": "Họ",
           "birthday": "Ngày sinh",
+          "phoneCountryCode": "Mã vùng",
           "phoneNumber": "Số điện thoại",
           "address": "Địa chỉ",
           "country": "Quốc gia",
@@ -244,6 +269,19 @@
           "zipCode": "Mã bưu chính",
           "city": "Thành phố",
           "department": "Phòng ban"
+        },
+        "placeholders": {
+          "phoneNumber": "ví dụ: 3456 789",
+          "selectDate": "Chọn ngày"
+        },
+        "datePicker": {
+          "month": "Tháng",
+          "year": "Năm",
+          "today": "Hôm nay",
+          "clear": "Xóa",
+          "keyboardHint": "Bạn có thể dùng phím mũi tên để di chuyển ngày",
+          "selectMonthAriaLabel": "Chọn tháng",
+          "selectYearAriaLabel": "Chọn năm"
         }
       },
       "password": {
@@ -309,6 +347,7 @@
       "validation": {
         "required": "Trường này là bắt buộc",
         "invalidEmail": "Địa chỉ email không hợp lệ",
+        "invalidPhoneNumber": "Số điện thoại không hợp lệ",
         "passwordMin": "Mật khẩu phải có ít nhất 10 ký tự",
         "passwordMax": "Mật khẩu tối đa 32 ký tự",
         "passwordFormat": "Mật khẩu phải có chữ hoa, chữ thường, số và ký tự đặc biệt",

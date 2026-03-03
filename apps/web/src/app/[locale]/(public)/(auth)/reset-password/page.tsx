@@ -1,44 +1,74 @@
 'use client';
 
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
-import { Button, Checkbox, FormControlLabel } from "@mui/material";
+import { Alert, Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 
 import { TextInputField } from "@supportops/ui-form";
+import { authService } from "@/features/auth/services/auth.service";
+import { ApiError } from "@/lib/api";
+import { buildPasswordRules, getPasswordRequirementState } from "@/lib/validation/passwordPolicy";
+import { PasswordRequirementChecklist } from "@/components/password/PasswordRequirementChecklist";
 
 import { AuthCard } from "../../../../../components/auth/AuthCard";
 import styles from "../auth.module.css";
 
 type ResetFormValues = {
-  email: string;
   password: string;
   confirmPassword: string;
-  acceptTerms: boolean;
 };
 
 export default function ResetPasswordPage() {
+  const searchParams = useSearchParams();
   const { locale } = useParams<{ locale: string }>();
   const t = useTranslations("auth.resetPassword");
   const commonT = useTranslations("auth.common");
   const [imageLoadError, setImageLoadError] = useState(false);
-  const { control, handleSubmit, register } = useForm<ResetFormValues>({
+  const [submitted, setSubmitted] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError
+  } = useForm<ResetFormValues>({
     defaultValues: {
-      email: "",
       password: "",
       confirmPassword: "",
-      acceptTerms: false,
     },
   });
+  const token = searchParams.get("token") ?? "";
 
-  const onSubmit = (data: ResetFormValues) => {
-    console.log(data);
+  const password = useWatch({
+    control,
+    name: "password"
+  });
+  const passwordRequirements = getPasswordRequirementState(password ?? "");
+
+  const onSubmit = async (data: ResetFormValues) => {
+    setSubmitted(false);
+
+    if (!token) {
+      setError("root", { message: t("missingToken") });
+      return;
+    }
+
+    try {
+      await authService.resetPassword({
+        token,
+        newPassword: data.password,
+        confirmPassword: data.confirmPassword
+      });
+      setSubmitted(true);
+    } catch (error: unknown) {
+      const message = error instanceof ApiError ? error.message : t("submitError");
+      setError("root", { message });
+    }
   };
 
   return (
@@ -103,21 +133,6 @@ export default function ResetPasswordPage() {
         />
         <div className={styles.fields}>
           <TextInputField
-            name="email"
-            control={control}
-            label={commonT("emailLabel")}
-            placeholder={commonT("emailPlaceholder")}
-            autoComplete="off"
-            startIcon={<EmailOutlinedIcon fontSize="small" />}
-            rules={{
-              required: commonT("emailRequired"),
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: commonT("invalidEmail"),
-              },
-            }}
-          />
-          <TextInputField
             name="password"
             control={control}
             label={t("newPasswordLabel")}
@@ -125,9 +140,42 @@ export default function ResetPasswordPage() {
             type="password"
             autoComplete="new-password"
             startIcon={<VpnKeyOutlinedIcon fontSize="small" />}
-            rules={{
+            rules={buildPasswordRules<ResetFormValues, "password">({
               required: commonT("passwordRequired"),
-            }}
+              min: commonT("passwordMin"),
+              max: commonT("passwordMax"),
+              format: commonT("passwordFormat")
+            })}
+          />
+          <PasswordRequirementChecklist
+            className={styles.passwordChecklist}
+            items={[
+              {
+                key: "minLength",
+                label: t("passwordRequirements.minLength"),
+                met: passwordRequirements.minLength
+              },
+              {
+                key: "lowercase",
+                label: t("passwordRequirements.lowercase"),
+                met: passwordRequirements.lowercase
+              },
+              {
+                key: "uppercase",
+                label: t("passwordRequirements.uppercase"),
+                met: passwordRequirements.uppercase
+              },
+              {
+                key: "number",
+                label: t("passwordRequirements.number"),
+                met: passwordRequirements.number
+              },
+              {
+                key: "specialCharacter",
+                label: t("passwordRequirements.specialCharacter"),
+                met: passwordRequirements.specialCharacter
+              }
+            ]}
           />
           <TextInputField
             name="confirmPassword"
@@ -139,21 +187,14 @@ export default function ResetPasswordPage() {
             startIcon={<VpnKeyOutlinedIcon fontSize="small" />}
             rules={{
               required: t("confirmNewPasswordRequired"),
+              validate: (value: string) => value === password || commonT("passwordMismatch")
             }}
-          />
-          <FormControlLabel
-            control={<Checkbox size="small" {...register("acceptTerms")} />}
-            label={
-              <span>
-                {commonT("acceptTerms")}{" "}
-                <Link href={`/${locale}/terms`}>{commonT("termsAndConditions")}</Link>
-              </span>
-            }
           />
           <Button
             type="submit"
             variant="contained"
             fullWidth
+            disabled={isSubmitting}
             sx={{
               borderRadius: 2,
               textTransform: "none",
@@ -165,6 +206,8 @@ export default function ResetPasswordPage() {
           >
             {t("submit")}
           </Button>
+          {submitted ? <Alert severity="success">{t("submitSuccess")}</Alert> : null}
+          {errors.root?.message ? <Alert severity="error">{errors.root.message}</Alert> : null}
         </div>
       </form>
     </AuthCard>

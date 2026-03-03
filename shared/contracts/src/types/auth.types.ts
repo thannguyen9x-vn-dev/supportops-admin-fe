@@ -43,4 +43,18 @@ export interface RefreshTokenResponse {
   expiresIn: number;
 }
 
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+export interface ResetPasswordRequest {
+  token: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export interface AuthMessageResponse {
+  message: string;
+}
+
 export type UserRole = "SUPER_ADMIN" | "ADMIN" | "MEMBER";

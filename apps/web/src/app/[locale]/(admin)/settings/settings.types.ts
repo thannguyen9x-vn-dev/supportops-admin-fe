@@ -7,6 +7,7 @@ export type ProfileFormValues = {
   firstName: string;
   lastName: string;
   birthday: string;
+  phoneCountry: CountryCode;
   phoneNumber: string;
   address: string;
   country: CountryCode;
@@ -42,6 +43,7 @@ export type NotificationPreference = {
 };
 
 export type SettingsData = {
+  avatarUrl: string | null;
   profile: ProfileFormValues;
   notifications: NotificationPreference[];
 };

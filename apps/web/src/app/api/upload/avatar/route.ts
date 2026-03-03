@@ -8,6 +8,7 @@ type UploadAvatarResponse = {
   mimeType: string;
   size: number;
   uploadedAt: string;
+  url: string;
 };
 
 export async function POST(request: Request) {
@@ -26,11 +27,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ code: "FILE_TOO_LARGE" }, { status: 413 });
   }
 
+  const arrayBuffer = await file.arrayBuffer();
+  const base64 = Buffer.from(arrayBuffer).toString("base64");
+  const dataUrl = `data:${file.type};base64,${base64}`;
+
   const response: UploadAvatarResponse = {
     fileName: file.name,
     mimeType: file.type,
     size: file.size,
     uploadedAt: new Date().toISOString(),
+    url: dataUrl,
   };
 
   return NextResponse.json(response);

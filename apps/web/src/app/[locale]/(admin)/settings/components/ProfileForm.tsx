@@ -3,9 +3,15 @@
 import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@mui/material";
+import {
+  getCountryCallingCode,
+  parsePhoneNumberFromString,
+  type CountryCode as PhoneLibCountryCode
+} from "libphonenumber-js";
 import type { Control, UseFormHandleSubmit } from "react-hook-form";
 
-import { SelectOptionField, TextInputField } from "@supportops/ui-form";
+import { PhoneNumberField, SelectDateField, SelectOptionField, TextInputField } from "@supportops/ui-form";
+import type { PhoneCountryOption } from "@supportops/ui-form";
 
 import { createCountryOptions } from "@/shared/constants/countries";
 
@@ -20,11 +26,38 @@ type ProfileFormProps = {
   submitState: SubmitState;
 };
 
+function toFlagEmoji(countryCode: string): string {
+  return countryCode
+    .toUpperCase()
+    .split("")
+    .map((char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
+    .join("");
+}
+
 export function ProfileForm({ control, handleSubmit, onSubmit, submitState }: ProfileFormProps) {
   const t = useTranslations("pages.settings");
   const locale = useLocale();
 
   const countryOptions = useMemo(() => createCountryOptions({ locale }), [locale]);
+  const phoneCountryOptions = useMemo<PhoneCountryOption<ProfileFormValues["phoneCountry"]>[]>(
+    () =>
+      countryOptions.flatMap((option) => {
+          try {
+            const flag = toFlagEmoji(option.code);
+            const dialingCode = String(getCountryCallingCode(option.code as PhoneLibCountryCode));
+            return [{
+              flag,
+              countryName: option.label,
+              dialingCode,
+              label: `${flag} (+${dialingCode}) ${option.label}`,
+              value: option.code,
+            }];
+          } catch {
+            return [];
+          }
+        }),
+    [countryOptions],
+  );
 
   return (
     <section className={styles.card}>
@@ -40,11 +73,21 @@ export function ProfileForm({ control, handleSubmit, onSubmit, submitState }: Pr
           placeholder="Thomas"
           rules={{ required: t("validation.required") }}
         />
-        <TextInputField
+        <SelectDateField
           control={control}
           label={t("profile.fields.birthday")}
+          locale={locale}
           name="birthday"
-          placeholder="12/08/1786"
+          placeholder={t("profile.placeholders.selectDate")}
+          texts={{
+            monthLabel: t("profile.datePicker.month"),
+            yearLabel: t("profile.datePicker.year"),
+            todayLabel: t("profile.datePicker.today"),
+            clearLabel: t("profile.datePicker.clear"),
+            keyboardHint: t("profile.datePicker.keyboardHint"),
+            selectMonthAriaLabel: t("profile.datePicker.selectMonthAriaLabel"),
+            selectYearAriaLabel: t("profile.datePicker.selectYearAriaLabel"),
+          }}
         />
 
         <TextInputField
@@ -54,12 +97,6 @@ export function ProfileForm({ control, handleSubmit, onSubmit, submitState }: Pr
           placeholder="Lean"
           rules={{ required: t("validation.required") }}
         />
-        <TextInputField
-          control={control}
-          label={t("profile.fields.phoneNumber")}
-          name="phoneNumber"
-          placeholder="e.g. +(12)3456 789"
-        />
 
         <TextInputField
           control={control}
@@ -67,6 +104,40 @@ export function ProfileForm({ control, handleSubmit, onSubmit, submitState }: Pr
           name="organization"
           placeholder="Themesberg"
         />
+
+        <PhoneNumberField
+          control={control}
+          countryAriaLabel={t("profile.fields.phoneCountryCode")}
+          countryName="phoneCountry"
+          countryOptions={phoneCountryOptions}
+          label={t("profile.fields.phoneNumber")}
+          noOptionsText={t("countries.noOptions")}
+          phoneAriaLabel={t("profile.fields.phoneNumber")}
+          phoneName="phoneNumber"
+          phonePlaceholder={t("profile.placeholders.phoneNumber")}
+          phoneRules={{
+            validate: (value, formValues) => {
+              const trimmedValue = value.trim();
+              if (!trimmedValue) {
+                return true;
+              }
+
+              const parsed = parsePhoneNumberFromString(
+                trimmedValue,
+                formValues.phoneCountry as PhoneLibCountryCode,
+              );
+
+              if (!parsed?.isValid()) {
+                return t("validation.invalidPhoneNumber");
+              }
+
+              return true;
+            },
+          }}
+          popupWidthPx={340}
+          searchPlaceholder={t("countries.searchPlaceholder")}
+        />
+
         <SelectOptionField
           control={control}
           label={t("profile.fields.country")}

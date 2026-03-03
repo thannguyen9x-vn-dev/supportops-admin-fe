@@ -73,7 +73,9 @@
       "illustrationText": "Enter your email and we will help you get back in.",
       "footerPrompt": "Remembered your password?",
       "footerAction": "Back to sign in",
-      "submit": "Recover password"
+      "submit": "Recover password",
+      "submitSuccess": "If the account exists, we sent a reset link.",
+      "submitError": "Unable to process your request. Please try again."
     },
     "resetPassword": {
       "title": "Reset password",
@@ -88,7 +90,17 @@
       "confirmNewPasswordLabel": "Confirm new password",
       "confirmNewPasswordPlaceholder": "Repeat your password",
       "confirmNewPasswordRequired": "Confirm your password",
-      "submit": "Reset password"
+      "submit": "Reset password",
+      "submitSuccess": "Password reset successfully. You can sign in now.",
+      "submitError": "Unable to reset password. Please try again.",
+      "missingToken": "Invalid reset link. Please request a new one.",
+      "passwordRequirements": {
+        "minLength": "At least 10 characters (and up to 32 characters)",
+        "lowercase": "At least one lowercase character",
+        "uppercase": "At least one UPPERCASE letter",
+        "number": "At least one number",
+        "specialCharacter": "Inclusion of at least one special character, e.g., ! @ # ?"
+      }
     }
   },
   "nav": {
@@ -231,11 +243,24 @@
         "avatarUploadError": "Unable to upload avatar. Please try again.",
         "avatarUploadTypeError": "Unsupported image format. Use JPG, PNG, or WEBP.",
         "avatarUploadSizeError": "Image is too large. Maximum file size is 2 MB.",
+        "avatarDialog": {
+          "title": "Update profile picture",
+          "description": "Drag and drop an image here, or choose a file from your computer.",
+          "chooseFile": "Choose image",
+          "helperText": "Accepted: JPG, PNG, WEBP • Maximum size: 2 MB",
+          "preview": "Preview",
+          "validFile": "File is valid. You can submit now.",
+          "fileRequired": "Please select an image first.",
+          "cancel": "Cancel",
+          "submit": "Apply picture",
+          "submitting": "Uploading..."
+        },
         "generalInfoTitle": "General information",
         "fields": {
           "firstName": "First name",
           "lastName": "Last name",
           "birthday": "Birthday",
+          "phoneCountryCode": "Area code",
           "phoneNumber": "Phone number",
           "address": "Address",
           "country": "Country",
@@ -244,6 +269,19 @@
           "zipCode": "Zip/Postal code",
           "city": "City",
           "department": "Department"
+        },
+        "placeholders": {
+          "phoneNumber": "e.g. 3456 789",
+          "selectDate": "Select date"
+        },
+        "datePicker": {
+          "month": "Month",
+          "year": "Year",
+          "today": "Today",
+          "clear": "Clear",
+          "keyboardHint": "Cursor keys can navigate dates",
+          "selectMonthAriaLabel": "Select month",
+          "selectYearAriaLabel": "Select year"
         }
       },
       "password": {
@@ -309,6 +347,7 @@
       "validation": {
         "required": "This field is required",
         "invalidEmail": "Invalid email address",
+        "invalidPhoneNumber": "Invalid phone number",
         "passwordMin": "Password must be at least 10 characters",
         "passwordMax": "Password must be at most 32 characters",
         "passwordFormat": "Password must include uppercase, lowercase, number, and special character",

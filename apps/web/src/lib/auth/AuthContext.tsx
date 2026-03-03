@@ -4,7 +4,7 @@ import type { AuthUser, LoginRequest, RegisterRequest } from "@supportops/contra
 import type { ReactNode } from "react";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
-import { ENDPOINTS, apiClient } from "@/lib/api";
+import { ENDPOINTS, apiClient, ApiError } from "@/lib/api";
 
 import { tokenManager } from "./tokenManager";
 
@@ -29,13 +29,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     const init = async () => {
-      if (tokenManager.isAuthenticated()) {
-        try {
-          const { data } = await apiClient.get<AuthUser>(ENDPOINTS.USERS.ME);
-          setUser(data);
-        } catch {
+      try {
+        // Always try /users/me on app load.
+        // If sessionStorage access token is missing, apiClient will silently refresh
+        // via HttpOnly refresh cookie and retry automatically.
+        const { data } = await apiClient.get<AuthUser>(ENDPOINTS.USERS.ME);
+        setUser(data);
+      } catch (error) {
+        // Clear only when auth is invalid; keep behavior stable for other transient errors.
+        if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
           tokenManager.clear();
         }
+        setUser(null);
       }
       setIsLoading(false);
     };

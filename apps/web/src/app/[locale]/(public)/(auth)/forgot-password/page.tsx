@@ -2,7 +2,7 @@
 
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
-import { Button } from "@mui/material";
+import { Alert, Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -11,6 +11,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { TextInputField } from "@supportops/ui-form";
+import { authService } from "@/features/auth/services/auth.service";
+import { ApiError } from "@/lib/api";
 
 import { AuthCard } from "../../../../../components/auth/AuthCard";
 import styles from "../auth.module.css";
@@ -24,14 +26,27 @@ export default function ForgotPasswordPage() {
   const t = useTranslations("auth.forgotPassword");
   const commonT = useTranslations("auth.common");
   const [imageLoadError, setImageLoadError] = useState(false);
-  const { control, handleSubmit } = useForm<ForgotFormValues>({
+  const [submitted, setSubmitted] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError
+  } = useForm<ForgotFormValues>({
     defaultValues: {
       email: "",
     },
   });
 
-  const onSubmit = (data: ForgotFormValues) => {
-    console.log(data);
+  const onSubmit = async (data: ForgotFormValues) => {
+    setSubmitted(false);
+    try {
+      await authService.forgotPassword({ email: data.email });
+      setSubmitted(true);
+    } catch (error) {
+      const message = error instanceof ApiError ? error.message : t("submitError");
+      setError("root", { message });
+    }
   };
 
   return (
@@ -97,6 +112,7 @@ export default function ForgotPasswordPage() {
             type="submit"
             variant="contained"
             fullWidth
+            disabled={isSubmitting}
             sx={{
               borderRadius: 2,
               textTransform: "none",
@@ -108,6 +124,8 @@ export default function ForgotPasswordPage() {
           >
             {t("submit")}
           </Button>
+          {submitted ? <Alert severity="success">{t("submitSuccess")}</Alert> : null}
+          {errors.root?.message ? <Alert severity="error">{errors.root.message}</Alert> : null}
         </div>
       </form>
     </AuthCard>
